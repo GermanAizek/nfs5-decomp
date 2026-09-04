@@ -162,3 +162,28 @@ int CREATEW_sub_5346A0(int bpp)
     return (bpp == 16 || bpp == 32) ? bpp : 16;
 }
 
+/* 0x00534110: Window instance constructor */
+void* CREATEW_sub_534110(void *this_ptr, void *param)
+{
+    if (!this_ptr) return NULL;
+    *(uint32_t*)this_ptr = 0x005B96B8;
+    *((uint32_t*)this_ptr + 1) = (uint32_t)(uintptr_t)param;
+    return this_ptr;
+}
+
+/* 0x005345C0: Rect callback validation dispatch */
+void CREATEW_sub_5345C0(int a1, int a2)
+{
+    (void)a1; (void)a2;
+}
+
+/* 0x005346E0: Window clone constructor */
+void* CREATEW_sub_5346E0(void *this_ptr, void *src)
+{
+    if (!this_ptr) return NULL;
+    if (src) memcpy(this_ptr, src, 64);
+    *(uint32_t*)this_ptr = 0x005B96C4;
+    return this_ptr;
+}
+
+

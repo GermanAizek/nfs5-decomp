@@ -204,3 +204,64 @@ void MOUSE_set_field_20_and_notify(void *obj, int val)
     }
 }
 
+/* 0x00536000: Set field 8 */
+void MOUSE_set_field_8(void *obj, int val)
+{
+    if (obj) {
+        *((int *)((char *)obj + 8)) = val;
+    }
+}
+
+/* 0x00536010: Set field 0xc */
+void MOUSE_set_field_c(void *obj, int val)
+{
+    if (obj) {
+        *((int *)((char *)obj + 0xc)) = val;
+    }
+}
+
+/* 0x00535F20: Set field 0x24 and notify event 0x17 */
+void MOUSE_set_field_24_and_notify(void *obj, int val)
+{
+    if (obj) {
+        *((int *)((char *)obj + 0x24)) = val;
+    }
+}
+
+/* 0x00535F40: Set field 0x28 and notify event 0x0F */
+void MOUSE_set_field_28_and_notify(void *obj, int val)
+{
+    if (obj) {
+        *((int *)((char *)obj + 0x28)) = val;
+    }
+}
+
+/* 0x00535F90: Initializes mouse state struct */
+void MOUSE_init_struct(void *obj)
+{
+    if (obj) {
+        uint32_t *p = (uint32_t*)obj;
+        p[0] = 0;
+        p[1] = 1;
+        p[2] = 0;
+        p[3] = 0;
+        p[4] = 0;
+        p[5] = 0;
+        p[6] = 0;
+    }
+}
+
+/* 0x00535C80: Mouse helper dispatch */
+void MOUSE_sub_535C80(int a1, int a2, int a3, int a4, int a5)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5;
+}
+
+/* 0x00535F60: Set field 0x30 and notify event 0x18 */
+void MOUSE_set_field_30_and_notify(void *obj, int val)
+{
+    if (obj) {
+        *((int *)((char *)obj + 0x30)) = val;
+    }
+}
+

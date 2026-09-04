@@ -39,6 +39,12 @@ int   NFILE_find_first_free_slot(void);
 int   NFILE_sub_566760(const char *name);
 int   NFILE_sub_5667A0(int handle);
 void* NFILE_sub_565F60(uint32_t size);
+void  NFILE_register_type1(const char *name, int p2, int p3);
+void  NFILE_register_type4(const char *name, int p2, int p3);
+void  NFILE_register_type8(int idx, int p2, int p3);
+void  NFILE_register_type5(const char *name, int p2, int p3, int p4);
+void  NFILE_cleanup(void);
+uint32_t NFILE_get_max_block_size(void);
 
 #ifdef __cplusplus
 }

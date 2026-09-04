@@ -1,5 +1,5 @@
 ; Module: inittmr.c
-; Total Matched Functions: 23
+; Total Matched Functions: 25
 ; Target: Porsche.exe
 
 ; Function: INITMR_set_error_handler
@@ -378,6 +378,62 @@ _INITMR_sub_563650:
   0056368E:  90                    nop     
   0056368F:  90                    nop     
 
+; Function: sub_005637D0
+; Address:  0x005637D0 - 0x00563830 (96 bytes)
+; Module:   inittmr.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_005637D0:
+  005637D0:  a0 bc 27 6b 00        mov     al, byte ptr [0x6b27bc]
+  005637D5:  56                    push    esi
+  005637D6:  84 c0                 test    al, al
+  005637D8:  75 07                 jne     0x5637e1
+  005637DA:  b8 f6 ff ff ff        mov     eax, 0xfffffff6
+  005637DF:  5e                    pop     esi
+  005637E0:  c3                    ret     
+  005637E1:  8b 74 24 0c           mov     esi, dword ptr [esp + 0xc]
+  005637E5:  56                    push    esi
+  005637E6:  e8 45 00 00 00        call    0x563830
+  005637EB:  83 c4 04              add     esp, 4
+  005637EE:  85 c0                 test    eax, eax
+  005637F0:  7c 2d                 jl      0x56381f
+  005637F2:  8b 15 24 28 6b 00     mov     edx, dword ptr [0x6b2824]
+  005637F8:  8d 0c 76              lea     ecx, [esi + esi*2]
+  005637FB:  53                    push    ebx
+  005637FC:  57                    push    edi
+  005637FD:  8b 34 8a              mov     esi, dword ptr [edx + ecx*4]
+  00563800:  8d 14 8a              lea     edx, [edx + ecx*4]
+  00563803:  8b c8                 mov     ecx, eax
+  00563805:  8b 44 24 10           mov     eax, dword ptr [esp + 0x10]
+  00563809:  8b d9                 mov     ebx, ecx
+  0056380B:  8b f8                 mov     edi, eax
+  0056380D:  c1 e9 02              shr     ecx, 2
+  00563810:  f3 a5                 rep movsd dword ptr es:[edi], dword ptr [esi]
+  00563812:  8b cb                 mov     ecx, ebx
+  00563814:  83 e1 03              and     ecx, 3
+  00563817:  f3 a4                 rep movsb byte ptr es:[edi], byte ptr [esi]
+  00563819:  89 02                 mov     dword ptr [edx], eax
+  0056381B:  5f                    pop     edi
+  0056381C:  33 c0                 xor     eax, eax
+  0056381E:  5b                    pop     ebx
+  0056381F:  5e                    pop     esi
+  00563820:  c3                    ret     
+  00563821:  90                    nop     
+  00563822:  90                    nop     
+  00563823:  90                    nop     
+  00563824:  90                    nop     
+  00563825:  90                    nop     
+  00563826:  90                    nop     
+  00563827:  90                    nop     
+  00563828:  90                    nop     
+  00563829:  90                    nop     
+  0056382A:  90                    nop     
+  0056382B:  90                    nop     
+  0056382C:  90                    nop     
+  0056382D:  90                    nop     
+  0056382E:  90                    nop     
+  0056382F:  90                    nop     
+
 ; Function: INITMR_get_channel_state
 ; Address:  0x00563830 - 0x00563860 (48 bytes)
 ; Module:   inittmr.c
@@ -621,3 +677,57 @@ _INITMR_detect_archive_type:
   0056425D:  c3                    ret     
   0056425E:  90                    nop     
   0056425F:  90                    nop     
+
+; Function: sub_00564260
+; Address:  0x00564260 - 0x005642B0 (80 bytes)
+; Module:   inittmr.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00564260:
+  00564260:  56                    push    esi
+  00564261:  8b 74 24 08           mov     esi, dword ptr [esp + 8]
+  00564265:  57                    push    edi
+  00564266:  56                    push    esi
+  00564267:  33 ff                 xor     edi, edi
+  00564269:  e8 b2 ff ff ff        call    0x564220
+  0056426E:  83 c4 04              add     esp, 4
+  00564271:  48                    dec     eax
+  00564272:  74 14                 je      0x564288
+  00564274:  48                    dec     eax
+  00564275:  75 25                 jne     0x56429c
+  00564277:  83 c6 0c              add     esi, 0xc
+  0056427A:  6a 04                 push    4
+  0056427C:  56                    push    esi
+  0056427D:  e8 3e 86 00 00        call    0x56c8c0
+  00564282:  83 c4 08              add     esp, 8
+  00564285:  5f                    pop     edi
+  00564286:  5e                    pop     esi
+  00564287:  c3                    ret     
+  00564288:  83 c6 02              add     esi, 2
+  0056428B:  6a 02                 push    2
+  0056428D:  56                    push    esi
+  0056428E:  e8 2d 86 00 00        call    0x56c8c0
+  00564293:  83 c4 08              add     esp, 8
+  00564296:  83 c0 04              add     eax, 4
+  00564299:  5f                    pop     edi
+  0056429A:  5e                    pop     esi
+  0056429B:  c3                    ret     
+  0056429C:  8b c7                 mov     eax, edi
+  0056429E:  5f                    pop     edi
+  0056429F:  5e                    pop     esi
+  005642A0:  c3                    ret     
+  005642A1:  90                    nop     
+  005642A2:  90                    nop     
+  005642A3:  90                    nop     
+  005642A4:  90                    nop     
+  005642A5:  90                    nop     
+  005642A6:  90                    nop     
+  005642A7:  90                    nop     
+  005642A8:  90                    nop     
+  005642A9:  90                    nop     
+  005642AA:  90                    nop     
+  005642AB:  90                    nop     
+  005642AC:  90                    nop     
+  005642AD:  90                    nop     
+  005642AE:  90                    nop     
+  005642AF:  90                    nop     

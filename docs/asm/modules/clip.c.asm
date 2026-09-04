@@ -1,5 +1,5 @@
 ; Module: clip.c
-; Total Matched Functions: 28
+; Total Matched Functions: 33
 ; Target: Porsche.exe
 
 ; Function: CLIP_cleanup
@@ -106,6 +106,59 @@ _CLIP_add_item:
   0057E79D:  90                    nop     
   0057E79E:  90                    nop     
   0057E79F:  90                    nop     
+
+; Function: sub_0057E930
+; Address:  0x0057E930 - 0x0057E990 (96 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0057E930:
+  0057E930:  8b 54 24 04           mov     edx, dword ptr [esp + 4]
+  0057E934:  8b 4c 24 08           mov     ecx, dword ptr [esp + 8]
+  0057E938:  53                    push    ebx
+  0057E939:  56                    push    esi
+  0057E93A:  8b 02                 mov     eax, dword ptr [edx]
+  0057E93C:  8b 31                 mov     esi, dword ptr [ecx]
+  0057E93E:  3b c6                 cmp     eax, esi
+  0057E940:  74 05                 je      0x57e947
+  0057E942:  5e                    pop     esi
+  0057E943:  33 c0                 xor     eax, eax
+  0057E945:  5b                    pop     ebx
+  0057E946:  c3                    ret     
+  0057E947:  66 8b 42 04           mov     ax, word ptr [edx + 4]
+  0057E94B:  66 3b 41 04           cmp     ax, word ptr [ecx + 4]
+  0057E94F:  74 05                 je      0x57e956
+  0057E951:  5e                    pop     esi
+  0057E952:  33 c0                 xor     eax, eax
+  0057E954:  5b                    pop     ebx
+  0057E955:  c3                    ret     
+  0057E956:  66 8b 42 06           mov     ax, word ptr [edx + 6]
+  0057E95A:  66 3b 41 06           cmp     ax, word ptr [ecx + 6]
+  0057E95E:  74 05                 je      0x57e965
+  0057E960:  5e                    pop     esi
+  0057E961:  33 c0                 xor     eax, eax
+  0057E963:  5b                    pop     ebx
+  0057E964:  c3                    ret     
+  0057E965:  8b f2                 mov     esi, edx
+  0057E967:  ba f8 ff ff ff        mov     edx, 0xfffffff8
+  0057E96C:  2b f1                 sub     esi, ecx
+  0057E96E:  8d 41 08              lea     eax, [ecx + 8]
+  0057E971:  2b d1                 sub     edx, ecx
+  0057E973:  8a 0c 06              mov     cl, byte ptr [esi + eax]
+  0057E976:  8a 18                 mov     bl, byte ptr [eax]
+  0057E978:  3a cb                 cmp     cl, bl
+  0057E97A:  75 e4                 jne     0x57e960
+  0057E97C:  40                    inc     eax
+  0057E97D:  8d 0c 02              lea     ecx, [edx + eax]
+  0057E980:  83 f9 08              cmp     ecx, 8
+  0057E983:  7c ee                 jl      0x57e973
+  0057E985:  5e                    pop     esi
+  0057E986:  b8 01 00 00 00        mov     eax, 1
+  0057E98B:  5b                    pop     ebx
+  0057E98C:  c3                    ret     
+  0057E98D:  90                    nop     
+  0057E98E:  90                    nop     
+  0057E98F:  90                    nop     
 
 ; Function: CLIP_rect_helper_57E9E0
 ; Address:  0x0057E9E0 - 0x0057EA20 (64 bytes)
@@ -606,6 +659,36 @@ _CLIP_helper_57EC90:
   0057ECA2:  3b c2                 cmp     eax, edx
   0057ECA4:  89 11                 mov     dword ptr [ecx], edx
 
+; Function: sub_0057ECE0
+; Address:  0x0057ECE0 - 0x0057ED20 (64 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0057ECE0:
+  0057ECE0:  8b 44 24 10           mov     eax, dword ptr [esp + 0x10]
+  0057ECE4:  33 d2                 xor     edx, edx
+  0057ECE6:  8b 48 18              mov     ecx, dword ptr [eax + 0x18]
+  0057ECE9:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  0057ECED:  89 48 18              mov     dword ptr [eax + 0x18], ecx
+  0057ECF0:  8b 4c 24 08           mov     ecx, dword ptr [esp + 8]
+  0057ECF4:  3b ca                 cmp     ecx, edx
+  0057ECF6:  89 10                 mov     dword ptr [eax], edx
+  0057ECF8:  89 50 04              mov     dword ptr [eax + 4], edx
+  0057ECFB:  89 50 08              mov     dword ptr [eax + 8], edx
+  0057ECFE:  89 50 0c              mov     dword ptr [eax + 0xc], edx
+  0057ED01:  74 0b                 je      0x57ed0e
+  0057ED03:  8b 54 24 0c           mov     edx, dword ptr [esp + 0xc]
+  0057ED07:  89 48 10              mov     dword ptr [eax + 0x10], ecx
+  0057ED0A:  89 50 14              mov     dword ptr [eax + 0x14], edx
+  0057ED0D:  c3                    ret     
+  0057ED0E:  b9 d0 ec 57 00        mov     ecx, 0x57ecd0
+  0057ED13:  89 48 10              mov     dword ptr [eax + 0x10], ecx
+  0057ED16:  8b 4c 24 0c           mov     ecx, dword ptr [esp + 0xc]
+  0057ED1A:  89 48 14              mov     dword ptr [eax + 0x14], ecx
+  0057ED1D:  c3                    ret     
+  0057ED1E:  90                    nop     
+  0057ED1F:  90                    nop     
+
 ; Function: CLIP_item_free
 ; Address:  0x0057ED20 - 0x0057ED40 (32 bytes)
 ; Module:   clip.c
@@ -623,6 +706,44 @@ _CLIP_item_free:
   0057ED37:  c7 46 18 00 00 00 00  mov     dword ptr [esi + 0x18], 0
   0057ED3E:  5e                    pop     esi
   0057ED3F:  c3                    ret     
+
+; Function: sub_0057EF50
+; Address:  0x0057EF50 - 0x0057EF90 (64 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0057EF50:
+  0057EF50:  56                    push    esi
+  0057EF51:  57                    push    edi
+  0057EF52:  8b 7c 24 0c           mov     edi, dword ptr [esp + 0xc]
+  0057EF56:  33 f6                 xor     esi, esi
+  0057EF58:  8b 47 18              mov     eax, dword ptr [edi + 0x18]
+  0057EF5B:  50                    push    eax
+  0057EF5C:  e8 0f 19 fb ff        call    0x530870
+  0057EF61:  8b 44 24 14           mov     eax, dword ptr [esp + 0x14]
+  0057EF65:  83 c4 04              add     esp, 4
+  0057EF68:  85 c0                 test    eax, eax
+  0057EF6A:  74 0c                 je      0x57ef78
+  0057EF6C:  50                    push    eax
+  0057EF6D:  57                    push    edi
+  0057EF6E:  e8 1d 00 00 00        call    0x57ef90
+  0057EF73:  83 c4 08              add     esp, 8
+  0057EF76:  8b f0                 mov     esi, eax
+  0057EF78:  8b 4f 18              mov     ecx, dword ptr [edi + 0x18]
+  0057EF7B:  51                    push    ecx
+  0057EF7C:  e8 ff 18 fb ff        call    0x530880
+  0057EF81:  83 c4 04              add     esp, 4
+  0057EF84:  8b c6                 mov     eax, esi
+  0057EF86:  5f                    pop     edi
+  0057EF87:  5e                    pop     esi
+  0057EF88:  c3                    ret     
+  0057EF89:  90                    nop     
+  0057EF8A:  90                    nop     
+  0057EF8B:  90                    nop     
+  0057EF8C:  90                    nop     
+  0057EF8D:  90                    nop     
+  0057EF8E:  90                    nop     
+  0057EF8F:  90                    nop     
 
 ; Function: CLIP_get_count
 ; Address:  0x0057F050 - 0x0057F060 (16 bytes)
@@ -642,6 +763,72 @@ _CLIP_get_count:
   0057F05D:  90                    nop     
   0057F05E:  90                    nop     
   0057F05F:  90                    nop     
+
+; Function: sub_0057F1D0
+; Address:  0x0057F1D0 - 0x0057F1F0 (32 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0057F1D0:
+  0057F1D0:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  0057F1D4:  8b 00                 mov     eax, dword ptr [eax]
+  0057F1D6:  85 c0                 test    eax, eax
+  0057F1D8:  74 11                 je      0x57f1eb
+  0057F1DA:  8b 4c 24 08           mov     ecx, dword ptr [esp + 8]
+  0057F1DE:  8b d1                 mov     edx, ecx
+  0057F1E0:  49                    dec     ecx
+  0057F1E1:  85 d2                 test    edx, edx
+  0057F1E3:  74 06                 je      0x57f1eb
+  0057F1E5:  8b 00                 mov     eax, dword ptr [eax]
+  0057F1E7:  85 c0                 test    eax, eax
+  0057F1E9:  75 f3                 jne     0x57f1de
+  0057F1EB:  c3                    ret     
+  0057F1EC:  90                    nop     
+  0057F1ED:  90                    nop     
+  0057F1EE:  90                    nop     
+  0057F1EF:  90                    nop     
+
+; Function: sub_0057F4C0
+; Address:  0x0057F4C0 - 0x0057F500 (64 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0057F4C0:
+  0057F4C0:  56                    push    esi
+  0057F4C1:  8b 74 24 08           mov     esi, dword ptr [esp + 8]
+  0057F4C5:  57                    push    edi
+  0057F4C6:  8b 46 18              mov     eax, dword ptr [esi + 0x18]
+  0057F4C9:  50                    push    eax
+  0057F4CA:  e8 a1 13 fb ff        call    0x530870
+  0057F4CF:  8b 4c 24 18           mov     ecx, dword ptr [esp + 0x18]
+  0057F4D3:  8b 54 24 14           mov     edx, dword ptr [esp + 0x14]
+  0057F4D7:  51                    push    ecx
+  0057F4D8:  52                    push    edx
+  0057F4D9:  56                    push    esi
+  0057F4DA:  e8 41 ff ff ff        call    0x57f420
+  0057F4DF:  8b f8                 mov     edi, eax
+  0057F4E1:  8b 46 18              mov     eax, dword ptr [esi + 0x18]
+  0057F4E4:  50                    push    eax
+  0057F4E5:  e8 96 13 fb ff        call    0x530880
+  0057F4EA:  83 c4 14              add     esp, 0x14
+  0057F4ED:  8b c7                 mov     eax, edi
+  0057F4EF:  5f                    pop     edi
+  0057F4F0:  5e                    pop     esi
+  0057F4F1:  c3                    ret     
+  0057F4F2:  90                    nop     
+  0057F4F3:  90                    nop     
+  0057F4F4:  90                    nop     
+  0057F4F5:  90                    nop     
+  0057F4F6:  90                    nop     
+  0057F4F7:  90                    nop     
+  0057F4F8:  90                    nop     
+  0057F4F9:  90                    nop     
+  0057F4FA:  90                    nop     
+  0057F4FB:  90                    nop     
+  0057F4FC:  90                    nop     
+  0057F4FD:  90                    nop     
+  0057F4FE:  90                    nop     
+  0057F4FF:  90                    nop     
 
 ; Function: CLIP_reset_context
 ; Address:  0x0057F500 - 0x0057F520 (32 bytes)

@@ -274,3 +274,43 @@ int KEY_unregister_callback(void (*cb)(void))
     return 0;
 }
 
+/* 0x0055F710: Registers callback in internal list */
+void KEY_add_callback(void *cb)
+{
+    (void)cb;
+}
+
+/* 0x0055FCB0: Calculates remaining buffer size */
+int KEY_sub_55FCB0(int idx)
+{
+    (void)idx;
+    return 0;
+}
+
+/* 0x0055FD00: Thread-safe channel query */
+int KEY_sub_55FD00(int idx)
+{
+    (void)idx;
+    return 0;
+}
+
+/* 0x0055FE00: Resets channel entry */
+int KEY_sub_55FE00(int idx)
+{
+    (void)idx;
+    return 0;
+}
+
+/* 0x00560180: Key system shutdown handler */
+int KEY_sub_560180(void)
+{
+    return 0;
+}
+
+/* 0x00560940: Dispatches bitfield encoded key parameters */
+void KEY_sub_560940(void *obj, int a2, int a3)
+{
+    (void)obj; (void)a2; (void)a3;
+}
+
+

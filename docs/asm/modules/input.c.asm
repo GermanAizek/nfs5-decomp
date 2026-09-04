@@ -1,5 +1,5 @@
 ; Module: input.c
-; Total Matched Functions: 23
+; Total Matched Functions: 29
 ; Target: Porsche.exe
 
 ; Function: INPUT_set_mode_100
@@ -156,6 +156,179 @@ _INPUT_init_device_table:
   0053160D:  90                    nop     
   0053160E:  90                    nop     
   0053160F:  90                    nop     
+
+; Function: sub_00531CF0
+; Address:  0x00531CF0 - 0x00531D20 (48 bytes)
+; Module:   input.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00531CF0:
+  00531CF0:  33 c0                 xor     eax, eax
+  00531CF2:  b9 7c aa 69 00        mov     ecx, 0x69aa7c
+  00531CF7:  83 39 ff              cmp     dword ptr [ecx], -1
+  00531CFA:  74 13                 je      0x531d0f
+  00531CFC:  81 c1 90 00 00 00     add     ecx, 0x90
+  00531D02:  40                    inc     eax
+  00531D03:  81 f9 7c bc 69 00     cmp     ecx, 0x69bc7c
+  00531D09:  7c ec                 jl      0x531cf7
+  00531D0B:  83 c8 ff              or      eax, 0xffffffff
+  00531D0E:  c3                    ret     
+  00531D0F:  83 f8 20              cmp     eax, 0x20
+  00531D12:  7c 03                 jl      0x531d17
+  00531D14:  83 c8 ff              or      eax, 0xffffffff
+  00531D17:  c3                    ret     
+  00531D18:  90                    nop     
+  00531D19:  90                    nop     
+  00531D1A:  90                    nop     
+  00531D1B:  90                    nop     
+  00531D1C:  90                    nop     
+  00531D1D:  90                    nop     
+  00531D1E:  90                    nop     
+  00531D1F:  90                    nop     
+
+; Function: sub_00531DA0
+; Address:  0x00531DA0 - 0x00531DD0 (48 bytes)
+; Module:   input.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00531DA0:
+  00531DA0:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00531DA4:  85 c0                 test    eax, eax
+  00531DA6:  7c 20                 jl      0x531dc8
+  00531DA8:  83 f8 20              cmp     eax, 0x20
+  00531DAB:  7d 1b                 jge     0x531dc8
+  00531DAD:  8d 04 c0              lea     eax, [eax + eax*8]
+  00531DB0:  c1 e0 04              shl     eax, 4
+  00531DB3:  83 b8 7c aa 69 00 ff  cmp     dword ptr [eax + 0x69aa7c], -1
+  00531DBA:  74 0c                 je      0x531dc8
+  00531DBC:  8b 80 78 aa 69 00     mov     eax, dword ptr [eax + 0x69aa78]
+  00531DC2:  50                    push    eax
+  00531DC3:  8b 08                 mov     ecx, dword ptr [eax]
+  00531DC5:  ff 51 2c              call    dword ptr [ecx + 0x2c]
+  00531DC8:  c3                    ret     
+  00531DC9:  90                    nop     
+  00531DCA:  90                    nop     
+  00531DCB:  90                    nop     
+  00531DCC:  90                    nop     
+  00531DCD:  90                    nop     
+  00531DCE:  90                    nop     
+  00531DCF:  90                    nop     
+
+; Function: sub_00532100
+; Address:  0x00532100 - 0x00532130 (48 bytes)
+; Module:   input.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00532100:
+  00532100:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00532104:  85 c0                 test    eax, eax
+  00532106:  7d 03                 jge     0x53210b
+  00532108:  33 c0                 xor     eax, eax
+  0053210A:  c3                    ret     
+  0053210B:  8d 04 c0              lea     eax, [eax + eax*8]
+  0053210E:  c1 e0 04              shl     eax, 4
+  00532111:  83 b8 f8 a9 69 00 ff  cmp     dword ptr [eax + 0x69a9f8], -1
+  00532118:  74 03                 je      0x53211d
+  0053211A:  33 c0                 xor     eax, eax
+  0053211C:  c3                    ret     
+  0053211D:  8b 80 70 aa 69 00     mov     eax, dword ptr [eax + 0x69aa70]
+  00532123:  c3                    ret     
+  00532124:  90                    nop     
+  00532125:  90                    nop     
+  00532126:  90                    nop     
+  00532127:  90                    nop     
+  00532128:  90                    nop     
+  00532129:  90                    nop     
+  0053212A:  90                    nop     
+  0053212B:  90                    nop     
+  0053212C:  90                    nop     
+  0053212D:  90                    nop     
+  0053212E:  90                    nop     
+  0053212F:  90                    nop     
+
+; Function: sub_00532130
+; Address:  0x00532130 - 0x00532150 (32 bytes)
+; Module:   input.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00532130:
+  00532130:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00532134:  8b 4c 24 08           mov     ecx, dword ptr [esp + 8]
+  00532138:  3b c1                 cmp     eax, ecx
+  0053213A:  7d 02                 jge     0x53213e
+  0053213C:  8b c1                 mov     eax, ecx
+  0053213E:  8b 4c 24 0c           mov     ecx, dword ptr [esp + 0xc]
+  00532142:  3b c1                 cmp     eax, ecx
+  00532144:  7e 02                 jle     0x532148
+  00532146:  8b c1                 mov     eax, ecx
+  00532148:  c3                    ret     
+  00532149:  90                    nop     
+  0053214A:  90                    nop     
+  0053214B:  90                    nop     
+  0053214C:  90                    nop     
+  0053214D:  90                    nop     
+  0053214E:  90                    nop     
+  0053214F:  90                    nop     
+
+; Function: sub_005321B0
+; Address:  0x005321B0 - 0x005321E0 (48 bytes)
+; Module:   input.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_005321B0:
+  005321B0:  8b 44 24 14           mov     eax, dword ptr [esp + 0x14]
+  005321B4:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  005321B8:  8b 54 24 0c           mov     edx, dword ptr [esp + 0xc]
+  005321BC:  68 10 68 56 00        push    0x566810
+  005321C1:  50                    push    eax
+  005321C2:  8b 44 24 10           mov     eax, dword ptr [esp + 0x10]
+  005321C6:  51                    push    ecx
+  005321C7:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  005321CB:  52                    push    edx
+  005321CC:  50                    push    eax
+  005321CD:  51                    push    ecx
+  005321CE:  e8 0d 00 00 00        call    0x5321e0
+  005321D3:  83 c4 18              add     esp, 0x18
+  005321D6:  c3                    ret     
+  005321D7:  90                    nop     
+  005321D8:  90                    nop     
+  005321D9:  90                    nop     
+  005321DA:  90                    nop     
+  005321DB:  90                    nop     
+  005321DC:  90                    nop     
+  005321DD:  90                    nop     
+  005321DE:  90                    nop     
+  005321DF:  90                    nop     
+
+; Function: sub_00532330
+; Address:  0x00532330 - 0x00532360 (48 bytes)
+; Module:   input.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00532330:
+  00532330:  8b 44 24 14           mov     eax, dword ptr [esp + 0x14]
+  00532334:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  00532338:  8b 54 24 0c           mov     edx, dword ptr [esp + 0xc]
+  0053233C:  68 50 68 56 00        push    0x566850
+  00532341:  50                    push    eax
+  00532342:  8b 44 24 10           mov     eax, dword ptr [esp + 0x10]
+  00532346:  51                    push    ecx
+  00532347:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  0053234B:  52                    push    edx
+  0053234C:  50                    push    eax
+  0053234D:  51                    push    ecx
+  0053234E:  e8 8d fe ff ff        call    0x5321e0
+  00532353:  83 c4 18              add     esp, 0x18
+  00532356:  c3                    ret     
+  00532357:  90                    nop     
+  00532358:  90                    nop     
+  00532359:  90                    nop     
+  0053235A:  90                    nop     
+  0053235B:  90                    nop     
+  0053235C:  90                    nop     
+  0053235D:  90                    nop     
+  0053235E:  90                    nop     
+  0053235F:  90                    nop     
 
 ; Function: INPUT_init_device_0
 ; Address:  0x00532AF0 - 0x00532B00 (16 bytes)

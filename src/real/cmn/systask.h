@@ -2,6 +2,8 @@
 #ifndef REAL_CMN_SYSTASK_H
 #define REAL_CMN_SYSTASK_H
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -28,6 +30,33 @@ int  stub_xor_ret(void);
 void SYSTASK_jmp_sub_535fb0(void);
 void SYSTASK_release_task(void);
 void SYSTASK_call_sub_53cb90(void *task, int param);
+void SYSTASK_set_word_if_zero(void *task, int cond, uint16_t val);
+void SYSTASK_sub_534F30(void *task, int a1, int a2, int a3, int a4, int a5);
+void SYSTASK_sub_5352A0(void *task, int a1, int a2);
+void SYSTASK_cleanup_objects(void);
+/* 0x005353B0: Performs binary search lookup on task table */
+int  SYSTASK_sub_5353B0(void *tbl);
+
+/* VA: 0x00534E00 */
+void* SYNCTASK_destroy_object(void *obj, uint8_t flags);
+
+/* VA: 0x00535306 */
+void* SYSTASK_lookup_key_entry(void *table);
+
+/* VA: 0x00535360 */
+void* SYSTASK_find_entry_or_sub(void *table, int key);
+
+/* VA: 0x005353F0 */
+int SYSTASK_compare_keys(const void *a, const void *b);
+
+/* VA: 0x0053569D */
+void SYSTASK_set_target_x(int val);
+
+/* VA: 0x005356C9 */
+void SYSTASK_set_target_y(int val);
+
+/* VA: 0x005356F5 */
+void SYSTASK_set_target_z(int val);
 
 #ifdef __cplusplus
 }

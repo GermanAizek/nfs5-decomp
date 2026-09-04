@@ -1,5 +1,5 @@
 ; Module: nfile.c
-; Total Matched Functions: 29
+; Total Matched Functions: 35
 ; Target: Porsche.exe
 
 ; Function: NFILE_sub_565F60
@@ -122,6 +122,133 @@ _NFILE_sub_5667A0:
   005667DD:  90                    nop     
   005667DE:  90                    nop     
   005667DF:  90                    nop     
+
+; Function: sub_005667E0
+; Address:  0x005667E0 - 0x00566810 (48 bytes)
+; Module:   nfile.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_005667E0:
+  005667E0:  56                    push    esi
+  005667E1:  8b 74 24 08           mov     esi, dword ptr [esp + 8]
+  005667E5:  56                    push    esi
+  005667E6:  e8 45 a4 02 00        call    0x590c30
+  005667EB:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  005667EF:  50                    push    eax
+  005667F0:  8b 44 24 18           mov     eax, dword ptr [esp + 0x18]
+  005667F4:  50                    push    eax
+  005667F5:  51                    push    ecx
+  005667F6:  6a 01                 push    1
+  005667F8:  e8 a3 f7 ff ff        call    0x565fa0
+  005667FD:  50                    push    eax
+  005667FE:  89 70 18              mov     dword ptr [eax + 0x18], esi
+  00566801:  e8 fa f6 ff ff        call    0x565f00
+  00566806:  83 c4 18              add     esp, 0x18
+  00566809:  5e                    pop     esi
+  0056680A:  c3                    ret     
+  0056680B:  90                    nop     
+  0056680C:  90                    nop     
+  0056680D:  90                    nop     
+  0056680E:  90                    nop     
+  0056680F:  90                    nop     
+
+; Function: sub_00566890
+; Address:  0x00566890 - 0x005668C0 (48 bytes)
+; Module:   nfile.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00566890:
+  00566890:  56                    push    esi
+  00566891:  8b 74 24 08           mov     esi, dword ptr [esp + 8]
+  00566895:  56                    push    esi
+  00566896:  e8 95 a3 02 00        call    0x590c30
+  0056689B:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  0056689F:  50                    push    eax
+  005668A0:  8b 44 24 18           mov     eax, dword ptr [esp + 0x18]
+  005668A4:  50                    push    eax
+  005668A5:  51                    push    ecx
+  005668A6:  6a 04                 push    4
+  005668A8:  e8 f3 f6 ff ff        call    0x565fa0
+  005668AD:  50                    push    eax
+  005668AE:  89 70 18              mov     dword ptr [eax + 0x18], esi
+  005668B1:  e8 4a f6 ff ff        call    0x565f00
+  005668B6:  83 c4 18              add     esp, 0x18
+  005668B9:  5e                    pop     esi
+  005668BA:  c3                    ret     
+  005668BB:  90                    nop     
+  005668BC:  90                    nop     
+  005668BD:  90                    nop     
+  005668BE:  90                    nop     
+  005668BF:  90                    nop     
+
+; Function: sub_005668C0
+; Address:  0x005668C0 - 0x00566900 (64 bytes)
+; Module:   nfile.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_005668C0:
+  005668C0:  56                    push    esi
+  005668C1:  8b 74 24 08           mov     esi, dword ptr [esp + 8]
+  005668C5:  56                    push    esi
+  005668C6:  e8 65 a3 02 00        call    0x590c30
+  005668CB:  8b 4c 24 14           mov     ecx, dword ptr [esp + 0x14]
+  005668CF:  50                    push    eax
+  005668D0:  8b 44 24 1c           mov     eax, dword ptr [esp + 0x1c]
+  005668D4:  50                    push    eax
+  005668D5:  51                    push    ecx
+  005668D6:  6a 05                 push    5
+  005668D8:  e8 c3 f6 ff ff        call    0x565fa0
+  005668DD:  8b 54 24 20           mov     edx, dword ptr [esp + 0x20]
+  005668E1:  50                    push    eax
+  005668E2:  89 70 18              mov     dword ptr [eax + 0x18], esi
+  005668E5:  89 50 28              mov     dword ptr [eax + 0x28], edx
+  005668E8:  e8 13 f6 ff ff        call    0x565f00
+  005668ED:  83 c4 18              add     esp, 0x18
+  005668F0:  5e                    pop     esi
+  005668F1:  c3                    ret     
+  005668F2:  90                    nop     
+  005668F3:  90                    nop     
+  005668F4:  90                    nop     
+  005668F5:  90                    nop     
+  005668F6:  90                    nop     
+  005668F7:  90                    nop     
+  005668F8:  90                    nop     
+  005668F9:  90                    nop     
+  005668FA:  90                    nop     
+  005668FB:  90                    nop     
+  005668FC:  90                    nop     
+  005668FD:  90                    nop     
+  005668FE:  90                    nop     
+  005668FF:  90                    nop     
+
+; Function: sub_00566900
+; Address:  0x00566900 - 0x00566930 (48 bytes)
+; Module:   nfile.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00566900:
+  00566900:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00566904:  85 c0                 test    eax, eax
+  00566906:  7d 08                 jge     0x566910
+  00566908:  83 f8 1f              cmp     eax, 0x1f
+  0056690B:  7e 03                 jle     0x566910
+  0056690D:  33 c0                 xor     eax, eax
+  0056690F:  c3                    ret     
+  00566910:  8b 4c 24 08           mov     ecx, dword ptr [esp + 8]
+  00566914:  50                    push    eax
+  00566915:  8b 44 24 10           mov     eax, dword ptr [esp + 0x10]
+  00566919:  50                    push    eax
+  0056691A:  51                    push    ecx
+  0056691B:  6a 08                 push    8
+  0056691D:  e8 7e f6 ff ff        call    0x565fa0
+  00566922:  50                    push    eax
+  00566923:  e8 d8 f5 ff ff        call    0x565f00
+  00566928:  83 c4 14              add     esp, 0x14
+  0056692B:  c3                    ret     
+  0056692C:  90                    nop     
+  0056692D:  90                    nop     
+  0056692E:  90                    nop     
+  0056692F:  90                    nop     
 
 ; Function: NFILE_compare_handles
 ; Address:  0x00566A30 - 0x00566A50 (32 bytes)
@@ -296,6 +423,43 @@ _NFILE_call_58FD70:
   00566C2D:  c3                    ret     
   00566C2E:  90                    nop     
   00566C2F:  90                    nop     
+
+; Function: sub_005670E0
+; Address:  0x005670E0 - 0x00567120 (64 bytes)
+; Module:   nfile.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_005670E0:
+  005670E0:  a1 d0 3a 6a 00        mov     eax, dword ptr [0x6a3ad0]
+  005670E5:  56                    push    esi
+  005670E6:  33 f6                 xor     esi, esi
+  005670E8:  3b c6                 cmp     eax, esi
+  005670EA:  74 0c                 je      0x5670f8
+  005670EC:  8b 08                 mov     ecx, dword ptr [eax]
+  005670EE:  50                    push    eax
+  005670EF:  ff 51 08              call    dword ptr [ecx + 8]
+  005670F2:  89 35 d0 3a 6a 00     mov     dword ptr [0x6a3ad0], esi
+  005670F8:  a1 cc 3a 6a 00        mov     eax, dword ptr [0x6a3acc]
+  005670FD:  3b c6                 cmp     eax, esi
+  005670FF:  74 0c                 je      0x56710d
+  00567101:  8b 10                 mov     edx, dword ptr [eax]
+  00567103:  50                    push    eax
+  00567104:  ff 52 08              call    dword ptr [edx + 8]
+  00567107:  89 35 cc 3a 6a 00     mov     dword ptr [0x6a3acc], esi
+  0056710D:  89 35 c8 3a 6a 00     mov     dword ptr [0x6a3ac8], esi
+  00567113:  5e                    pop     esi
+  00567114:  c3                    ret     
+  00567115:  90                    nop     
+  00567116:  90                    nop     
+  00567117:  90                    nop     
+  00567118:  90                    nop     
+  00567119:  90                    nop     
+  0056711A:  90                    nop     
+  0056711B:  90                    nop     
+  0056711C:  90                    nop     
+  0056711D:  90                    nop     
+  0056711E:  90                    nop     
+  0056711F:  90                    nop     
 
 ; Function: NFILE_get_global_status
 ; Address:  0x00567120 - 0x00567130 (16 bytes)
@@ -658,3 +822,39 @@ _NFILE_find_first_free_slot:
   0056778D:  90                    nop     
   0056778E:  90                    nop     
   0056778F:  90                    nop     
+
+; Function: sub_00567790
+; Address:  0x00567790 - 0x005677D0 (64 bytes)
+; Module:   nfile.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00567790:
+  00567790:  a1 d0 ca 5d 00        mov     eax, dword ptr [0x5dcad0]
+  00567795:  56                    push    esi
+  00567796:  83 e0 0f              and     eax, 0xf
+  00567799:  33 f6                 xor     esi, esi
+  0056779B:  8b 04 85 40 2d 6b 00  mov     eax, dword ptr [eax*4 + 0x6b2d40]
+  005677A2:  83 c0 10              add     eax, 0x10
+  005677A5:  33 d2                 xor     edx, edx
+  005677A7:  8b 40 10              mov     eax, dword ptr [eax + 0x10]
+  005677AA:  8b 48 04              mov     ecx, dword ptr [eax + 4]
+  005677AD:  3b ca                 cmp     ecx, edx
+  005677AF:  7e f6                 jle     0x5677a7
+  005677B1:  66 81 38 53 42        cmp     word ptr [eax], 0x4253
+  005677B6:  74 06                 je      0x5677be
+  005677B8:  8b f0                 mov     esi, eax
+  005677BA:  8b d1                 mov     edx, ecx
+  005677BC:  eb e9                 jmp     0x5677a7
+  005677BE:  85 f6                 test    esi, esi
+  005677C0:  74 05                 je      0x5677c7
+  005677C2:  8b 46 04              mov     eax, dword ptr [esi + 4]
+  005677C5:  5e                    pop     esi
+  005677C6:  c3                    ret     
+  005677C7:  33 c0                 xor     eax, eax
+  005677C9:  5e                    pop     esi
+  005677CA:  c3                    ret     
+  005677CB:  90                    nop     
+  005677CC:  90                    nop     
+  005677CD:  90                    nop     
+  005677CE:  90                    nop     
+  005677CF:  90                    nop     

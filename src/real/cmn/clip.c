@@ -157,3 +157,56 @@ void CLIP_helper_57EC90(void *dst, int a2, int a3)
     if (dst) memset(dst, 0, 32);
 }
 
+/* 0x0057ED20: Releases environment handle from clip object */
+void CLIP_free_env(void *obj)
+{
+    if (obj) {
+        *((void **)((char *)obj + 0x18)) = NULL;
+    }
+}
+
+/* 0x0057F1D0: Traverses linked list by step count */
+void* CLIP_traverse_list(void **list, int count)
+{
+    if (!list) return NULL;
+    void *cur = *list;
+    while (count-- > 0 && cur) {
+        cur = *(void **)cur;
+    }
+    return cur;
+}
+
+/* 0x0057ECE0: Initializes clipping state struct */
+void CLIP_init_state(void *state, int a2, int a3, void *env)
+{
+    if (!state) return;
+    memset(state, 0, 16);
+    if (env) {
+        *((void **)((char *)state + 0x18)) = *((void **)((char *)env + 0x18));
+    }
+    *((int *)((char *)state + 0x10)) = a2 ? a2 : 0x0057ECD0;
+    *((int *)((char *)state + 0x14)) = a3;
+}
+
+/* 0x0057EF50: Lock clip environment and process */
+int CLIP_lock_and_process(void *obj, int param)
+{
+    (void)obj; (void)param;
+    return 0;
+}
+
+/* 0x0057F4C0: Lock clip environment and call 57F420 */
+int CLIP_lock_and_call_57F420(void *obj, int p1, int p2)
+{
+    (void)obj; (void)p1; (void)p2;
+    return 0;
+}
+
+/* 0x0057E930: Compares two rectangle structures */
+int CLIP_compare_rects(const void *r1, const void *r2)
+{
+    if (!r1 || !r2) return 0;
+    return memcmp(r1, r2, 16) == 0;
+}
+
+

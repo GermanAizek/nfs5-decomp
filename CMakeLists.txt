@@ -152,6 +152,7 @@ if(BUILD_ENGINE)
         src/real/pc/movdfl.c
         src/real/pc/textpc.c
         src/real/patch3/cmn/dyntexture.c
+        src/real/patch3/cmn/fontdraw.c
         src/real/patch3/pc/set3d.c
         src/real/patch3/pc/input.c
         src/real/patch3/pc/key.c

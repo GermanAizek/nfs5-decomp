@@ -27,6 +27,7 @@ extern "C" {
 
 
 #include "../src/real/patch3/cmn/dyntexture.h"
+#include "../src/real/patch3/cmn/fontdraw.h"
 #include "../src/real/patch3/pc/input.h"
 #include "../src/real/patch3/pc/key.h"
 #include "../src/real/patch3/pc/mouse.h"
@@ -301,6 +302,40 @@ int main() {
     uint64_t drv_ver = 0;
     assert(creates_get_driver_file_version(&drv_ver, "dummy") == 1);
     assert(drv_ver > 0);
+
+    // 9b. Testing newly restored fontdraw, systask, textpc, loadshp functions
+    printf("[9b] Testing newly restored fontdraw, systask, textpc, loadshp functions...\n");
+    uint8_t font_ctx[256];
+    memset(font_ctx, 0, sizeof(font_ctx));
+    FONTDRAW_reset_scales(font_ctx);
+    FONTDRAW_set_flag_bit0(font_ctx, 1);
+    assert((*(uint32_t*)(font_ctx + 0xbc) & 1) != 0);
+    FONTDRAW_set_flag_bit0(font_ctx, 0);
+    assert((*(uint32_t*)(font_ctx + 0xbc) & 1) == 0);
+    FONTDRAW_set_flag_bit1(font_ctx, 1);
+    assert((*(uint32_t*)(font_ctx + 0xbc) & 2) != 0);
+    FONTDRAW_set_flag_bit2(font_ctx, 1);
+    assert((*(uint32_t*)(font_ctx + 0xbc) & 4) != 0);
+    FONTDRAW_set_prop_5c(font_ctx, 100);
+    assert(*(uint32_t*)(font_ctx + 0x5c) == 100);
+    FONTDRAW_set_all_paddings(font_ctx, 5);
+    assert(*(uint32_t*)(font_ctx + 0x4c) == 5);
+    FONTDRAW_set_scale_x(font_ctx, 65536);
+    FONTDRAW_set_scale_y(font_ctx, 65536);
+    FONTDRAW_set_scale_z(font_ctx, 65536);
+
+    uint16_t key_a = 10, key_b = 20;
+    assert(SYSTASK_compare_keys(&key_a, &key_b) < 0);
+    assert(SYSTASK_compare_keys(&key_b, &key_a) > 0);
+    SYSTASK_set_target_x(123);
+    SYSTASK_set_target_y(456);
+    SYSTASK_set_target_z(789);
+
+    TEXTPC_clear_all();
+
+    LOADSHP_init_default_cache();
+    assert(LOADSHP_sub_5ad210(NULL, 0) == 1);
+    assert(LOADSHP_sub_5ad530(NULL, NULL, 0) == 0);
 
 
 

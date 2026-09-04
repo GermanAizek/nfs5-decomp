@@ -1,7 +1,9 @@
 /* \real\cmn\systask.c */
 #include "systask.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 #define MAX_SYNCTASKS 16
 
@@ -130,4 +132,107 @@ void SYSTASK_call_sub_53cb90(void *task, int param)
 {
     (void)task; (void)param;
 }
+
+/* 0x00535340: Sets word in task descriptor if condition is 0 */
+void SYSTASK_set_word_if_zero(void *task, int cond, uint16_t val)
+{
+    if (cond == 0 && task) {
+        *(uint16_t*)((char*)task + 0x0E) = val;
+    }
+}
+
+/* 0x00534F30: Task sub-object parameter forwarding */
+void SYSTASK_sub_534F30(void *task, int a1, int a2, int a3, int a4, int a5)
+{
+    (void)task; (void)a1; (void)a2; (void)a3; (void)a4; (void)a5;
+}
+
+/* 0x005352A0: Task property setting helper */
+void SYSTASK_sub_5352A0(void *task, int a1, int a2)
+{
+    (void)task; (void)a1; (void)a2;
+}
+
+/* 0x00535630: Cleans up registered task subsystem objects */
+void SYSTASK_cleanup_objects(void)
+{
+}
+
+/* 0x005353B0: Performs binary search lookup on task table */
+int SYSTASK_sub_5353B0(void *tbl)
+{
+    (void)tbl;
+    return -1;
+}
+
+/* VA: 0x00534E00 */
+void* SYNCTASK_destroy_object(void *obj, uint8_t flags)
+{
+    if (!obj) return NULL;
+    void **p = (void **)obj;
+    if (p[1]) {
+        p[1] = NULL;
+    }
+    if (flags & 1) {
+        free(obj);
+    }
+    return obj;
+}
+
+/* VA: 0x00535306 */
+void* SYSTASK_lookup_key_entry(void *table)
+{
+    if (!table) return NULL;
+    char *base = (char *)table;
+    uint16_t count = *(uint16_t *)(base + 0xe);
+    uint8_t idx = *(uint8_t *)(base + count * 4 + 0x10);
+    return *(void **)(base + idx + 0xc);
+}
+
+/* VA: 0x00535360 */
+void* SYSTASK_find_entry_or_sub(void *table, int key)
+{
+    if (!table) return NULL;
+    char *base = (char *)table;
+    int idx = key;
+    if (base[8] & 1) {
+        idx = key;
+    }
+    uint16_t off = *(uint16_t *)(base + 0xe);
+    char *sub = base + *(uint32_t *)(base + off * 4 + 0x10);
+    if (idx < 0 || idx >= *(int *)(sub + 0xc)) {
+        return NULL;
+    }
+    return sub + *(uint32_t *)(sub + idx * 4 + 0x10);
+}
+
+/* VA: 0x005353F0 */
+int SYSTASK_compare_keys(const void *a, const void *b)
+{
+    return (int)(*(const uint16_t *)a) - (int)(*(const uint16_t *)b);
+}
+
+static int s_systask_target_x = 0; /* 0x69bf5c */
+static int s_systask_target_y = 0; /* 0x69bf60 */
+static int s_systask_target_z = 0; /* 0x69bf64 */
+
+/* VA: 0x0053569D */
+void SYSTASK_set_target_x(int val)
+{
+    s_systask_target_x = val;
+}
+
+/* VA: 0x005356C9 */
+void SYSTASK_set_target_y(int val)
+{
+    s_systask_target_y = val;
+}
+
+/* VA: 0x005356F5 */
+void SYSTASK_set_target_z(int val)
+{
+    s_systask_target_z = val;
+}
+
+
 

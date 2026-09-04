@@ -139,3 +139,58 @@ SHAPE_Entry* SHAPE_getbyindex(SHAPE_Header *shp, int index)
     if (!shp || index < 0 || index >= shp->count) return NULL;
     return &shp->entries[index];
 }
+
+/* 0x005AD230: Shape loader sub-dispatch */
+void LOADSHP_sub_5AD230(int a1, int a2)
+{
+    (void)a1; (void)a2;
+}
+
+/* 0x005AD3C0: Anti-debug verification via kernel32 IsDebuggerPresent */
+int LOADSHP_sub_5AD3C0(void)
+{
+    return 0;
+}
+
+/* 0x005AD300: Loads and registers shape asset */
+void* LOADSHP_sub_5AD300(const char *name)
+{
+    (void)name;
+    return NULL;
+}
+
+/* 0x005AD730: Vector projection dot-product ratio */
+float LOADSHP_sub_5AD730(void *a1, void *a2)
+{
+    (void)a1; (void)a2;
+    return 1.0f;
+}
+
+/* 0x005AD2B0: Registers loaded shape into shape table */
+void LOADSHP_sub_5AD2B0(void *res, const char *name)
+{
+    (void)res; (void)name;
+}
+
+/* VA: 0x005AD210 */
+int LOADSHP_sub_5ad210(void *ctx, int val)
+{
+    (void)ctx; (void)val;
+    return 1;
+}
+
+/* VA: 0x005AD340 */
+void LOADSHP_init_default_cache(void)
+{
+    LOADSHP_sub_5AD300((const char *)0x2000000);
+}
+
+/* VA: 0x005AD530 */
+int LOADSHP_sub_5ad530(void *ctx, void *src, int a3)
+{
+    (void)ctx; (void)src; (void)a3;
+    return 0;
+}
+
+
+

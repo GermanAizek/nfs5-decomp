@@ -22,6 +22,9 @@ uint32_t* TEXTPC_draw_1bpp_32bit(uint8_t mask, uint32_t color, uint32_t *dst);
 int TEXTPC_sub_568190(int a1, int a2);
 int TEXTPC_sub_568380(int ch);
 
+/* VA: 0x005683B0 */
+void TEXTPC_clear_all(void);
+
 #ifdef __cplusplus
 }
 #endif

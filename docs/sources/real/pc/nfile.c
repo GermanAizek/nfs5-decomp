@@ -214,3 +214,39 @@ void* NFILE_sub_565F60(uint32_t size)
     return malloc(size);
 }
 
+/* 0x005667E0: Registers file entry type 1 */
+void NFILE_register_type1(const char *name, int p2, int p3)
+{
+    (void)name; (void)p2; (void)p3;
+}
+
+/* 0x00566890: Registers file entry type 4 */
+void NFILE_register_type4(const char *name, int p2, int p3)
+{
+    (void)name; (void)p2; (void)p3;
+}
+
+/* 0x00566900: Registers file entry type 8 */
+void NFILE_register_type8(int idx, int p2, int p3)
+{
+    (void)idx; (void)p2; (void)p3;
+}
+
+/* 0x005668C0: Registers file entry type 5 */
+void NFILE_register_type5(const char *name, int p2, int p3, int p4)
+{
+    (void)name; (void)p2; (void)p3; (void)p4;
+}
+
+/* 0x005670E0: Cleans up file system structures */
+void NFILE_cleanup(void)
+{
+}
+
+/* 0x00567790: Returns max free block size in pool */
+uint32_t NFILE_get_max_block_size(void)
+{
+    return 0x100000;
+}
+
+

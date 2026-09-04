@@ -1,5 +1,5 @@
 ; Module: lowtimer.c
-; Total Matched Functions: 17
+; Total Matched Functions: 22
 ; Target: Porsche.exe
 
 ; Function: SecondaryTimerThread
@@ -118,6 +118,49 @@ _timer_free_handle:
   0053A85D:  90                    nop     
   0053A85E:  90                    nop     
   0053A85F:  90                    nop     
+
+; Function: sub_0053A860
+; Address:  0x0053A860 - 0x0053A8B0 (80 bytes)
+; Module:   lowtimer.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0053A860:
+  0053A860:  55                    push    ebp
+  0053A861:  8b ec                 mov     ebp, esp
+  0053A863:  a1 8c ca 5d 00        mov     eax, dword ptr [0x5dca8c]
+  0053A868:  85 c0                 test    eax, eax
+  0053A86A:  74 16                 je      0x53a882
+  0053A86C:  8b 45 10              mov     eax, dword ptr [ebp + 0x10]
+  0053A86F:  8b 4d 0c              mov     ecx, dword ptr [ebp + 0xc]
+  0053A872:  8b 55 08              mov     edx, dword ptr [ebp + 8]
+  0053A875:  50                    push    eax
+  0053A876:  51                    push    ecx
+  0053A877:  52                    push    edx
+  0053A878:  e8 83 42 07 00        call    0x5aeb00
+  0053A87D:  83 c4 0c              add     esp, 0xc
+  0053A880:  5d                    pop     ebp
+  0053A881:  c3                    ret     
+  0053A882:  a1 88 ca 5d 00        mov     eax, dword ptr [0x5dca88]
+  0053A887:  8b 4d 0c              mov     ecx, dword ptr [ebp + 0xc]
+  0053A88A:  8b 55 08              mov     edx, dword ptr [ebp + 8]
+  0053A88D:  85 c0                 test    eax, eax
+  0053A88F:  8b 45 10              mov     eax, dword ptr [ebp + 0x10]
+  0053A892:  50                    push    eax
+  0053A893:  51                    push    ecx
+  0053A894:  52                    push    edx
+  0053A895:  74 0c                 je      0x53a8a3
+  0053A897:  e8 a4 41 07 00        call    0x5aea40
+  0053A89C:  83 c4 0c              add     esp, 0xc
+  0053A89F:  0f 77                 emms    
+  0053A8A1:  5d                    pop     ebp
+  0053A8A2:  c3                    ret     
+  0053A8A3:  e8 d8 40 07 00        call    0x5ae980
+  0053A8A8:  83 c4 0c              add     esp, 0xc
+  0053A8AB:  5d                    pop     ebp
+  0053A8AC:  c3                    ret     
+  0053A8AD:  90                    nop     
+  0053A8AE:  90                    nop     
+  0053A8AF:  90                    nop     
 
 ; Function: sub_0053A8B0
 ; Address:  0x0053A8B0 - 0x0053A8C0 (16 bytes)
@@ -315,6 +358,37 @@ _get_total_phys_memory:
   0053A9DE:  90                    nop     
   0053A9DF:  90                    nop     
 
+; Function: sub_0053ABA0
+; Address:  0x0053ABA0 - 0x0053ABE0 (64 bytes)
+; Module:   lowtimer.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0053ABA0:
+  0053ABA0:  8b 54 24 04           mov     edx, dword ptr [esp + 4]
+  0053ABA4:  85 d2                 test    edx, edx
+  0053ABA6:  7e 36                 jle     0x53abde
+  0053ABA8:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  0053ABAC:  8b 44 24 08           mov     eax, dword ptr [esp + 8]
+  0053ABB0:  56                    push    esi
+  0053ABB1:  d9 44 24 10           fld     dword ptr [esp + 0x10]
+  0053ABB5:  d8 08                 fmul    dword ptr [eax]
+  0053ABB7:  8b 70 0c              mov     esi, dword ptr [eax + 0xc]
+  0053ABBA:  83 c0 10              add     eax, 0x10
+  0053ABBD:  89 71 0c              mov     dword ptr [ecx + 0xc], esi
+  0053ABC0:  83 c1 10              add     ecx, 0x10
+  0053ABC3:  d9 59 f0              fstp    dword ptr [ecx - 0x10]
+  0053ABC6:  d9 40 f4              fld     dword ptr [eax - 0xc]
+  0053ABC9:  d8 4c 24 10           fmul    dword ptr [esp + 0x10]
+  0053ABCD:  4a                    dec     edx
+  0053ABCE:  d9 59 f4              fstp    dword ptr [ecx - 0xc]
+  0053ABD1:  d9 40 f8              fld     dword ptr [eax - 8]
+  0053ABD4:  d8 4c 24 10           fmul    dword ptr [esp + 0x10]
+  0053ABD8:  d9 59 f8              fstp    dword ptr [ecx - 8]
+  0053ABDB:  75 d4                 jne     0x53abb1
+  0053ABDD:  5e                    pop     esi
+  0053ABDE:  c3                    ret     
+  0053ABDF:  90                    nop     
+
 ; Function: lowtimer_call_sub_5720b0
 ; Address:  0x0053ABE0 - 0x0053AC10 (48 bytes)
 ; Module:   lowtimer.c
@@ -344,6 +418,76 @@ _lowtimer_call_sub_5720b0:
   0053AC0D:  90                    nop     
   0053AC0E:  90                    nop     
   0053AC0F:  90                    nop     
+
+; Function: sub_0053AC10
+; Address:  0x0053AC10 - 0x0053AC50 (64 bytes)
+; Module:   lowtimer.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0053AC10:
+  0053AC10:  8b 44 24 08           mov     eax, dword ptr [esp + 8]
+  0053AC14:  56                    push    esi
+  0053AC15:  6a 04                 push    4
+  0053AC17:  50                    push    eax
+  0053AC18:  e8 bb 1c 03 00        call    0x56c8d8
+  0053AC1D:  8b 74 24 10           mov     esi, dword ptr [esp + 0x10]
+  0053AC21:  83 c4 08              add     esp, 8
+  0053AC24:  8b 4e 08              mov     ecx, dword ptr [esi + 8]
+  0053AC27:  85 c9                 test    ecx, ecx
+  0053AC29:  74 20                 je      0x53ac4b
+  0053AC2B:  8d 54 ce 10           lea     edx, [esi + ecx*8 + 0x10]
+  0053AC2F:  49                    dec     ecx
+  0053AC30:  83 ea 08              sub     edx, 8
+  0053AC33:  85 c9                 test    ecx, ecx
+  0053AC35:  74 04                 je      0x53ac3b
+  0053AC37:  39 02                 cmp     dword ptr [edx], eax
+  0053AC39:  75 f4                 jne     0x53ac2f
+  0053AC3B:  8b 54 ce 10           mov     edx, dword ptr [esi + ecx*8 + 0x10]
+  0053AC3F:  3b d0                 cmp     edx, eax
+  0053AC41:  75 08                 jne     0x53ac4b
+  0053AC43:  8b 44 ce 14           mov     eax, dword ptr [esi + ecx*8 + 0x14]
+  0053AC47:  03 c6                 add     eax, esi
+  0053AC49:  5e                    pop     esi
+  0053AC4A:  c3                    ret     
+  0053AC4B:  33 c0                 xor     eax, eax
+  0053AC4D:  5e                    pop     esi
+  0053AC4E:  c3                    ret     
+  0053AC4F:  90                    nop     
+
+; Function: sub_0053AC50
+; Address:  0x0053AC50 - 0x0053AC90 (64 bytes)
+; Module:   lowtimer.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0053AC50:
+  0053AC50:  8b 44 24 08           mov     eax, dword ptr [esp + 8]
+  0053AC54:  56                    push    esi
+  0053AC55:  6a 04                 push    4
+  0053AC57:  50                    push    eax
+  0053AC58:  e8 7b 1c 03 00        call    0x56c8d8
+  0053AC5D:  8b 74 24 10           mov     esi, dword ptr [esp + 0x10]
+  0053AC61:  83 c4 08              add     esp, 8
+  0053AC64:  8b 4e 08              mov     ecx, dword ptr [esi + 8]
+  0053AC67:  85 c9                 test    ecx, ecx
+  0053AC69:  74 20                 je      0x53ac8b
+  0053AC6B:  8d 54 ce 10           lea     edx, [esi + ecx*8 + 0x10]
+  0053AC6F:  49                    dec     ecx
+  0053AC70:  83 ea 08              sub     edx, 8
+  0053AC73:  85 c9                 test    ecx, ecx
+  0053AC75:  74 04                 je      0x53ac7b
+  0053AC77:  39 02                 cmp     dword ptr [edx], eax
+  0053AC79:  75 f4                 jne     0x53ac6f
+  0053AC7B:  8b 54 ce 10           mov     edx, dword ptr [esi + ecx*8 + 0x10]
+  0053AC7F:  3b d0                 cmp     edx, eax
+  0053AC81:  75 08                 jne     0x53ac8b
+  0053AC83:  8b 44 ce 14           mov     eax, dword ptr [esi + ecx*8 + 0x14]
+  0053AC87:  03 c6                 add     eax, esi
+  0053AC89:  5e                    pop     esi
+  0053AC8A:  c3                    ret     
+  0053AC8B:  33 c0                 xor     eax, eax
+  0053AC8D:  5e                    pop     esi
+  0053AC8E:  c3                    ret     
+  0053AC8F:  90                    nop     
 
 ; Function: timer_callback_dispatch
 ; Address:  0x0053AE80 - 0x0053AEA0 (32 bytes)
@@ -384,6 +528,27 @@ _sub_0053AEA0:
   0053AEAD:  90                    nop     
   0053AEAE:  90                    nop     
   0053AEAF:  90                    nop     
+
+; Function: sub_0053AEB0
+; Address:  0x0053AEB0 - 0x0053AEE0 (48 bytes)
+; Module:   lowtimer.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0053AEB0:
+  0053AEB0:  a1 74 ca 69 00        mov     eax, dword ptr [0x69ca74]
+  0053AEB5:  85 c0                 test    eax, eax
+  0053AEB7:  75 23                 jne     0x53aedc
+  0053AEB9:  6a 00                 push    0
+  0053AEBB:  e8 50 0f 00 00        call    0x53be10
+  0053AEC0:  68 fc dc 5d 00        push    0x5ddcfc
+  0053AEC5:  e8 c6 fd ff ff        call    0x53ac90
+  0053AECA:  83 c4 08              add     esp, 8
+  0053AECD:  a3 70 ca 69 00        mov     dword ptr [0x69ca70], eax
+  0053AED2:  c7 05 74 ca 69 00 01 00 00 00  mov     dword ptr [0x69ca74], 1
+  0053AEDC:  c3                    ret     
+  0053AEDD:  90                    nop     
+  0053AEDE:  90                    nop     
+  0053AEDF:  90                    nop     
 
 ; Function: timer_set_flag
 ; Address:  0x0053B490 - 0x0053B4A0 (16 bytes)

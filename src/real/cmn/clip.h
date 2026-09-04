@@ -40,6 +40,12 @@ int  CLIP_dispatch_callback_4args_variant(void *ctx, int a1, int a2, int a3);
 int  CLIP_check_and_call_sub(void *ctx);
 int  CLIP_rect_helper_57E9E0(int *r);
 void CLIP_helper_57EC90(void *dst, int a2, int a3);
+void CLIP_free_env(void *obj);
+void* CLIP_traverse_list(void **list, int count);
+void CLIP_init_state(void *state, int a2, int a3, void *env);
+int  CLIP_lock_and_process(void *obj, int param);
+int  CLIP_lock_and_call_57F420(void *obj, int p1, int p2);
+int  CLIP_compare_rects(const void *r1, const void *r2);
 
 #ifdef __cplusplus
 }

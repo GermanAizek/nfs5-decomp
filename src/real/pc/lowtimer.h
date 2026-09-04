@@ -33,6 +33,11 @@ int      timer_set_flag(int val);
 /* Additional batch prototypes */
 void lowtimer_sleep_ticks(uint32_t delta);
 void lowtimer_call_sub_5720b0(int a1, int a2);
+void lowtimer_init_tables(void);
+void lowtimer_scale_vectors(int count, const float *src, float *dst, float scale);
+void* lowtimer_lookup_resource(void *table, const char *name);
+void* lowtimer_sub_53AC50(void *table, const char *name);
+void lowtimer_sub_53A860(int p1, int p2, int p3);
 
 #ifdef __cplusplus
 }

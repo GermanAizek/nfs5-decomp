@@ -42,6 +42,8 @@ int  INITMR_sub_563380(int ch, int freq);
 int  INITMR_sub_5633D0(int ch, int mul);
 void INITMR_sub_563650(void);
 int  INITMR_sub_563860(void *status);
+int  INITTMR_sub_564260(void *ptr);
+int  INITTMR_copy_data(int idx, void *dst);
 
 #ifdef __cplusplus
 }

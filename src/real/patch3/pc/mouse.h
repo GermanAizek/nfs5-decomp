@@ -38,6 +38,13 @@ uint8_t MOUSE_get_mapped_char(const int *p);
 void MOUSE_call_sub_53ec40(void);
 void MOUSE_set_field_1c_and_notify(void *obj, int val);
 void MOUSE_set_field_20_and_notify(void *obj, int val);
+void MOUSE_set_field_8(void *obj, int val);
+void MOUSE_set_field_c(void *obj, int val);
+void MOUSE_set_field_24_and_notify(void *obj, int val);
+void MOUSE_set_field_28_and_notify(void *obj, int val);
+void MOUSE_init_struct(void *obj);
+void MOUSE_sub_535C80(int a1, int a2, int a3, int a4, int a5);
+void MOUSE_set_field_30_and_notify(void *obj, int val);
 
 #ifdef __cplusplus
 }

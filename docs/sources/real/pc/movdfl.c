@@ -46,3 +46,43 @@ void MOVDFL_free_buffer(void *desc)
     }
 }
 
+/* 0x005700F0: Initializes buffer subdivision table */
+int MOVDFL_sub_5700F0(void *tbl, int initial_sz, int target_sz)
+{
+    if (!tbl) return 0;
+    uint32_t *p = (uint32_t*)tbl;
+    uint32_t block_sz = 0x20;
+    if (initial_sz > 0x20) {
+        while (block_sz < (uint32_t)initial_sz) {
+            block_sz <<= 1;
+        }
+    }
+    p[0] = block_sz;
+    p[1] = 0;
+    uint32_t offset = 0;
+    while (offset < (uint32_t)target_sz) {
+        if (p[1] >= 10) {
+            return 0;
+        }
+        uint32_t idx = p[1];
+        p[idx * 2 + 2] = offset;
+        p[idx * 2 + 3] = p[0];
+        offset += p[idx * 2 + 3];
+        p[1] = idx + 1;
+    }
+    return 1;
+}
+
+/* 0x00570040: Movie stream frame buffer setup */
+int MOVDFL_sub_570040(void *desc)
+{
+    if (!desc) return 0;
+    return 1;
+}
+
+/* 0x0056FFF0: Movie audio channel stream init */
+void MOVDFL_sub_56FFF0(int a1, int a2, int a3)
+{
+    (void)a1; (void)a2; (void)a3;
+}
+

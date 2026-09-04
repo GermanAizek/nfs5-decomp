@@ -27,10 +27,13 @@ void*        Window_scalar_destructor(REAL_Window *w, unsigned int flags);
 
 
 /* Additional batch prototypes */
-int  CREATEW_sub_534570(int w, int h);
-void CREATEW_sub_534610(void *win);
-void CREATEW_sub_534660(void *win, int visible);
-int  CREATEW_sub_5346A0(int bpp);
+int   CREATEW_sub_534570(int w, int h);
+void  CREATEW_sub_534610(void *win);
+void  CREATEW_sub_534660(void *win, int visible);
+int   CREATEW_sub_5346A0(int bpp);
+void* CREATEW_sub_534110(void *this_ptr, void *param);
+void  CREATEW_sub_5345C0(int a1, int a2);
+void* CREATEW_sub_5346E0(void *this_ptr, void *src);
 
 #ifdef __cplusplus
 }

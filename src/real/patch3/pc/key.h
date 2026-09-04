@@ -43,6 +43,12 @@ int   KEY_write_stream_words(int handle, int len, void *buf);
 /* Additional batch prototypes */
 int  KEY_register_callback(void (*cb)(void));
 int  KEY_unregister_callback(void (*cb)(void));
+void KEY_add_callback(void *cb);
+int  KEY_sub_55FCB0(int idx);
+int  KEY_sub_55FD00(int idx);
+int  KEY_sub_55FE00(int idx);
+int  KEY_sub_560180(void);
+void KEY_sub_560940(void *obj, int a2, int a3);
 
 #ifdef __cplusplus
 }

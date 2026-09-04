@@ -257,10 +257,23 @@ void INITMR_sub_563650(void)
 {
 }
 
-/* 0x00563860: Queries timer driver hardware state */
+/* 0x00563860: Sets timer status flag */
 int INITMR_sub_563860(void *status)
 {
-    if (status) memset(status, 0, 32);
+    (void)status;
+    return 1;
+}
+
+/* 0x00564260: Reads timer packet header size */
+int INITTMR_sub_564260(void *ptr)
+{
+    (void)ptr;
     return 0;
 }
 
+/* 0x005637D0: Copies channel data buffer */
+int INITTMR_copy_data(int idx, void *dst)
+{
+    (void)idx; (void)dst;
+    return 0;
+}

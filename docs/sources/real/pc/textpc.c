@@ -133,3 +133,15 @@ int TEXTPC_sub_568380(int ch)
     return (ch >= 32) ? 8 : 0;
 }
 
+static void TEXTPC_sub_5683d0(int a1, int a2, int a3, int a4)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4;
+}
+
+/* VA: 0x005683B0 */
+void TEXTPC_clear_all(void)
+{
+    TEXTPC_sub_5683d0(0, 0, 0, 0);
+}
+
+

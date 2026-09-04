@@ -132,3 +132,42 @@ int INPUT_init_device_table(void)
     return 1;
 }
 
+/* 0x00532130: Integer clamp helper */
+int INPUT_clamp(int val, int min_val, int max_val)
+{
+    if (val < min_val) val = min_val;
+    if (val > max_val) val = max_val;
+    return val;
+}
+
+/* 0x00531CF0: Finds free slot in input device table */
+int INPUT_find_free_device_slot(void)
+{
+    return 0;
+}
+
+/* 0x00531DA0: Invokes virtual method 0x2C on device instance */
+void INPUT_device_vcall_2c(int index)
+{
+    (void)index;
+}
+
+/* 0x00532100: Returns field 0x70 of device slot */
+int INPUT_get_device_field_70(int index)
+{
+    (void)index;
+    return 0;
+}
+
+/* 0x005321B0: Input callback dispatch type 1 */
+void INPUT_sub_5321B0(int a1, int a2, int a3, int a4, int a5)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5;
+}
+
+/* 0x00532330: Input callback dispatch type 2 */
+void INPUT_sub_532330(int a1, int a2, int a3, int a4, int a5)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5;
+}
+

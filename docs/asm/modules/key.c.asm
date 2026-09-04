@@ -1,5 +1,5 @@
 ; Module: key.c
-; Total Matched Functions: 23
+; Total Matched Functions: 29
 ; Target: Porsche.exe
 
 ; Function: KEY_get_device_ptr
@@ -323,6 +323,31 @@ _KEY_reset_field3c:
   0055EFBE:  90                    nop     
   0055EFBF:  90                    nop     
 
+; Function: sub_0055F710
+; Address:  0x0055F710 - 0x0055F740 (48 bytes)
+; Module:   key.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0055F710:
+  0055F710:  a0 bc 27 6b 00        mov     al, byte ptr [0x6b27bc]
+  0055F715:  84 c0                 test    al, al
+  0055F717:  74 1e                 je      0x55f737
+  0055F719:  0f be 05 c0 27 6b 00  movsx   eax, byte ptr [0x6b27c0]
+  0055F720:  8b 4c 24 04           mov     ecx, dword ptr [esp + 4]
+  0055F724:  89 0c 85 d0 27 6b 00  mov     dword ptr [eax*4 + 0x6b27d0], ecx
+  0055F72B:  a0 c0 27 6b 00        mov     al, byte ptr [0x6b27c0]
+  0055F730:  fe c0                 inc     al
+  0055F732:  a2 c0 27 6b 00        mov     byte ptr [0x6b27c0], al
+  0055F737:  c3                    ret     
+  0055F738:  90                    nop     
+  0055F739:  90                    nop     
+  0055F73A:  90                    nop     
+  0055F73B:  90                    nop     
+  0055F73C:  90                    nop     
+  0055F73D:  90                    nop     
+  0055F73E:  90                    nop     
+  0055F73F:  90                    nop     
+
 ; Function: KEY_calculate_offset
 ; Address:  0x0055F800 - 0x0055F810 (16 bytes)
 ; Module:   key.c
@@ -362,6 +387,35 @@ _KEY_get_stream_offset:
   0055F82E:  90                    nop     
   0055F82F:  90                    nop     
 
+; Function: sub_0055FCB0
+; Address:  0x0055FCB0 - 0x0055FCE0 (48 bytes)
+; Module:   key.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0055FCB0:
+  0055FCB0:  a0 bc 27 6b 00        mov     al, byte ptr [0x6b27bc]
+  0055FCB5:  84 c0                 test    al, al
+  0055FCB7:  75 06                 jne     0x55fcbf
+  0055FCB9:  b8 f6 ff ff ff        mov     eax, 0xfffffff6
+  0055FCBE:  c3                    ret     
+  0055FCBF:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  0055FCC3:  8b 0c 85 e0 5a 6b 00  mov     ecx, dword ptr [eax*4 + 0x6b5ae0]
+  0055FCCA:  0f bf 41 18           movsx   eax, word ptr [ecx + 0x18]
+  0055FCCE:  0f bf 49 10           movsx   ecx, word ptr [ecx + 0x10]
+  0055FCD2:  2b c1                 sub     eax, ecx
+  0055FCD4:  48                    dec     eax
+  0055FCD5:  c3                    ret     
+  0055FCD6:  90                    nop     
+  0055FCD7:  90                    nop     
+  0055FCD8:  90                    nop     
+  0055FCD9:  90                    nop     
+  0055FCDA:  90                    nop     
+  0055FCDB:  90                    nop     
+  0055FCDC:  90                    nop     
+  0055FCDD:  90                    nop     
+  0055FCDE:  90                    nop     
+  0055FCDF:  90                    nop     
+
 ; Function: KEY_get_total_size
 ; Address:  0x0055FCE0 - 0x0055FD00 (32 bytes)
 ; Module:   key.c
@@ -386,6 +440,32 @@ _KEY_get_total_size:
   0055FCFD:  90                    nop     
   0055FCFE:  90                    nop     
   0055FCFF:  90                    nop     
+
+; Function: sub_0055FD00
+; Address:  0x0055FD00 - 0x0055FD30 (48 bytes)
+; Module:   key.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0055FD00:
+  0055FD00:  a0 bc 27 6b 00        mov     al, byte ptr [0x6b27bc]
+  0055FD05:  84 c0                 test    al, al
+  0055FD07:  75 06                 jne     0x55fd0f
+  0055FD09:  b8 f6 ff ff ff        mov     eax, 0xfffffff6
+  0055FD0E:  c3                    ret     
+  0055FD0F:  56                    push    esi
+  0055FD10:  e8 1b 80 02 00        call    0x587d30
+  0055FD15:  8b 44 24 08           mov     eax, dword ptr [esp + 8]
+  0055FD19:  50                    push    eax
+  0055FD1A:  e8 c1 ff ff ff        call    0x55fce0
+  0055FD1F:  83 c4 04              add     esp, 4
+  0055FD22:  8b f0                 mov     esi, eax
+  0055FD24:  e8 27 80 02 00        call    0x587d50
+  0055FD29:  8b c6                 mov     eax, esi
+  0055FD2B:  5e                    pop     esi
+  0055FD2C:  c3                    ret     
+  0055FD2D:  90                    nop     
+  0055FD2E:  90                    nop     
+  0055FD2F:  90                    nop     
 
 ; Function: KEY_get_channel_size
 ; Address:  0x0055FD30 - 0x0055FD50 (32 bytes)
@@ -426,6 +506,52 @@ _KEY_return_zero:
   0055FD5D:  90                    nop     
   0055FD5E:  90                    nop     
   0055FD5F:  90                    nop     
+
+; Function: sub_0055FE00
+; Address:  0x0055FE00 - 0x0055FE30 (48 bytes)
+; Module:   key.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_0055FE00:
+  0055FE00:  a0 bc 27 6b 00        mov     al, byte ptr [0x6b27bc]
+  0055FE05:  84 c0                 test    al, al
+  0055FE07:  75 06                 jne     0x55fe0f
+  0055FE09:  b8 f6 ff ff ff        mov     eax, 0xfffffff6
+  0055FE0E:  c3                    ret     
+  0055FE0F:  56                    push    esi
+  0055FE10:  8b 74 24 08           mov     esi, dword ptr [esp + 8]
+  0055FE14:  56                    push    esi
+  0055FE15:  e8 f6 7f 02 00        call    0x587e10
+  0055FE1A:  83 c4 04              add     esp, 4
+  0055FE1D:  c7 04 b5 e0 5a 6b 00 00 00 00 00  mov     dword ptr [esi*4 + 0x6b5ae0], 0
+  0055FE28:  33 c0                 xor     eax, eax
+  0055FE2A:  5e                    pop     esi
+  0055FE2B:  c3                    ret     
+  0055FE2C:  90                    nop     
+  0055FE2D:  90                    nop     
+  0055FE2E:  90                    nop     
+  0055FE2F:  90                    nop     
+
+; Function: sub_00560180
+; Address:  0x00560180 - 0x005601B0 (48 bytes)
+; Module:   key.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00560180:
+  00560180:  a1 c0 5a 6b 00        mov     eax, dword ptr [0x6b5ac0]
+  00560185:  85 c0                 test    eax, eax
+  00560187:  75 06                 jne     0x56018f
+  00560189:  b8 f0 ff ff ff        mov     eax, 0xfffffff0
+  0056018E:  c3                    ret     
+  0056018F:  68 e0 ff 55 00        push    0x55ffe0
+  00560194:  e8 a7 f5 ff ff        call    0x55f740
+  00560199:  83 c4 04              add     esp, 4
+  0056019C:  e8 1f 92 02 00        call    0x5893c0
+  005601A1:  c7 05 c0 5a 6b 00 00 00 00 00  mov     dword ptr [0x6b5ac0], 0
+  005601AB:  33 c0                 xor     eax, eax
+  005601AD:  c3                    ret     
+  005601AE:  90                    nop     
+  005601AF:  90                    nop     
 
 ; Function: KEY_write_stream_bytes
 ; Address:  0x00560200 - 0x00560220 (32 bytes)
@@ -468,3 +594,32 @@ _KEY_write_stream_words:
   0056023D:  90                    nop     
   0056023E:  90                    nop     
   0056023F:  90                    nop     
+
+; Function: sub_00560940
+; Address:  0x00560940 - 0x00560970 (48 bytes)
+; Module:   key.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00560940:
+  00560940:  8b 54 24 0c           mov     edx, dword ptr [esp + 0xc]
+  00560944:  8b 4c 24 04           mov     ecx, dword ptr [esp + 4]
+  00560948:  52                    push    edx
+  00560949:  8b 54 24 0c           mov     edx, dword ptr [esp + 0xc]
+  0056094D:  8b 41 0c              mov     eax, dword ptr [ecx + 0xc]
+  00560950:  52                    push    edx
+  00560951:  8b d0                 mov     edx, eax
+  00560953:  c1 e2 04              shl     edx, 4
+  00560956:  c1 e0 14              shl     eax, 0x14
+  00560959:  c1 fa 14              sar     edx, 0x14
+  0056095C:  c1 f8 14              sar     eax, 0x14
+  0056095F:  52                    push    edx
+  00560960:  50                    push    eax
+  00560961:  51                    push    ecx
+  00560962:  e8 a9 fb ff ff        call    0x560510
+  00560967:  83 c4 14              add     esp, 0x14
+  0056096A:  c3                    ret     
+  0056096B:  90                    nop     
+  0056096C:  90                    nop     
+  0056096D:  90                    nop     
+  0056096E:  90                    nop     
+  0056096F:  90                    nop     

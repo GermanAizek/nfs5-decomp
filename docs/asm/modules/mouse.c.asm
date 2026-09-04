@@ -1,5 +1,5 @@
 ; Module: mouse.c
-; Total Matched Functions: 22
+; Total Matched Functions: 29
 ; Target: Porsche.exe
 
 ; Function: MOUSE_set_state_cc
@@ -64,6 +64,40 @@ _MOUSE_get_state_d0:
   00535B14:  5b                    pop     ebx
   00535B15:  83 c4 10              add     esp, 0x10
   00535B18:  c3                    ret     
+
+; Function: sub_00535C80
+; Address:  0x00535C80 - 0x00535CB0 (48 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00535C80:
+  00535C80:  8b 44 24 14           mov     eax, dword ptr [esp + 0x14]
+  00535C84:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  00535C88:  8b 54 24 0c           mov     edx, dword ptr [esp + 0xc]
+  00535C8C:  50                    push    eax
+  00535C8D:  8b 44 24 0c           mov     eax, dword ptr [esp + 0xc]
+  00535C91:  51                    push    ecx
+  00535C92:  8b 4c 24 0c           mov     ecx, dword ptr [esp + 0xc]
+  00535C96:  52                    push    edx
+  00535C97:  50                    push    eax
+  00535C98:  51                    push    ecx
+  00535C99:  e8 92 b3 03 00        call    0x571030
+  00535C9E:  83 c4 14              add     esp, 0x14
+  00535CA1:  c3                    ret     
+  00535CA2:  90                    nop     
+  00535CA3:  90                    nop     
+  00535CA4:  90                    nop     
+  00535CA5:  90                    nop     
+  00535CA6:  90                    nop     
+  00535CA7:  90                    nop     
+  00535CA8:  90                    nop     
+  00535CA9:  90                    nop     
+  00535CAA:  90                    nop     
+  00535CAB:  90                    nop     
+  00535CAC:  90                    nop     
+  00535CAD:  90                    nop     
+  00535CAE:  90                    nop     
+  00535CAF:  90                    nop     
 
 ; Function: MOUSE_call_sub_53ec40
 ; Address:  0x00535CB0 - 0x00535CC0 (16 bytes)
@@ -306,6 +340,106 @@ _MOUSE_set_field_20_and_notify:
   00535F1E:  90                    nop     
   00535F1F:  90                    nop     
 
+; Function: sub_00535F20
+; Address:  0x00535F20 - 0x00535F40 (32 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00535F20:
+  00535F20:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00535F24:  89 41 24              mov     dword ptr [ecx + 0x24], eax
+  00535F27:  8b c8                 mov     ecx, eax
+  00535F29:  51                    push    ecx
+  00535F2A:  6a 17                 push    0x17
+  00535F2C:  e8 8f 8b 00 00        call    0x53eac0
+  00535F31:  83 c4 08              add     esp, 8
+  00535F34:  c2 04 00              ret     4
+  00535F37:  90                    nop     
+  00535F38:  90                    nop     
+  00535F39:  90                    nop     
+  00535F3A:  90                    nop     
+  00535F3B:  90                    nop     
+  00535F3C:  90                    nop     
+  00535F3D:  90                    nop     
+  00535F3E:  90                    nop     
+  00535F3F:  90                    nop     
+
+; Function: sub_00535F40
+; Address:  0x00535F40 - 0x00535F60 (32 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00535F40:
+  00535F40:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00535F44:  50                    push    eax
+  00535F45:  6a 0f                 push    0xf
+  00535F47:  89 41 28              mov     dword ptr [ecx + 0x28], eax
+  00535F4A:  e8 11 8b 00 00        call    0x53ea60
+  00535F4F:  83 c4 08              add     esp, 8
+  00535F52:  c2 04 00              ret     4
+  00535F55:  90                    nop     
+  00535F56:  90                    nop     
+  00535F57:  90                    nop     
+  00535F58:  90                    nop     
+  00535F59:  90                    nop     
+  00535F5A:  90                    nop     
+  00535F5B:  90                    nop     
+  00535F5C:  90                    nop     
+  00535F5D:  90                    nop     
+  00535F5E:  90                    nop     
+  00535F5F:  90                    nop     
+
+; Function: sub_00535F60
+; Address:  0x00535F60 - 0x00535F90 (48 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00535F60:
+  00535F60:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00535F64:  8b 51 30              mov     edx, dword ptr [ecx + 0x30]
+  00535F67:  3b d0                 cmp     edx, eax
+  00535F69:  74 16                 je      0x535f81
+  00535F6B:  89 41 30              mov     dword ptr [ecx + 0x30], eax
+  00535F6E:  8b 0d 64 cd 5d 00     mov     ecx, dword ptr [0x5dcd64]
+  00535F74:  03 c8                 add     ecx, eax
+  00535F76:  51                    push    ecx
+  00535F77:  6a 18                 push    0x18
+  00535F79:  e8 02 8b 00 00        call    0x53ea80
+  00535F7E:  83 c4 08              add     esp, 8
+  00535F81:  c2 04 00              ret     4
+  00535F84:  90                    nop     
+  00535F85:  90                    nop     
+  00535F86:  90                    nop     
+  00535F87:  90                    nop     
+  00535F88:  90                    nop     
+  00535F89:  90                    nop     
+  00535F8A:  90                    nop     
+  00535F8B:  90                    nop     
+  00535F8C:  90                    nop     
+  00535F8D:  90                    nop     
+  00535F8E:  90                    nop     
+  00535F8F:  90                    nop     
+
+; Function: sub_00535F90
+; Address:  0x00535F90 - 0x00535FB0 (32 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00535F90:
+  00535F90:  8b c1                 mov     eax, ecx
+  00535F92:  33 c9                 xor     ecx, ecx
+  00535F94:  89 08                 mov     dword ptr [eax], ecx
+  00535F96:  c7 40 04 01 00 00 00  mov     dword ptr [eax + 4], 1
+  00535F9D:  89 48 08              mov     dword ptr [eax + 8], ecx
+  00535FA0:  89 48 0c              mov     dword ptr [eax + 0xc], ecx
+  00535FA3:  89 48 10              mov     dword ptr [eax + 0x10], ecx
+  00535FA6:  89 48 14              mov     dword ptr [eax + 0x14], ecx
+  00535FA9:  89 48 18              mov     dword ptr [eax + 0x18], ecx
+  00535FAC:  c3                    ret     
+  00535FAD:  90                    nop     
+  00535FAE:  90                    nop     
+  00535FAF:  90                    nop     
+
 ; Function: MOUSE_set_field_0
 ; Address:  0x00535FE0 - 0x00535FF0 (16 bytes)
 ; Module:   mouse.c
@@ -338,6 +472,38 @@ _MOUSE_set_field_4:
   00535FFD:  90                    nop     
   00535FFE:  90                    nop     
   00535FFF:  90                    nop     
+
+; Function: sub_00536000
+; Address:  0x00536000 - 0x00536010 (16 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00536000:
+  00536000:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00536004:  89 41 08              mov     dword ptr [ecx + 8], eax
+  00536007:  c2 04 00              ret     4
+  0053600A:  90                    nop     
+  0053600B:  90                    nop     
+  0053600C:  90                    nop     
+  0053600D:  90                    nop     
+  0053600E:  90                    nop     
+  0053600F:  90                    nop     
+
+; Function: sub_00536010
+; Address:  0x00536010 - 0x00536020 (16 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_sub_00536010:
+  00536010:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00536014:  89 41 0c              mov     dword ptr [ecx + 0xc], eax
+  00536017:  c2 04 00              ret     4
+  0053601A:  90                    nop     
+  0053601B:  90                    nop     
+  0053601C:  90                    nop     
+  0053601D:  90                    nop     
+  0053601E:  90                    nop     
+  0053601F:  90                    nop     
 
 ; Function: MOUSE_set_field_10
 ; Address:  0x00536020 - 0x00536030 (16 bytes)

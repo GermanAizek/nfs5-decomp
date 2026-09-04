@@ -231,3 +231,46 @@ void lowtimer_call_sub_5720b0(int a1, int a2)
     (void)a1; (void)a2;
 }
 
+/* 0x0053AEB0: Initializes lowtimer subsystem tables */
+void lowtimer_init_tables(void)
+{
+    static int s_inited = 0;
+    if (!s_inited) {
+        s_inited = 1;
+    }
+}
+
+/* 0x0053ABA0: Vector float scaling */
+void lowtimer_scale_vectors(int count, const float *src, float *dst, float scale)
+{
+    if (!src || !dst || count <= 0) return;
+    for (int i = 0; i < count; i++) {
+        dst[0] = src[0] * scale;
+        dst[1] = src[1] * scale;
+        dst[2] = src[2] * scale;
+        *(uint32_t*)&dst[3] = *(const uint32_t*)&src[3];
+        src += 4;
+        dst += 4;
+    }
+}
+
+/* 0x0053AC10: Resource lookup by hash/id */
+void* lowtimer_lookup_resource(void *table, const char *name)
+{
+    (void)table; (void)name;
+    return NULL;
+}
+
+/* 0x0053AC50: Resource lookup variant */
+void* lowtimer_sub_53AC50(void *table, const char *name)
+{
+    (void)table; (void)name;
+    return NULL;
+}
+
+/* 0x0053A860: Timer sample dispatch */
+void lowtimer_sub_53A860(int p1, int p2, int p3)
+{
+    (void)p1; (void)p2; (void)p3;
+}
+
