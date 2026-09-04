@@ -142,3 +142,63 @@ DynTexture* DTEX_find(const char *name)
     }
     return NULL;
 }
+
+/* 0x00553410: Modify flag at offset 0x2C */
+void DYNTEXT_set_flag(void *obj)
+{
+    uint32_t *p = (uint32_t *)((char *)obj + 0x2C);
+    *p = (*p & 0xFFFFFFFD) | 1;
+}
+
+/* 0x00553430, 0x00553440: Global flag setters */
+extern uint32_t dword_6A192C;
+void DYNTEXT_enable_flag(void)
+{
+    dword_6A192C = 1;
+}
+
+void DYNTEXT_disable_flag(void)
+{
+    dword_6A192C = 0;
+}
+
+/* 0x00553520: Dispatch call based on flag */
+extern void sub_553970(void);
+typedef void (*dyn_disp_fn_t)(void);
+extern dyn_disp_fn_t dword_6BB7A8;
+void DYNTEXT_dispatch_call(void)
+{
+    if (dword_6A192C) {
+        sub_553970();
+    } else if (dword_6BB7A8) {
+        dword_6BB7A8();
+    }
+}
+
+/* 0x00553A70: Query readiness */
+extern uint32_t dword_6A1928;
+int DYNTEXT_is_ready(void *obj)
+{
+    if (!obj || !dword_6A1928) return 0;
+    return *(uint32_t *)((char *)obj + 0x10) != 0;
+}
+
+/* 0x00553C10: Dummy return */
+void DYNTEXT_dummy_ret(void)
+{
+}
+
+/* 0x00553C80: Set global target pointer */
+extern void *dword_6A1930;
+void DYNTEXT_set_target(void *target)
+{
+    dword_6A1930 = target;
+}
+
+/* 0x00554990: Wrapper calling 0x00554950 */
+extern void sub_554950(void *b, void *c, void *a);
+void DYNTEXT_call_554950(void *a, void *b, void *c)
+{
+    sub_554950(c, a, b);
+}
+

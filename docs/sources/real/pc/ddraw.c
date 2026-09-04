@@ -233,3 +233,155 @@ int DD_getbpp(void)    { return g_bpp;    }
 #ifndef _WIN32
 SDL_Window* DD_getwindow(void) { return g_window; }
 #endif
+
+/* 0x005569A0: Call DirectDraw Release via COM helper */
+typedef void (*dd_release_fn_t)(void *);
+extern dd_release_fn_t dword_5B0318;
+extern void *dword_6B55C0;
+void DDRAW_sub_5569A0(void *obj)
+{
+    if (!obj) obj = &dword_6B55C0;
+    void *ptr = *(void **)((char *)obj + 0x458);
+    if (dword_5B0318) dword_5B0318(ptr);
+}
+
+/* 0x00556A60: Query backbuffer surface pointer */
+void* DDRAW_sub_556A60(void *obj)
+{
+    if (!obj) obj = &dword_6B55C0;
+    void *surf = *(void **)obj;
+    if (!surf) return NULL;
+    typedef int (*get_attached_fn_t)(void *, void *, void **);
+    void **vtbl = *(void ***)surf;
+    get_attached_fn_t fn = (get_attached_fn_t)vtbl[0x44/4];
+    void *out = NULL;
+    fn(surf, NULL, &out);
+    return out;
+}
+
+/* 0x00557290: Release surface */
+void DDRAW_sub_557290(void *obj)
+{
+    if (!obj) return;
+    typedef void (*surf_rel_fn_t)(void *);
+    void **vtbl = *(void ***)obj;
+    surf_rel_fn_t fn = (surf_rel_fn_t)vtbl[0x60/4];
+    fn(obj);
+}
+
+/* 0x00558050 .. 0x005580F0: Surface dimension / configuration setters */
+extern uint32_t dword_6A1A1C;
+extern uint32_t dword_5DD2C8;
+extern uint32_t dword_5DD2CC;
+extern uint32_t dword_5DD2D0;
+extern uint32_t dword_6A1A24;
+extern uint32_t dword_6A1A28;
+extern uint32_t dword_6A1A2C;
+
+uint32_t DDRAW_set_dim_6a1a1c(uint32_t val)
+{
+    uint32_t old = dword_6A1A1C;
+    dword_6A1A1C = val;
+    if (val == 0) dword_5DD2C8 = 0xFFFFFFFF;
+    return old;
+}
+
+uint32_t DDRAW_set_dim_5dd2cc(uint32_t val)
+{
+    uint32_t old = dword_5DD2CC;
+    dword_5DD2CC = val;
+    if (val == 0) dword_5DD2C8 = 0xFFFFFFFF;
+    return old;
+}
+
+uint32_t DDRAW_set_dim_5dd2d0(uint32_t val)
+{
+    uint32_t old = dword_5DD2D0;
+    dword_5DD2D0 = val;
+    if (val == 0) dword_5DD2C8 = 0xFFFFFFFF;
+    return old;
+}
+
+uint32_t DDRAW_set_dim_6a1a24(uint32_t val)
+{
+    uint32_t old = dword_6A1A24;
+    dword_6A1A24 = val;
+    if (val == 0) dword_5DD2C8 = 0xFFFFFFFF;
+    return old;
+}
+
+uint32_t DDRAW_set_dim_6a1a28(uint32_t val)
+{
+    uint32_t old = dword_6A1A28;
+    dword_6A1A28 = val;
+    if (val == 0) dword_5DD2C8 = 0xFFFFFFFF;
+    return old;
+}
+
+uint32_t DDRAW_set_dim_6a1a2c(uint32_t val)
+{
+    uint32_t old = dword_6A1A2C;
+    dword_6A1A2C = val;
+    if (val == 0) dword_5DD2C8 = 0xFFFFFFFF;
+    return old;
+}
+
+extern void sub_55BD70(int val);
+extern void *dword_6A35DC;
+extern void sub_530550(void *p);
+
+/* VA: 0x0055B2B0 (16 bytes) */
+int DDRAW_sub_55B2B0(void)
+{
+    return 0;
+}
+
+/* VA: 0x0055B400 (32 bytes) */
+int DDRAW_sub_55B400(void *a)
+{
+    char *sub = *(char **)((char *)a + 4);
+    uint32_t *flag = (uint32_t *)(sub + 0x2C8);
+    *flag |= 0x10;
+    return 0;
+}
+
+/* VA: 0x0055BAE0 (32 bytes) */
+void* DDRAW_sub_55BAE0(void *a)
+{
+    if (*((uint8_t *)a + 0x2C8) & 1) {
+        return (char *)a + 0x254;
+    }
+    return NULL;
+}
+
+/* VA: 0x0055BD10 (32 bytes) */
+int DDRAW_sub_55BD10(void *a)
+{
+    uint32_t val = *(uint32_t *)((char *)a + 0xBC);
+    return (val > 3) ? 1 : 0;
+}
+
+/* VA: 0x0055BD30 (32 bytes) */
+int DDRAW_sub_55BD30(void *a)
+{
+    return *(uint32_t *)((char *)a + 0xBC) == 1;
+}
+
+/* VA: 0x0055BD50 (32 bytes) */
+void DDRAW_sub_55BD50(int val)
+{
+    if (val > 0x2B0E || val < 0x2AF9) {
+        sub_55BD70(val);
+    }
+}
+
+/* VA: 0x0055C480 (32 bytes) */
+void DDRAW_sub_55C480(void)
+{
+    if (dword_6A35DC) {
+        sub_530550(dword_6A35DC);
+        dword_6A35DC = NULL;
+    }
+}
+
+

@@ -174,3 +174,76 @@ int FILE_loadpackat(const char *filename, void *destination)
     VFS_FreeFile(raw);
     return 1;
 }
+
+/* 0x0056CC70: VirtualFree wrapper */
+typedef int (*vfree_fn_t)(void *, uint32_t, uint32_t);
+extern vfree_fn_t dword_5B0140;
+void LOADPACK_virtual_free(void *ptr)
+{
+#if defined(_WIN32)
+    if (dword_5B0140) dword_5B0140(ptr, 0, 0x8000);
+#else
+    free(ptr);
+#endif
+}
+
+/* 0x0056CF70: VirtualAlloc thunk */
+typedef void* (*valloc_fn_t)(void);
+extern valloc_fn_t dword_5B0030;
+void LOADPACK_thunk_5b0030(void)
+{
+    if (dword_5B0030) dword_5B0030();
+}
+
+/* 0x0056E310: Helper chaining two sub-parsers */
+extern void sub_56E330(void *obj);
+extern void sub_56E360(void *obj, void *a, void *b);
+void LOADPACK_sub_56E310(void *obj, void *a, void *b)
+{
+    sub_56E330(obj);
+    sub_56E360(obj, a, b);
+}
+
+/* 0x0056E700, 0x0056E7C0, 0x0056EAA0: Buffer transfer wrappers */
+extern void sub_5309A0(void *dst, void *src, int count);
+
+void LOADPACK_sub_56E700(void *a, void *b, int count)
+{
+    sub_5309A0(a, b, (count + 1) / 2);
+}
+
+void LOADPACK_sub_56E7C0(void *a, void *b, int count)
+{
+    sub_5309A0(a, b, count);
+}
+
+void LOADPACK_sub_56EAA0(void *a, void *b, int count)
+{
+    sub_5309A0(a, b, count * 2);
+}
+
+void LOADPACK_copy_3x(void *dst, void *src, int count)
+{
+    sub_5309A0(dst, src, count * 3);
+}
+
+void LOADPACK_copy_4x(void *dst, void *src, int count)
+{
+    sub_5309A0(dst, src, count * 4);
+}
+
+void LOADPACK_log_error(void)
+{
+}
+
+void LOADPACK_wrapper_56f9d0(void *a, void *b)
+{
+    (void)a; (void)b;
+}
+
+void LOADPACK_wrapper_56fac0(void *a)
+{
+    (void)a;
+}
+
+

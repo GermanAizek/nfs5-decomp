@@ -199,6 +199,73 @@ void* LOADSHP_find_block_by_ptr(const void *ptr)
     return NULL;
 }
 
+/* VA: 0x005AD490: Create raster surface from shape format */
+int LOADSHP_create_surface(int a1, void *a2, void *a3, void *a4)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4;
+    return 1;
+}
+
+/* VA: 0x005AD370: Shape sub-dispatch */
+void LOADSHP_sub_5ad370(void *a1, int a2, int a3)
+{
+    (void)a1; (void)a2; (void)a3;
+}
+
+/* VA: 0x005AD39A: Shape subdivision arithmetic and callback */
+void LOADSHP_sub_5ad39a(int a1, int a2)
+{
+    (void)a1; (void)a2;
+}
+
+/* VA: 0x005AD3F0: Shape cache status check */
+int LOADSHP_sub_5ad3f0(void)
+{
+    return 0;
+}
+
+/* VA: 0x005AD3FD: Shape cache invalidate */
+void LOADSHP_sub_5ad3fd(void *a1)
+{
+    (void)a1;
+}
+
+/* VA: 0x005AD770: Shape frame unpacker */
+int LOADSHP_sub_5ad770(void *a1, void *a2, int a3)
+{
+    (void)a1; (void)a2; (void)a3;
+    return 1;
+}
+
+/* VA: 0x005AD090: Shape lookup by name in cache */
+int LOADSHP_sub_5ad090(void *a1, void *a2)
+{
+    (void)a1; (void)a2;
+    return 0;
+}
+
+/* VA: 0x005AD570: Shape texture scale calculation */
+int LOADSHP_sub_5ad570(void *a1, float a2)
+{
+    (void)a1; (void)a2;
+    return 1;
+}
+
+/* VA: 0x005AD8A4: Shape file parsing and block extraction */
+void* LOADSHP_sub_5ad8a4(void *a1, int a2)
+{
+    (void)a1; (void)a2;
+    return NULL;
+}
+
+/* VA: 0x005ADD1D: Shape header parser */
+int LOADSHP_sub_5add1d(void *a1, void *a2)
+{
+    (void)a1; (void)a2;
+    return 1;
+}
+
+
 
 
 

@@ -18,6 +18,16 @@ int         SET3D_getwidth(void);
 int         SET3D_getheight(void);
 int         SET3D_getbpp(void);
 
+int         SET3D_sub_573D20(void);
+void        SET3D_sub_573D30(void);
+void        SET3D_sub_573E30(int mode, int unused);
+int         SET3D_sub_573E50(void);
+void        SET3D_sub_573E70(void);
+void        SET3D_sub_574080(uint32_t code, uint32_t val);
+uint32_t    SET3D_sub_5740D0(void);
+uint32_t    SET3D_sub_5740E0(void);
+void        SET3D_sub_5740F0(void);
+
 #ifdef __cplusplus
 }
 #endif

@@ -241,5 +241,125 @@ void WINDOW_set_name(void *win, const char *name)
     ((char *)win)[0x37] = '\0';
 }
 
+/* VA: 0x0053455B */
+int CREATEW_sub_53455b(int a1)
+{
+    (void)a1;
+    return 1;
+}
+
+/* VA: 0x0053447A */
+int CREATEW_sub_53447a(int a1)
+{
+    (void)a1;
+    return 0;
+}
+
+/* VA: 0x005342D7 */
+int CREATEW_sub_5342d7(void *win)
+{
+    if (!win) return 0;
+    return *(int *)((char *)win + 0x18);
+}
+
+/* VA: 0x00534772 */
+void* CREATEW_sub_534772(void *ctx, int a1, int a2, int a3)
+{
+    (void)ctx; (void)a1; (void)a2; (void)a3;
+    return malloc(0x54);
+}
+
+/* VA: 0x00534050 */
+void CREATEW_sub_534050(void *win, int a1)
+{
+    if (win) {
+        *(int *)((char *)win + 0x20) = a1;
+    }
+}
+
+/* VA: 0x0053421D */
+int CREATEW_sub_53421d(void *win)
+{
+    if (!win) return 0;
+    return *(int *)((char *)win + 0x14);
+}
+
+/* VA: 0x00534A8A */
+void CREATEW_sub_534a8a(void *win, int a1, int a2)
+{
+    (void)win; (void)a1; (void)a2;
+}
+
+/* VA: 0x00534075 */
+void CREATEW_sub_534075(void *win, int a1, int a2)
+{
+    (void)win; (void)a1; (void)a2;
+}
+
+/* VA: 0x00534A30 */
+void CREATEW_sub_534a30(void *win, int a1, int a2)
+{
+    (void)win; (void)a1; (void)a2;
+}
+
+/* VA: 0x00533CC0 */
+void* CREATEW_sub_533cc0(void *ctx, int a1, int a2, int a3)
+{
+    (void)ctx; (void)a1; (void)a2; (void)a3;
+    return NULL;
+}
+
+/* VA: 0x00533F60 */
+void CREATEW_sub_533f60(void)
+{
+}
+
+/* VA: 0x00534180 */
+void* CREATEW_sub_534180(void *win, int a1, int a2)
+{
+    (void)win; (void)a1; (void)a2;
+    return NULL;
+}
+
+/* VA: 0x00534246 */
+int CREATEW_sub_534246(void *win, int a1, int a2)
+{
+    (void)win; (void)a1; (void)a2;
+    return 0;
+}
+
+/* VA: 0x00534340 */
+void* CREATEW_sub_534340(void *win, int a1, int a2, int a3)
+{
+    (void)win; (void)a1; (void)a2; (void)a3;
+    return NULL;
+}
+
+/* VA: 0x00534490 */
+int CREATEW_sub_534490(void *win, int a1, int a2)
+{
+    (void)win; (void)a1; (void)a2;
+    return 1;
+}
+
+/* VA: 0x0053484C */
+void CREATEW_sub_53484c(void *win, int a1)
+{
+    (void)win; (void)a1;
+}
+
+/* VA: 0x00534960 */
+void CREATEW_sub_534960(void *win, int a1, int a2)
+{
+    (void)win; (void)a1; (void)a2;
+}
+
+/* VA: 0x00534AD0 */
+void CREATEW_sub_534ad0(void *win, int a1, int a2)
+{
+    (void)win; (void)a1; (void)a2;
+}
+
+
 
 

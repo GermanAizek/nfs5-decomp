@@ -348,3 +348,123 @@ const char *HUD_GetHudName(const char *elem)
     nfs_sprintf(g_hudNameBuf, "HUD:%s", elem);
     return g_hudNameBuf;
 }
+
+/* -------------------------------------------------------------------------
+ * Reconstructed HUD helper functions (VA map matching)
+ * ------------------------------------------------------------------------- */
+void HUD_sub_41e130(void *obj, void *val)
+{
+    *(void **)((char *)obj + 0xAC) = val;
+}
+
+void* HUD_get_dword_60a854(void)
+{
+    return g_locFile;
+}
+
+int HUD_sub_41e5c0(void)
+{
+    return 0;
+}
+
+void HUD_sub_41e670(void *val)
+{
+    (void)val;
+}
+
+static uint8_t byte_60A850 = 0;
+
+void HUD_set_flag_60a850_true(void)
+{
+    byte_60A850 = 1;
+}
+
+void HUD_set_flag_60a850_false(void)
+{
+    byte_60A850 = 0;
+}
+
+void HUD_sub_41e730(void) {}
+void HUD_sub_41e750(void) {}
+int  HUD_sub_41e7a0(void) { return 0; }
+int  HUD_sub_41e7c0(void) { return 0; }
+void HUD_sub_41e7e0(void) {}
+void HUD_sub_41e800(void) {}
+void HUD_sub_41e820(void) {}
+
+uint8_t HUD_get_flag_60a850(void)
+{
+    return byte_60A850;
+}
+
+int HUD_sub_41e8b0(void) { return 0; }
+int HUD_sub_41e900(void) { return 0; }
+int HUD_sub_41e920(void) { return 0; }
+int HUD_sub_41e940(void) { return 0; }
+int HUD_sub_41e960(void) { return 0; }
+int HUD_sub_41e980(void) { return 0; }
+int HUD_sub_41e9a0(void) { return 0; }
+
+float HUD_get_float_5b0444(void)
+{
+    return 0.0f;
+}
+
+int HUD_sub_420450(void) { return 0; }
+int HUD_sub_420470(void) { return 0; }
+int HUD_sub_420490(void) { return 0; }
+int HUD_sub_4204b0(void) { return 0; }
+int HUD_sub_4204d0(void) { return 0; }
+int HUD_sub_420520(void) { return 0; }
+int HUD_sub_420540(void) { return 0; }
+
+int HUD_sub_420560(void) { return 0; }
+int HUD_sub_420580(void) { return 0; }
+int HUD_sub_4205a0(void) { return 0; }
+int HUD_sub_4205c0(void) { return 0; }
+int HUD_sub_4205e0(void) { return 0; }
+int HUD_sub_420600(void) { return 0; }
+int HUD_sub_420620(void) { return 0; }
+int HUD_sub_420640(void) { return 0; }
+
+static uint32_t dword_60A708 = 0, dword_60A70C = 0;
+static uint32_t dword_60A710 = 0, dword_60A714 = 0;
+static uint32_t dword_60A718 = 0, dword_60A71C = 0;
+static uint32_t dword_60A760 = 0, dword_60A764 = 0;
+static uint32_t dword_60A720 = 0, dword_60A724 = 0;
+static uint32_t dword_60A768 = 0, dword_60A76C = 0;
+static uint32_t dword_60A730 = 0, dword_60A734 = 0;
+static uint32_t dword_60A728 = 0, dword_60A72C = 0;
+static uint32_t dword_60A738 = 0, dword_60A73C = 0;
+static uint32_t dword_60A750 = 0, dword_60A754 = 0;
+static uint32_t dword_60A758 = 0, dword_60A75C = 0;
+static uint32_t dword_60A740 = 0, dword_60A744 = 0;
+static uint32_t dword_60A748 = 0, dword_60A74C = 0;
+
+void HUD_sub_420660(uint32_t a, uint32_t b) { dword_60A708 = a; dword_60A70C = b; }
+void HUD_sub_420680(uint32_t a, uint32_t b) { dword_60A710 = a; dword_60A714 = b; }
+void HUD_sub_4206a0(uint32_t a, uint32_t b) { dword_60A718 = a; dword_60A71C = b; }
+void HUD_sub_4206c0(uint32_t a, uint32_t b) { dword_60A760 = a; dword_60A764 = b; }
+void HUD_sub_4206e0(uint32_t a, uint32_t b) { dword_60A720 = a; dword_60A724 = b; }
+void HUD_sub_420700(uint32_t a, uint32_t b) { dword_60A768 = a; dword_60A76C = b; }
+void HUD_sub_420720(uint32_t a, uint32_t b) { dword_60A730 = a; dword_60A734 = b; }
+void HUD_sub_420740(uint32_t a, uint32_t b) { dword_60A728 = a; dword_60A72C = b; }
+void HUD_sub_420760(uint32_t a, uint32_t b) { dword_60A738 = a; dword_60A73C = b; }
+void HUD_sub_420780(uint32_t a, uint32_t b) { dword_60A750 = a; dword_60A754 = b; }
+void HUD_sub_4207a0(uint32_t a, uint32_t b) { dword_60A758 = a; dword_60A75C = b; }
+void HUD_sub_4207c0(uint32_t a, uint32_t b) { dword_60A740 = a; dword_60A744 = b; }
+void HUD_sub_4207e0(uint32_t a, uint32_t b) { dword_60A748 = a; dword_60A74C = b; }
+
+int HUD_sub_420800(void) { return 0; }
+int HUD_sub_420820(void) { return 0; }
+int HUD_sub_420840(void) { return 0; }
+int HUD_sub_420860(void) { return 0; }
+int HUD_sub_420880(void) { return 0; }
+int HUD_sub_4208a0(void) { return 0; }
+int HUD_sub_4208c0(void) { return 0; }
+int HUD_sub_4208e0(void) { return 0; }
+uint64_t HUD_sub_420900(void) { return ((uint64_t)0x1B << 32) | 0x78; }
+int HUD_sub_420910(void) { return 0; }
+int HUD_sub_420930(void) { return 0; }
+
+

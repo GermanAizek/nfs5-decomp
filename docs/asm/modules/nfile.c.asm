@@ -1,5 +1,5 @@
 ; Module: nfile.c
-; Total Matched Functions: 35
+; Total Matched Functions: 38
 ; Target: Porsche.exe
 
 ; Function: NFILE_sub_565F60
@@ -43,6 +43,28 @@ _NFILE_sub_565F60:
   00565F9D:  90                    nop     
   00565F9E:  90                    nop     
   00565F9F:  90                    nop     
+
+; Function: NFILE_pack_offset
+; Address:  0x005661C0 - 0x005661E0 (32 bytes)
+; Module:   nfile.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_NFILE_pack_offset:
+  005661C0:  8b 4c 24 04           mov     ecx, dword ptr [esp + 4]
+  005661C4:  33 d2                 xor     edx, edx
+  005661C6:  8b 41 04              mov     eax, dword ptr [ecx + 4]
+  005661C9:  8a 51 11              mov     dl, byte ptr [ecx + 0x11]
+  005661CC:  c1 f8 05              sar     eax, 5
+  005661CF:  25 ff ff ff 00        and     eax, 0xffffff
+  005661D4:  c1 e2 18              shl     edx, 0x18
+  005661D7:  0b c2                 or      eax, edx
+  005661D9:  c3                    ret     
+  005661DA:  90                    nop     
+  005661DB:  90                    nop     
+  005661DC:  90                    nop     
+  005661DD:  90                    nop     
+  005661DE:  90                    nop     
+  005661DF:  90                    nop     
 
 ; Function: NFILE_sub_566760
 ; Address:  0x00566760 - 0x005667A0 (64 bytes)
@@ -423,6 +445,38 @@ _NFILE_call_58FD70:
   00566C2D:  c3                    ret     
   00566C2E:  90                    nop     
   00566C2F:  90                    nop     
+
+; Function: NFILE_sub_566d80
+; Address:  0x00566D80 - 0x00566D9B (27 bytes)
+; Module:   nfile.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_NFILE_sub_566d80:
+  00566D80:  8b 44 24 08           mov     eax, dword ptr [esp + 8]
+  00566D84:  8b 48 68              mov     ecx, dword ptr [eax + 0x68]
+  00566D87:  f6 c5 02              test    ch, 2
+  00566D8A:  74 0f                 je      0x566d9b
+  00566D8C:  8b 4c 24 0c           mov     ecx, dword ptr [esp + 0xc]
+  00566D90:  8b 54 24 04           mov     edx, dword ptr [esp + 4]
+  00566D94:  33 c0                 xor     eax, eax
+  00566D96:  89 11                 mov     dword ptr [ecx], edx
+  00566D98:  c2 0c 00              ret     0xc
+
+; Function: NFILE_sub_566d9b
+; Address:  0x00566D9B - 0x00566DB0 (21 bytes)
+; Module:   nfile.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_NFILE_sub_566d9b:
+  00566D9B:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00566D9F:  50                    push    eax
+  00566DA0:  8b 08                 mov     ecx, dword ptr [eax]
+  00566DA2:  ff 51 08              call    dword ptr [ecx + 8]
+  00566DA5:  b8 01 00 00 00        mov     eax, 1
+  00566DAA:  c2 0c 00              ret     0xc
+  00566DAD:  90                    nop     
+  00566DAE:  90                    nop     
+  00566DAF:  90                    nop     
 
 ; Function: sub_005670E0
 ; Address:  0x005670E0 - 0x00567120 (64 bytes)

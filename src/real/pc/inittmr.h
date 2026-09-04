@@ -45,6 +45,42 @@ int  INITMR_sub_563860(void *status);
 int  INITTMR_sub_564260(void *ptr);
 int  INITTMR_copy_data(int idx, void *dst);
 
+/* 34 Newly matched functions in inittmr.c */
+int  INITMR_sub_562d30(void *a1, int a2, int a3, int a4);
+int  INITMR_sub_562f70(void *a1, int a2, int a3);
+int  INITMR_sub_563040(void *a1, int a2);
+int  INITMR_sub_563230(void *a1);
+int  INITMR_sub_56323d(void *a1);
+int  INITMR_sub_56324c(void *a1);
+int  INITMR_sub_5632f0(void *a1, int a2);
+int  INITMR_sub_563420(void *a1, int a2);
+int  INITMR_sub_5634e3(void *a1, int a2);
+int  INITMR_sub_563590(void *a1);
+int  INITMR_sub_5635ad(void *a1, int a2);
+int  INITMR_sub_563690(void *a1, int a2);
+int  INITMR_sub_5636f0(void *a1, int a2, int a3);
+int  INITMR_sub_5638b0(void *a1, int a2);
+int  INITMR_sub_563970(void *a1);
+int  INITMR_sub_5639d0(void *a1, int a2);
+int  INITMR_sub_563a60(void *a1);
+int  INITMR_sub_563ad0(void *a1, int a2);
+int  INITMR_sub_563b4d(void *a1);
+int  INITMR_sub_563ba0(void *a1);
+int  INITMR_sub_563bd5(void *a1);
+int  INITMR_sub_563c00(void *a1, int a2);
+int  INITMR_sub_563c80(void *a1, int a2);
+int  INITMR_sub_563ce3(void *a1);
+int  INITMR_sub_563d20(void *a1);
+int  INITMR_sub_563d6d(void *a1);
+int  INITMR_sub_563e00(void *a1);
+int  INITMR_sub_563e6b(void *a1);
+int  INITMR_sub_563ef0(void *a1, int a2);
+int  INITMR_sub_563fb0(void *a1);
+int  INITMR_sub_564000(void *a1);
+int  INITMR_sub_5640c0(void *a1);
+int  INITMR_sub_564130(void *a1, int a2, int a3);
+int  INITMR_sub_5642b0(void *a1, int a2, int a3);
+
 #ifdef __cplusplus
 }
 #endif

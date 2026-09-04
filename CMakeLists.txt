@@ -141,8 +141,18 @@ if(BUILD_ENGINE)
         src/real/cmn/creates.c
         src/real/cmn/createw.c
         src/real/cmn/depthconv.c
+        src/real/cmn/packet.c
+        src/real/cmn/unrely.c
+        src/real/cmn/hflip.c
+        src/real/cmn/nasync.c
+        src/real/cmn/fontdtex.c
+        src/real/cmn/intprt.c
+        src/real/cmn/llpacket.c
+        src/real/cmn/fontattr.c
+        src/real/pc/fontpc.c
         src/real/pc/startup.c
         src/real/pc/gluevc.c
+        src/real/pc/tapipkt.c
         src/real/pc/ddraw.c
         src/real/pc/inittmr.c
         src/real/pc/lowtimer.c
@@ -153,10 +163,12 @@ if(BUILD_ENGINE)
         src/real/pc/textpc.c
         src/real/patch3/cmn/dyntexture.c
         src/real/patch3/cmn/fontdraw.c
+        src/real/patch3/cmn/netgathr.c
         src/real/patch3/pc/set3d.c
         src/real/patch3/pc/input.c
         src/real/patch3/pc/key.c
         src/real/patch3/pc/mouse.c
+        src/real/patch3/pc/tcp.c
         src/utility/UMemory.cpp
         src/frontend/fert/src/Window.cpp
         src/frontend/fert/src/FEMainScreen.cpp
@@ -198,6 +210,9 @@ if(BUILD_ENGINE)
         src/engine/gamedata/cardata.c
         src/engine/gamedata/trackdata.c
         src/engine/gamedata/dashhud.c
+        src/engine/reallib_stubs.c
+        src/game/world/track_select.c
+        src/game/hud/hud.c
     )
 
     add_library(nfs5engine STATIC ${ENGINE_SOURCES})
@@ -215,6 +230,8 @@ if(BUILD_ENGINE)
         src/real/pc
         src/real/patch3/cmn
         src/real/patch3/pc
+        src/game/hud
+        src/game/world
         ${SDL2_INCLUDE_DIRS}
     )
 
@@ -241,6 +258,7 @@ if(BUILD_ENGINE)
         target_link_libraries(nfs5
             nfs5engine
             reallib
+            nfs5engine
             ${OPENGL_LIBRARIES}
             ${SDL2_LIBRARIES}
             dl
@@ -274,6 +292,8 @@ if(BUILD_ENGINE)
         src/frontend/fert/src
         src/frontend/common/Src
         src/game/Common/Render
+        src/game/hud
+        src/game/world
         ${SDL2_INCLUDE_DIRS}
     )
     target_link_libraries(test_reallib

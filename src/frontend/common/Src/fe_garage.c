@@ -159,3 +159,97 @@ void FEGarage_SellCar(const char *action)
         FE_CancelSellCar();
     }
 }
+
+/* -------------------------------------------------------------------------
+ * Reconstructed functions for FEGarage
+ * ------------------------------------------------------------------------- */
+void GARAGE_sub_510700(void)                                /* VA: 0x00510700 */
+{
+    extern void sub_4AD820(int);
+    sub_4AD820(0);
+}
+
+int GARAGE_sub_510b20(void *obj)                            /* VA: 0x00510B20 */
+{
+    uint8_t *p = (uint8_t *)obj;
+    if (p[0xD8] == 0 && *(uint32_t *)(p + 0xDC) == 0)
+        return 1;
+    return 0;
+}
+
+int GARAGE_sub_510b40(void *obj)                            /* VA: 0x00510B40 */
+{
+    uint8_t *p = (uint8_t *)obj;
+    if (p[0xD8] != 0 && *(uint32_t *)(p + 0xDC) == 0xFF)
+        return 1;
+    return 0;
+}
+
+uint8_t GARAGE_sub_510b60(void *obj)                        /* VA: 0x00510B60 */
+{
+    uint8_t *p = (uint8_t *)obj;
+    uint8_t val = p[0xF8];
+    p[0xF8] = 0;
+    return val;
+}
+
+uint8_t GARAGE_sub_510b70(void *obj)                        /* VA: 0x00510B70 */
+{
+    return *((uint8_t *)obj + 0xF9);
+}
+
+void *GARAGE_sub_512fe0(void *obj)                          /* VA: 0x00512FE0 */
+{
+    uint8_t *p = (uint8_t *)obj;
+    uint8_t *sub = *(uint8_t **)(p + 0xFC);
+    return *(void **)(sub + 0xE4);
+}
+
+uint8_t GARAGE_sub_5130e0(void *obj)                        /* VA: 0x005130E0 */
+{
+    uint8_t *p = (uint8_t *)obj;
+    if (p[0xF0]) {
+        p[0xF0] = 0;
+        return 1;
+    }
+    return 0;
+}
+
+int GARAGE_sub_513c4d(void *a, void *b)                     /* VA: 0x00513C4D */
+{
+    (void)a; (void)b;
+    return 0;
+}
+
+void *GARAGE_sub_5146d0(void *ptr)                          /* VA: 0x005146D0 */
+{
+    extern void *sub_517520(void);
+    if (!ptr) {
+        return (uint8_t *)sub_517520() + 0x0E;
+    }
+    return ptr;
+}
+
+void *GARAGE_sub_515100(void *ptr)                          /* VA: 0x00515100 */
+{
+    extern void *sub_517520(void);
+    if (!ptr) {
+        return (uint8_t *)sub_517520() + 0x0E;
+    }
+    return ptr;
+}
+
+void *GARAGE_sub_51568a(void *obj, void *arg)               /* VA: 0x0051568A */
+{
+    (void)arg;
+    uint8_t *p = (uint8_t *)obj;
+    *(uint32_t *)(p + 0x24) = 0;
+    return obj;
+}
+
+void *GARAGE_sub_515720(void *arg)                          /* VA: 0x00515720 */
+{
+    (void)arg;
+    return (void *)0x005E6D30;
+}
+

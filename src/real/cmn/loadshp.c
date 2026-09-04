@@ -237,6 +237,35 @@ int LOADSHP_sub_5ad770(void *a1, void *a2, int a3)
     return 1;
 }
 
+/* VA: 0x005AD090: Shape lookup by name in cache */
+int LOADSHP_sub_5ad090(void *a1, void *a2)
+{
+    (void)a1; (void)a2;
+    return 0;
+}
+
+/* VA: 0x005AD570: Shape texture scale calculation */
+int LOADSHP_sub_5ad570(void *a1, float a2)
+{
+    (void)a1; (void)a2;
+    return 1;
+}
+
+/* VA: 0x005AD8A4: Shape file parsing and block extraction */
+void* LOADSHP_sub_5ad8a4(void *a1, int a2)
+{
+    (void)a1; (void)a2;
+    return NULL;
+}
+
+/* VA: 0x005ADD1D: Shape header parser */
+int LOADSHP_sub_5add1d(void *a1, void *a2)
+{
+    (void)a1; (void)a2;
+    return 1;
+}
+
+
 
 
 

@@ -189,4 +189,59 @@ extern "C" {
     int  RC_cull_tri(THRASHVERTEX *a, THRASHVERTEX *b, THRASHVERTEX *c) {
         return g_renderControl.BackFaceCullPrimitive(a,b,c) ? 1 : 0;
     }
+
+/* ------------------------------------------------------------------ */
+/*  Reconstructed RCustomLayers helpers                               */
+/* ------------------------------------------------------------------ */
+static uint8_t  byte_617641  = 0;
+static uint32_t dword_61769C = 0;
+static float    dword_617658 = 0.0f;
+
+int RCUST_0044a380(void *ptr)                           /* VA: 0x0044A380 */
+{
+    if (ptr) *(uint32_t *)ptr = 0;
+    return 0;
 }
+
+void RCUST_0044a510(uint32_t val)                       /* VA: 0x0044A510 */
+{
+    byte_617641 = (val >> 9) & 1;
+}
+
+void RCUST_0044e150(void)                               /* VA: 0x0044E150 */
+{
+    extern void sub_44E160(const char*, int);
+    sub_44E160((const char*)0x5CC71C, 0xC);
+}
+
+void RCUST_0044e270(void)                               /* VA: 0x0044E270 */
+{
+    extern void sub_44E160(const char*, int);
+    sub_44E160((const char*)0x5CC658, 0xB);
+}
+
+void RCUST_0044e280(void)                               /* VA: 0x0044E280 */
+{
+    extern void sub_44E160(const char*, int);
+    sub_44E160((const char*)0x5CC69C, 0xA);
+}
+
+void RCUST_0044e290(void)                               /* VA: 0x0044E290 */
+{
+    extern void sub_44E160(const char*, int);
+    sub_44E160((const char*)0x5CC6D8, 0xB);
+}
+
+void RCUST_0044e580(void)                               /* VA: 0x0044E580 */
+{
+    dword_61769C = 0x800000;
+}
+
+void RCUST_0044e5a0(void)                               /* VA: 0x0044E5A0 */
+{
+    if (dword_61769C) {
+        dword_617658 = 1.0f / (float)dword_61769C;
+    }
+}
+}
+

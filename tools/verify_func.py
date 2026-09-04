@@ -14,9 +14,27 @@ import tempfile
 import os
 import pefile
 
-def verify_function(va_or_name, candidate_bytes=None, candidate_obj=None, pe_path="Porsche.exe", db_path="tools/function_checksums.json"):
-    with open(db_path, "r") as f:
-        db = json.load(f)
+_db_cache = {}
+_pe_cache = {}
+
+def _get_db(db_path):
+    if db_path not in _db_cache:
+        with open(db_path, "r") as f:
+            _db_cache[db_path] = json.load(f)
+    return _db_cache[db_path]
+
+def _get_pe_text(pe_path):
+    if pe_path not in _pe_cache:
+        pe = pefile.PE(pe_path)
+        base = pe.OPTIONAL_HEADER.ImageBase
+        text_sec = [s for s in pe.sections if s.Name.decode("latin1").startswith(".text")][0]
+        t_va = base + text_sec.VirtualAddress
+        t_bytes = text_sec.get_data()
+        _pe_cache[pe_path] = (t_va, t_bytes)
+    return _pe_cache[pe_path]
+
+def verify_function(va_or_name, candidate_bytes=None, candidate_obj=None, pe_path="Porsche.exe", db_path="tools/function_checksums.json", quiet=False):
+    db = _get_db(db_path)
 
     # Find target function
     target_entry = None
@@ -33,24 +51,22 @@ def verify_function(va_or_name, candidate_bytes=None, candidate_obj=None, pe_pat
                 break
 
     if not target_entry:
-        print(f"Error: Function {va_or_name} not found in database {db_path}.")
+        if not quiet:
+            print(f"Error: Function {va_or_name} not found in database {db_path}.")
         return False
 
-    print("=" * 70)
-    print(f"FUNCTION CHECKSUM VERIFICATION: {target_entry['name']} ({target_entry['va']})")
-    print(f"Source file : {target_entry['source_file']}")
-    print(f"Target size : {target_entry['size']} bytes")
-    print(f"Target CRC32: {target_entry['crc32']}")
-    print(f"Target SHA256 (Raw)   : {target_entry['raw_sha256']}")
-    print(f"Target SHA256 (Masked): {target_entry['masked_sha256']}")
-    print("-" * 70)
+    if not quiet:
+        print("=" * 70)
+        print(f"FUNCTION CHECKSUM VERIFICATION: {target_entry['name']} ({target_entry['va']})")
+        print(f"Source file : {target_entry['source_file']}")
+        print(f"Target size : {target_entry['size']} bytes")
+        print(f"Target CRC32: {target_entry['crc32']}")
+        print(f"Target SHA256 (Raw)   : {target_entry['raw_sha256']}")
+        print(f"Target SHA256 (Masked): {target_entry['masked_sha256']}")
+        print("-" * 70)
 
     # Extract original bytes from Porsche.exe
-    pe = pefile.PE(pe_path)
-    base = pe.OPTIONAL_HEADER.ImageBase
-    text_sec = [s for s in pe.sections if s.Name.decode("latin1").startswith(".text")][0]
-    t_va = base + text_sec.VirtualAddress
-    t_bytes = text_sec.get_data()
+    t_va, t_bytes = _get_pe_text(pe_path)
 
     va_int = int(target_va_str, 16)
     offset = va_int - t_va
@@ -70,20 +86,23 @@ def verify_function(va_or_name, candidate_bytes=None, candidate_obj=None, pe_pat
     if candidate_bytes is not None:
         cand_crc = f"0x{zlib.crc32(candidate_bytes) & 0xFFFFFFFF:08X}"
         cand_sha = hashlib.sha256(candidate_bytes).hexdigest()
-        print(f"Candidate size : {len(candidate_bytes)} bytes")
-        print(f"Candidate CRC32: {cand_crc}")
-        print(f"Candidate SHA  : {cand_sha}")
+        if not quiet:
+            print(f"Candidate size : {len(candidate_bytes)} bytes")
+            print(f"Candidate CRC32: {cand_crc}")
+            print(f"Candidate SHA  : {cand_sha}")
 
         if candidate_bytes == orig_bytes:
-            print(">>> 100% EXACT BYTE-FOR-BYTE MATCH! <<<")
-            print("=" * 70)
+            if not quiet:
+                print(">>> 100% EXACT BYTE-FOR-BYTE MATCH! <<<")
+                print("=" * 70)
             return True
         else:
-            print(">>> BYTES DIFFER <<<")
-            diffs = sum(1 for a, b in zip(orig_bytes, candidate_bytes) if a != b)
-            diffs += abs(len(orig_bytes) - len(candidate_bytes))
-            print(f"Mismatch: {diffs} bytes differ out of {len(orig_bytes)} bytes.")
-            print("=" * 70)
+            if not quiet:
+                print(">>> BYTES DIFFER <<<")
+                diffs = sum(1 for a, b in zip(orig_bytes, candidate_bytes) if a != b)
+                diffs += abs(len(orig_bytes) - len(candidate_bytes))
+                print(f"Mismatch: {diffs} bytes differ out of {len(orig_bytes)} bytes.")
+                print("=" * 70)
             return False
 
     return False

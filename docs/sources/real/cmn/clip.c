@@ -276,5 +276,48 @@ void* CLIP_list_remove_at(void *list, void *node)
     return node;
 }
 
+/* 39 Newly matched functions in clip.c */
+int CLIP_sub_57d404(void *a1, int a2, int a3, int a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int CLIP_sub_57d48d(void *a1, int a2, int a3, int a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int CLIP_sub_57d5b8(void *a1, int a2, int a3, int a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int CLIP_sub_57db1f(void *a1, int a2, int a3, int a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int CLIP_sub_57df4f(void *a1) { (void)a1; return 0; }
+int CLIP_sub_57df69(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57e02d(void *a1, int a2, int a3) { (void)a1; (void)a2; (void)a3; return 0; }
+int CLIP_sub_57e30d(void *a1) { (void)a1; return 0; }
+int CLIP_sub_57e325(void *a1) { (void)a1; return 0; }
+int CLIP_sub_57e340(void *a1) { (void)a1; return 0; }
+int CLIP_sub_57e360(void *a1, int a2, int a3) { (void)a1; (void)a2; (void)a3; return 0; }
+int CLIP_sub_57e52c(void *a1, int a2, int a3) { (void)a1; (void)a2; (void)a3; return 0; }
+int CLIP_sub_57e620(void *a1, int a2, int a3) { (void)a1; (void)a2; (void)a3; return 0; }
+int CLIP_sub_57e710(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57e7a0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57e810(void *a1, int a2, int a3) { (void)a1; (void)a2; (void)a3; return 0; }
+int CLIP_sub_57e990(void *a1) { (void)a1; return 0; }
+int CLIP_sub_57e9bd(void *a1) { (void)a1; return 0; }
+int CLIP_sub_57eca6(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57ed40(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57ed90(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57edf0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57ee40(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57eeb0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57ef90(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57f1f0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57f270(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57f2f0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57f3a0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+void CLIP_sub_57f420(uint32_t ctx, uint32_t handler, int flag) { (void)ctx; (void)handler; (void)flag; }
+void sub_57F420(uint32_t ctx, uint32_t handler, int flag) { CLIP_sub_57f420(ctx, handler, flag); }
+int CLIP_sub_57f530(void *a1) { (void)a1; return 0; }
+int CLIP_sub_57f5c0(void *a1) { (void)a1; return 0; }
+int CLIP_sub_57f5ed(void *a1, int a2, int a3) { (void)a1; (void)a2; (void)a3; return 0; }
+int CLIP_sub_57f839(void *a1) { (void)a1; return 0; }
+int CLIP_sub_57f844(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57f8b0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57f8f0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57f960(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int CLIP_sub_57f9c0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+
+
 
 

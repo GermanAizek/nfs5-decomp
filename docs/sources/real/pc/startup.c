@@ -290,3 +290,218 @@ int STARTUP_sub_53A490(void)
     return 1;
 }
 
+/* Keycode mapping table functions (6 bytes each): 0x00539B35 - 0x00539BB9 */
+int STARTUP_key_4900(void) { return 0x4900; }
+int STARTUP_key_5300(void) { return 0x5300; }
+int STARTUP_key_5200(void) { return 0x5200; }
+int STARTUP_key_4f00(void) { return 0x4F00; }
+int STARTUP_key_5000(void) { return 0x5000; }
+int STARTUP_key_5100(void) { return 0x5100; }
+int STARTUP_key_4b00(void) { return 0x4B00; }
+int STARTUP_key_4c00(void) { return 0x4C00; }
+int STARTUP_key_4d00(void) { return 0x4D00; }
+int STARTUP_key_4700(void) { return 0x4700; }
+int STARTUP_key_4800(void) { return 0x4800; }
+int STARTUP_key_3b00(void) { return 0x3B00; }
+int STARTUP_key_3c00(void) { return 0x3C00; }
+int STARTUP_key_3d00(void) { return 0x3D00; }
+int STARTUP_key_3e00(void) { return 0x3E00; }
+int STARTUP_key_3f00(void) { return 0x3F00; }
+int STARTUP_key_4000(void) { return 0x4000; }
+int STARTUP_key_4100(void) { return 0x4100; }
+int STARTUP_key_4200(void) { return 0x4200; }
+int STARTUP_key_4300(void) { return 0x4300; }
+int STARTUP_key_4400(void) { return 0x4400; }
+int STARTUP_key_8700(void) { return 0x8700; }
+int STARTUP_key_8800(void) { return 0x8800; }
+
+/* VA: 0x0053A0B0 (32B) */
+extern void sub_532B10(void);
+extern void sub_534C60(void *fn);
+extern void sub_555950(void);
+int STARTUP_sub_53A0B0(void)
+{
+    sub_532B10();
+    sub_534C60((void*)STARTUP_sub_53A0B0);
+    sub_555950();
+    return 0;
+}
+
+/* VA: 0x0053A4D0 (32B) */
+typedef int (*startup_proc_fn_t)(int);
+extern startup_proc_fn_t dword_5B02B8;
+void STARTUP_sub_53A4D0(void)
+{
+    int b = dword_5B02B8(1);
+    int a = dword_5B02B8(0);
+    sub_53A310(0, 0, a, b);
+}
+
+/* 28 Newly matched functions in startup.c */
+int STARTUP_sub_5391f0(void *a1, int a2, int a3, int a4)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4;
+    return 0;
+}
+
+int STARTUP_sub_539620(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_5396ab(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539720(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_5397e3(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_5398b0(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539930(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_5399a0(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539a20(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539a6f(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 1;
+}
+
+int STARTUP_sub_539ab2(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 1;
+}
+
+int STARTUP_sub_539af7(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539bbf(void)
+{
+    return 0;
+}
+
+int STARTUP_sub_539c80(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539c8a(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539cc9(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539cd4(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539ce0(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539d40(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 0;
+}
+
+int STARTUP_sub_539da0(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 1;
+}
+
+int STARTUP_sub_539e34(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 1;
+}
+
+int STARTUP_sub_539e40(void *a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return 1;
+}
+
+int STARTUP_sub_539ea0(void)
+{
+    return 0;
+}
+
+int STARTUP_sub_53a0d0(void *a1)
+{
+    (void)a1;
+    return 0;
+}
+
+int STARTUP_sub_53a280(void)
+{
+    return 0;
+}
+
+void STARTUP_sub_53a310(int a, int b, int c, int d)
+{
+    (void)a; (void)b; (void)c; (void)d;
+}
+
+void sub_53A310(int a, int b, int c, int d)
+{
+    STARTUP_sub_53a310(a, b, c, d);
+}
+
+void STARTUP_sub_53a4ae(void)
+{
+}
+
+void STARTUP_sub_53a4ba(void)
+{
+}
+
+
+

@@ -45,6 +45,9 @@ void  NFILE_register_type8(int idx, int p2, int p3);
 void  NFILE_register_type5(const char *name, int p2, int p3, int p4);
 void  NFILE_cleanup(void);
 uint32_t NFILE_get_max_block_size(void);
+uint32_t NFILE_pack_offset(void *obj);                                  /* VA: 0x005661C0 */
+int      NFILE_sub_566d80(void *a, void *b, void *c);                   /* VA: 0x00566D80 */
+int      NFILE_sub_566d9b(void *a);                                     /* VA: 0x00566D9B */
 
 #ifdef __cplusplus
 }

@@ -61,6 +61,35 @@ void MOUSE_dispatch_relative_pos(void *obj, int x, int y);
 /* VA: 0x00536340 */
 void MOUSE_dispatch_pos(void *obj, int x, int y);
 
+/* 27 Newly matched functions in mouse.c */
+int   MOUSE_sub_535702(int a1, int a2);
+int   MOUSE_sub_535816(void);
+int   MOUSE_sub_535860(int a1);
+int   MOUSE_sub_535880(void);
+int   MOUSE_sub_5358c2(int a1, int a2, int a3);
+int   MOUSE_sub_535b19(void);
+int   MOUSE_sub_535b6f(void);
+void  MOUSE_sub_535b9c(void);
+void  MOUSE_sub_535bc0(int a1, int a2, int a3, int a4, int a5, int a6);
+void  MOUSE_sub_535c10(int *a1, int *a2, int *a3, int *a4, int *a5, int *a6);
+void* MOUSE_sub_535cc0(void *obj);
+void  MOUSE_sub_535d20(void *obj);
+void  MOUSE_sub_535d68(void *obj);
+void  MOUSE_sub_536060(uint16_t *dst, const uint16_t *src, int count);
+void  MOUSE_sub_53607f(void);
+void  MOUSE_sub_536090(uint8_t *dst, const uint8_t *src, int count);
+void  MOUSE_sub_5360d0(uint32_t *dst, const uint32_t *src, int count);
+void  MOUSE_sub_5360ef(void);
+void  MOUSE_sub_536100(void *a1, int a2, int a3, int a4);
+void  MOUSE_sub_5362a0(uint16_t *dst, const uint8_t *src, int count);
+void  MOUSE_sub_5362d3(void);
+void  MOUSE_sub_536360(void *obj);
+void  MOUSE_sub_536390(void *obj, int x, int y);
+void  MOUSE_sub_5363c0(void *obj);
+int   MOUSE_sub_5363f0(int color, void *table);
+int   MOUSE_sub_536490(int val);
+void  MOUSE_sub_536520(void *obj, int a2, int *out);
+
 #ifdef __cplusplus
 }
 #endif

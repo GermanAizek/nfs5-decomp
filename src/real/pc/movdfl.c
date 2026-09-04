@@ -147,3 +147,57 @@ void MOVDFL_sub_570212(void *desc)
     }
 }
 
+/* Sliced sub-blocks of movdfl */
+/* VA: 0x0056FC60 */
+int MOVDFL_sub_56fc60(void *dst, const void *src, int shape_type, int width, int height, int dst_pitch, int src_pitch)
+{
+    return movdfl(dst, src, shape_type, width, height, dst_pitch, src_pitch);
+}
+
+/* VA: 0x0056FD5D */
+void MOVDFL_sub_56fd5d(void *a1)
+{
+    (void)a1;
+}
+
+/* VA: 0x0056FE77 */
+void MOVDFL_sub_56fe77(void *a1)
+{
+    (void)a1;
+}
+
+/* VA: 0x0056FE7F */
+void MOVDFL_sub_56fe7f(void *a1)
+{
+    (void)a1;
+}
+
+/* VA: 0x0056FE88 */
+void MOVDFL_sub_56fe88(void *a1)
+{
+    (void)a1;
+}
+
+/* VA: 0x0056FE91 */
+void MOVDFL_sub_56fe91(void *a1)
+{
+    (void)a1;
+}
+
+/* VA: 0x0056FE9A */
+void MOVDFL_sub_56fe9a(void *a1)
+{
+    (void)a1;
+}
+
+/* VA: 0x0056FEA5 */
+void MOVDFL_sub_56fea5(void *a1)
+{
+    (void)a1;
+}
+
+/* VA: 0x0056FFD0 */
+void MOVDFL_sub_56ffd0(void)
+{
+}
+

@@ -67,6 +67,33 @@ void SYNCTASK_post_vector_task(void *ctx, int a1, int a2, int a3);
 /* VA: 0x0053531B */
 int SYSTASK_is_entry_active(void *entry);
 
+/* VA: 0x00534FC0 */
+void SYSTASK_sub_534fc0(void *obj, int a1, int a2);
+/* VA: 0x005352E0 */
+void SYSTASK_sub_5352e0(void *obj);
+/* VA: 0x0053532C */
+int  SYSTASK_sub_53532c(void *obj);
+/* VA: 0x0053560F */
+int  SYSTASK_sub_53560f(void);
+/* VA: 0x0053561B */
+void SYSTASK_sub_53561b(int val);
+/* VA: 0x00535680 */
+int  SYSTASK_sub_535680(void);
+/* VA: 0x00535020 */
+void SYSTASK_sub_535020(void *obj, int a1);
+/* VA: 0x005355E0 */
+void SYSTASK_sub_5355e0(void *obj, int a1, int a2);
+/* VA: 0x00535241 */
+void SYSTASK_sub_535241(void *obj, int a1, int a2);
+/* VA: 0x00534FCC */
+void SYSTASK_sub_534fcc(void *obj, int a1, int a2, int a3);
+/* VA: 0x00534E30 */
+void SYSTASK_sub_534e30(void);
+/* VA: 0x00535046 */
+void SYSTASK_sub_535046(void *obj, int a1, int a2);
+/* VA: 0x00535410 */
+void SYSTASK_sub_535410(void *obj, int a1);
+
 #ifdef __cplusplus
 }
 #endif

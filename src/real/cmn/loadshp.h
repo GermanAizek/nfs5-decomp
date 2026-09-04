@@ -57,6 +57,14 @@ int   LOADSHP_sub_5ad3f0(void);
 void  LOADSHP_sub_5ad3fd(void *a1);
 /* VA: 0x005AD770 */
 int   LOADSHP_sub_5ad770(void *a1, void *a2, int a3);
+/* VA: 0x005AD090 */
+int   LOADSHP_sub_5ad090(void *a1, void *a2);
+/* VA: 0x005AD570 */
+int   LOADSHP_sub_5ad570(void *a1, float a2);
+/* VA: 0x005AD8A4 */
+void* LOADSHP_sub_5ad8a4(void *a1, int a2);
+/* VA: 0x005ADD1D */
+int   LOADSHP_sub_5add1d(void *a1, void *a2);
 
 #ifdef __cplusplus
 }

@@ -301,4 +301,175 @@ void LOWTIMER_free_timer_obj(void *obj)
     free(obj);
 }
 
+/* VA: 0x0053A630 */
+int LOWTIMER_sub_53a630(void *ctx, int a1)
+{
+    (void)ctx; (void)a1;
+    return 1;
+}
+
+/* VA: 0x0053A7A0 */
+void LOWTIMER_sub_53a7a0(void *ctx, int a1)
+{
+    (void)ctx; (void)a1;
+}
+
+/* VA: 0x0053A9E0 */
+int LOWTIMER_sub_53a9e0(void *ctx)
+{
+    (void)ctx;
+    return 0;
+}
+
+/* VA: 0x0053AA60 */
+void* LOWTIMER_sub_53aa60(void *ctx, int a1)
+{
+    (void)ctx; (void)a1;
+    return NULL;
+}
+
+/* VA: 0x0053AAE5 */
+void LOWTIMER_sub_53aae5(void *ctx)
+{
+    (void)ctx;
+}
+
+/* VA: 0x0053AB00 */
+void* LOWTIMER_sub_53ab00(void *ctx, int a1)
+{
+    (void)ctx; (void)a1;
+    return NULL;
+}
+
+/* VA: 0x0053AB8B */
+void LOWTIMER_sub_53ab8b(void *ctx)
+{
+    (void)ctx;
+}
+
+/* VA: 0x0053AC90 */
+int LOWTIMER_sub_53ac90(void *ctx, void *src, int a3)
+{
+    (void)ctx; (void)src; (void)a3;
+    return 1;
+}
+
+/* VA: 0x0053AE69 */
+void LOWTIMER_sub_53ae69(void)
+{
+}
+
+/* VA: 0x0053AF20 */
+int LOWTIMER_sub_53af20(void *ctx, int a1)
+{
+    (void)ctx; (void)a1;
+    return 0;
+}
+
+/* VA: 0x0053AFC6 */
+void LOWTIMER_sub_53afc6(void *ctx)
+{
+    (void)ctx;
+}
+
+/* VA: 0x0053AFF0 */
+int LOWTIMER_sub_53aff0(void *ctx, int a1)
+{
+    (void)ctx; (void)a1;
+    return 0;
+}
+
+/* VA: 0x0053B05A */
+void LOWTIMER_sub_53b05a(void *ctx)
+{
+    (void)ctx;
+}
+
+/* VA: 0x0053B078 */
+int LOWTIMER_sub_53b078(void *ctx)
+{
+    (void)ctx;
+    return 0;
+}
+
+/* VA: 0x0053B0A1 */
+void LOWTIMER_sub_53b0a1(void *ctx, int a1)
+{
+    (void)ctx; (void)a1;
+}
+
+/* VA: 0x0053B110 */
+void* LOWTIMER_sub_53b110(void *ctx, int a1)
+{
+    (void)ctx; (void)a1;
+    return NULL;
+}
+
+/* VA: 0x0053B190 */
+int LOWTIMER_sub_53b190(void *ctx, void *src, int a3)
+{
+    (void)ctx; (void)src; (void)a3;
+    return 1;
+}
+
+/* VA: 0x0053B249 */
+void LOWTIMER_sub_53b249(void *ctx)
+{
+    (void)ctx;
+}
+
+/* VA: 0x0053B279 */
+int LOWTIMER_sub_53b279(void *ctx, int a1, int a2)
+{
+    (void)ctx; (void)a1; (void)a2;
+    return 0;
+}
+
+/* VA: 0x0053B320 */
+void* LOWTIMER_sub_53b320(void *ctx)
+{
+    (void)ctx;
+    return NULL;
+}
+
+/* VA: 0x0053B35B */
+void LOWTIMER_sub_53b35b(void *ctx)
+{
+    (void)ctx;
+}
+
+/* VA: 0x0053B379 */
+int LOWTIMER_sub_53b379(void *ctx, int a1)
+{
+    (void)ctx; (void)a1;
+    return 0;
+}
+
+/* VA: 0x0053B3C0 */
+void* LOWTIMER_sub_53b3c0(void *ctx)
+{
+    (void)ctx;
+    return NULL;
+}
+
+/* VA: 0x0053B3F9 */
+void LOWTIMER_sub_53b3f9(void *ctx)
+{
+    (void)ctx;
+}
+
+/* VA: 0x0053B416 */
+int LOWTIMER_sub_53b416(void *ctx, int a1)
+{
+    (void)ctx; (void)a1;
+    return 0;
+}
+
+/* VA: 0x0053B43F */
+void LOWTIMER_sub_53b43f(void *ctx)
+{
+    (void)ctx;
+}
+
+
 

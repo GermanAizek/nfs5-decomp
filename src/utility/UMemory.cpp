@@ -113,3 +113,70 @@ void FastBlock::Deallocate(void *ptr)
     *(void**)ptr = m_freeList;
     m_freeList = ptr;
 }
+
+extern "C" {
+static void *dword_5E2ED0 = nullptr;
+static void *dword_6AD218 = nullptr;
+
+void* UMEM_sub_59d1d0(void *arg)                        /* VA: 0x0059D1D0 */
+{
+    typedef void* (*MemFn)(void*);
+    if (!dword_5E2ED0) return nullptr;
+    MemFn fn = *(MemFn*)((uint8_t*)dword_5E2ED0 + 8);
+    return fn ? fn(arg) : nullptr;
+}
+
+void* UMEM_sub_59d1e0(void *arg)                        /* VA: 0x0059D1E0 */
+{
+    typedef void* (*MemFn)(void*);
+    if (!dword_5E2ED0) return nullptr;
+    MemFn fn = *(MemFn*)((uint8_t*)dword_5E2ED0 + 0x18);
+    return fn ? fn(arg) : nullptr;
+}
+
+void* UMEM_sub_59d200(void *arg)                        /* VA: 0x0059D200 */
+{
+    typedef void* (*MemFn)(void*);
+    if (!dword_5E2ED0) return nullptr;
+    MemFn fn = *(MemFn*)((uint8_t*)dword_5E2ED0 + 0x24);
+    return fn ? fn(arg) : nullptr;
+}
+
+void* UMEM_sub_59d220(void)                             /* VA: 0x0059D220 */
+{
+    return UMEM_sub_59d200(dword_6AD218);
+}
+
+int UMEM_sub_59d290(void *arg)                          /* VA: 0x0059D290 */
+{
+#if defined(_WIN32)
+    return VirtualFree(arg, 0, MEM_RELEASE) ? 1 : 0;
+#else
+    (void)arg;
+    return 1;
+#endif
+}
+
+void UMEM_sub_59d4f0(void *ptr)                         /* VA: 0x0059D4F0 */
+{
+    if (ptr) {
+        UMEM_sub_59d1d0(ptr);
+    }
+}
+
+void* UMEM_sub_59d75a(void *arg)                        /* VA: 0x0059D75A */
+{
+    return arg;
+}
+
+void* UMEM_sub_59d7da(void *arg)                        /* VA: 0x0059D7DA */
+{
+    return arg;
+}
+
+void* UMEM_sub_59d9c0(void *arg)                        /* VA: 0x0059D9C0 */
+{
+    return arg;
+}
+}
+

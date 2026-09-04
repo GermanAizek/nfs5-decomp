@@ -1,5 +1,5 @@
 ; Module: systask.c
-; Total Matched Functions: 27
+; Total Matched Functions: 40
 ; Target: Porsche.exe
 
 ; Function: SYNCTASK_add
@@ -321,6 +321,82 @@ _SYNCTASK_destroy_object:
   00534E2E:  90                    nop     
   00534E2F:  90                    nop     
 
+; Function: SYSTASK_sub_534e30
+; Address:  0x00534E30 - 0x00534F10 (224 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_534e30:
+  00534E30:  a1 20 bd 69 00        mov     eax, dword ptr [0x69bd20]
+  00534E35:  85 c0                 test    eax, eax
+  00534E37:  0f 85 ca 00 00 00     jne     0x534f07
+  00534E3D:  68 d0 da 5d 00        push    0x5ddad0
+  00534E42:  e8 59 60 00 00        call    0x53aea0
+  00534E47:  83 c4 04              add     esp, 4
+  00534E4A:  e8 61 60 00 00        call    0x53aeb0
+  00534E4F:  a1 ec cb 69 00        mov     eax, dword ptr [0x69cbec]
+  00534E54:  c7 05 20 bd 69 00 01 00 00 00  mov     dword ptr [0x69bd20], 1
+  00534E5E:  8b 08                 mov     ecx, dword ptr [eax]
+  00534E60:  8b 49 18              mov     ecx, dword ptr [ecx + 0x18]
+  00534E63:  8b 11                 mov     edx, dword ptr [ecx]
+  00534E65:  ff 12                 call    dword ptr [edx]
+  00534E67:  84 c0                 test    al, al
+  00534E69:  74 07                 je      0x534e72
+  00534E6B:  c6 05 2c bd 69 00 01  mov     byte ptr [0x69bd2c], 1
+  00534E72:  56                    push    esi
+  00534E73:  6a 2c                 push    0x2c
+  00534E75:  e8 16 86 06 00        call    0x59d490
+  00534E7A:  8b f0                 mov     esi, eax
+  00534E7C:  83 c4 04              add     esp, 4
+  00534E7F:  85 f6                 test    esi, esi
+  00534E81:  74 6a                 je      0x534eed
+  00534E83:  57                    push    edi
+  00534E84:  8b 3d 70 ca 69 00     mov     edi, dword ptr [0x69ca70]
+  00534E8A:  8d 4e 08              lea     ecx, [esi + 8]
+  00534E8D:  e8 fe 10 00 00        call    0x535f90
+  00534E92:  c7 06 f8 96 5b 00     mov     dword ptr [esi], 0x5b96f8
+  00534E98:  89 7e 04              mov     dword ptr [esi + 4], edi
+  00534E9B:  a1 ec cb 69 00        mov     eax, dword ptr [0x69cbec]
+  00534EA0:  5f                    pop     edi
+  00534EA1:  8b 48 04              mov     ecx, dword ptr [eax + 4]
+  00534EA4:  a0 2c bd 69 00        mov     al, byte ptr [0x69bd2c]
+  00534EA9:  84 c0                 test    al, al
+  00534EAB:  89 0d 28 bd 69 00     mov     dword ptr [0x69bd28], ecx
+  00534EB1:  74 23                 je      0x534ed6
+  00534EB3:  8b 56 04              mov     edx, dword ptr [esi + 4]
+  00534EB6:  68 00 00 00 bf        push    0xbf000000
+  00534EBB:  6a 14                 push    0x14
+  00534EBD:  52                    push    edx
+  00534EBE:  e8 9d 7f 00 00        call    0x53ce60
+  00534EC3:  8b 46 04              mov     eax, dword ptr [esi + 4]
+  00534EC6:  68 00 00 00 bf        push    0xbf000000
+  00534ECB:  6a 15                 push    0x15
+  00534ECD:  50                    push    eax
+  00534ECE:  e8 8d 7f 00 00        call    0x53ce60
+  00534ED3:  83 c4 18              add     esp, 0x18
+  00534ED6:  8b 0d 70 ca 69 00     mov     ecx, dword ptr [0x69ca70]
+  00534EDC:  89 35 24 bd 69 00     mov     dword ptr [0x69bd24], esi
+  00534EE2:  51                    push    ecx
+  00534EE3:  e8 58 b1 03 00        call    0x570040
+  00534EE8:  83 c4 04              add     esp, 4
+  00534EEB:  5e                    pop     esi
+  00534EEC:  c3                    ret     
+  00534EED:  8b 0d 70 ca 69 00     mov     ecx, dword ptr [0x69ca70]
+  00534EF3:  c7 05 24 bd 69 00 00 00 00 00  mov     dword ptr [0x69bd24], 0
+  00534EFD:  51                    push    ecx
+  00534EFE:  e8 3d b1 03 00        call    0x570040
+  00534F03:  83 c4 04              add     esp, 4
+  00534F06:  5e                    pop     esi
+  00534F07:  c3                    ret     
+  00534F08:  90                    nop     
+  00534F09:  90                    nop     
+  00534F0A:  90                    nop     
+  00534F0B:  90                    nop     
+  00534F0C:  90                    nop     
+  00534F0D:  90                    nop     
+  00534F0E:  90                    nop     
+  00534F0F:  90                    nop     
+
 ; Function: SYSTASK_release_task
 ; Address:  0x00534F10 - 0x00534F30 (32 bytes)
 ; Module:   systask.c
@@ -424,6 +500,252 @@ _SYNCTASK_post_vector_task:
   00534FBE:  90                    nop     
   00534FBF:  90                    nop     
 
+; Function: SYSTASK_sub_534fc0
+; Address:  0x00534FC0 - 0x00534FCC (12 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_534fc0:
+  00534FC0:  83 ec 10              sub     esp, 0x10
+  00534FC3:  8b 54 24 18           mov     edx, dword ptr [esp + 0x18]
+  00534FC7:  8b 44 24 14           mov     eax, dword ptr [esp + 0x14]
+
+; Function: SYSTASK_sub_534fcc
+; Address:  0x00534FCC - 0x00535020 (84 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_534fcc:
+  00534FCC:  54                    push    esp
+  00534FCD:  24 04                 and     al, 4
+  00534FCF:  8b 54 24 20           mov     edx, dword ptr [esp + 0x20]
+  00534FD3:  89 44 24 00           mov     dword ptr [esp], eax
+  00534FD7:  8b 44 24 1c           mov     eax, dword ptr [esp + 0x1c]
+  00534FDB:  52                    push    edx
+  00534FDC:  8b 54 24 04           mov     edx, dword ptr [esp + 4]
+  00534FE0:  83 ec 10              sub     esp, 0x10
+  00534FE3:  89 44 24 1c           mov     dword ptr [esp + 0x1c], eax
+  00534FE7:  8b c4                 mov     eax, esp
+  00534FE9:  c7 44 24 20 00 00 80 3f  mov     dword ptr [esp + 0x20], 0x3f800000
+  00534FF1:  89 10                 mov     dword ptr [eax], edx
+  00534FF3:  8b 54 24 18           mov     edx, dword ptr [esp + 0x18]
+  00534FF7:  89 50 04              mov     dword ptr [eax + 4], edx
+  00534FFA:  8b 54 24 1c           mov     edx, dword ptr [esp + 0x1c]
+  00534FFE:  89 50 08              mov     dword ptr [eax + 8], edx
+  00535001:  8b 54 24 20           mov     edx, dword ptr [esp + 0x20]
+  00535005:  89 50 0c              mov     dword ptr [eax + 0xc], edx
+  00535008:  e8 13 00 00 00        call    0x535020
+  0053500D:  83 c4 10              add     esp, 0x10
+  00535010:  c2 10 00              ret     0x10
+  00535013:  90                    nop     
+  00535014:  90                    nop     
+  00535015:  90                    nop     
+  00535016:  90                    nop     
+  00535017:  90                    nop     
+  00535018:  90                    nop     
+  00535019:  90                    nop     
+  0053501A:  90                    nop     
+  0053501B:  90                    nop     
+  0053501C:  90                    nop     
+  0053501D:  90                    nop     
+  0053501E:  90                    nop     
+  0053501F:  90                    nop     
+
+; Function: SYSTASK_sub_535020
+; Address:  0x00535020 - 0x00535046 (38 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_535020:
+  00535020:  a0 28 c6 5d 00        mov     al, byte ptr [0x5dc628]
+  00535025:  83 ec 28              sub     esp, 0x28
+  00535028:  84 c0                 test    al, al
+  0053502A:  56                    push    esi
+  0053502B:  8b f1                 mov     esi, ecx
+  0053502D:  0f 84 43 02 00 00     je      0x535276
+  00535033:  a1 ec cb 69 00        mov     eax, dword ptr [0x69cbec]
+  00535038:  8b 48 04              mov     ecx, dword ptr [eax + 4]
+  0053503B:  e8 50 f6 ff ff        call    0x534690
+  00535040:  84 c0                 test    al, al
+
+; Function: SYSTASK_sub_535046
+; Address:  0x00535046 - 0x00535241 (507 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_535046:
+  00535046:  00 00                 add     byte ptr [eax], al
+  00535048:  8b 0d ec cb 69 00     mov     ecx, dword ptr [0x69cbec]
+  0053504E:  6a 00                 push    0
+  00535050:  6a 00                 push    0
+  00535052:  8b 49 04              mov     ecx, dword ptr [ecx + 4]
+  00535055:  e8 a6 f7 ff ff        call    0x534800
+  0053505A:  8b 0d b4 bf 69 00     mov     ecx, dword ptr [0x69bfb4]
+  00535060:  6a 00                 push    0
+  00535062:  e8 69 28 01 00        call    0x5478d0
+  00535067:  a1 ec cb 69 00        mov     eax, dword ptr [0x69cbec]
+  0053506C:  8d 56 08              lea     edx, [esi + 8]
+  0053506F:  6a 00                 push    0
+  00535071:  52                    push    edx
+  00535072:  8b 48 04              mov     ecx, dword ptr [eax + 4]
+  00535075:  e8 46 f5 ff ff        call    0x5345c0
+  0053507A:  b9 08 bd 69 00        mov     ecx, 0x69bd08
+  0053507F:  e8 2c 0c 00 00        call    0x535cb0
+  00535084:  8d 4c 24 14           lea     ecx, [esp + 0x14]
+  00535088:  8d 54 24 18           lea     edx, [esp + 0x18]
+  0053508C:  51                    push    ecx
+  0053508D:  8d 44 24 14           lea     eax, [esp + 0x14]
+  00535091:  52                    push    edx
+  00535092:  8d 4c 24 14           lea     ecx, [esp + 0x14]
+  00535096:  50                    push    eax
+  00535097:  51                    push    ecx
+  00535098:  8b 0d ec cb 69 00     mov     ecx, dword ptr [0x69cbec]
+  0053509E:  8d 54 24 18           lea     edx, [esp + 0x18]
+  005350A2:  52                    push    edx
+  005350A3:  8d 44 24 18           lea     eax, [esp + 0x18]
+  005350A7:  8b 11                 mov     edx, dword ptr [ecx]
+  005350A9:  50                    push    eax
+  005350AA:  8b 4a 14              mov     ecx, dword ptr [edx + 0x14]
+  005350AD:  e8 9e 25 00 00        call    0x537650
+  005350B2:  8b 44 24 08           mov     eax, dword ptr [esp + 8]
+  005350B6:  8b 4c 24 04           mov     ecx, dword ptr [esp + 4]
+  005350BA:  8b 54 24 10           mov     edx, dword ptr [esp + 0x10]
+  005350BE:  50                    push    eax
+  005350BF:  8b 44 24 10           mov     eax, dword ptr [esp + 0x10]
+  005350C3:  51                    push    ecx
+  005350C4:  8b 4e 04              mov     ecx, dword ptr [esi + 4]
+  005350C7:  52                    push    edx
+  005350C8:  50                    push    eax
+  005350C9:  51                    push    ecx
+  005350CA:  e8 a1 6c 00 00        call    0x53bd70
+  005350CF:  8b 15 ec cb 69 00     mov     edx, dword ptr [0x69cbec]
+  005350D5:  83 c4 14              add     esp, 0x14
+  005350D8:  8b 02                 mov     eax, dword ptr [edx]
+  005350DA:  8b 48 14              mov     ecx, dword ptr [eax + 0x14]
+  005350DD:  e8 8e 28 00 00        call    0x537970
+  005350E2:  8b 0d ec cb 69 00     mov     ecx, dword ptr [0x69cbec]
+  005350E8:  8b 11                 mov     edx, dword ptr [ecx]
+  005350EA:  8b 42 14              mov     eax, dword ptr [edx + 0x14]
+  005350ED:  83 b8 20 02 00 00 01  cmp     dword ptr [eax + 0x220], 1
+  005350F4:  75 77                 jne     0x53516d
+  005350F6:  d9 44 24 38           fld     dword ptr [esp + 0x38]
+  005350FA:  d9 e0                 fchs    
+  005350FC:  d9 5c 24 38           fstp    dword ptr [esp + 0x38]
+  00535100:  8d 44 24 1c           lea     eax, [esp + 0x1c]
+  00535104:  8d 54 24 30           lea     edx, [esp + 0x30]
+  00535108:  50                    push    eax
+  00535109:  8b 01                 mov     eax, dword ptr [ecx]
+  0053510B:  52                    push    edx
+  0053510C:  8b 48 14              mov     ecx, dword ptr [eax + 0x14]
+  0053510F:  81 c1 08 01 00 00     add     ecx, 0x108
+  00535115:  e8 e6 37 00 00        call    0x538900
+  0053511A:  d9 44 24 1c           fld     dword ptr [esp + 0x1c]
+  0053511E:  d8 05 98 04 5b 00     fadd    dword ptr [0x5b0498]
+  00535124:  83 ec 08              sub     esp, 8
+  00535127:  d8 4c 24 0c           fmul    dword ptr [esp + 0xc]
+  0053512B:  d8 0d e0 03 5b 00     fmul    dword ptr [0x5b03e0]
+  00535131:  d8 44 24 14           fadd    dword ptr [esp + 0x14]
+  00535135:  dd 1c 24              fstp    qword ptr [esp]
+  00535138:  e8 28 b3 06 00        call    0x5a0465
+  0053513D:  d9 5c 24 24           fstp    dword ptr [esp + 0x24]
+  00535141:  d9 44 24 28           fld     dword ptr [esp + 0x28]
+  00535145:  d8 05 98 04 5b 00     fadd    dword ptr [0x5b0498]
+  0053514B:  d8 4c 24 10           fmul    dword ptr [esp + 0x10]
+  0053514F:  d8 0d e0 03 5b 00     fmul    dword ptr [0x5b03e0]
+  00535155:  d8 44 24 18           fadd    dword ptr [esp + 0x18]
+  00535159:  dd 1c 24              fstp    qword ptr [esp]
+  0053515C:  e8 04 b3 06 00        call    0x5a0465
+  00535161:  d9 5c 24 28           fstp    dword ptr [esp + 0x28]
+  00535165:  83 c4 08              add     esp, 8
+  00535168:  e9 99 00 00 00        jmp     0x535206
+  0053516D:  8d 4c 24 1c           lea     ecx, [esp + 0x1c]
+  00535171:  8d 54 24 30           lea     edx, [esp + 0x30]
+  00535175:  51                    push    ecx
+  00535176:  52                    push    edx
+  00535177:  8d 88 08 01 00 00     lea     ecx, [eax + 0x108]
+  0053517D:  e8 7e 37 00 00        call    0x538900
+  00535182:  d9 44 24 1c           fld     dword ptr [esp + 0x1c]
+  00535186:  d8 4c 24 04           fmul    dword ptr [esp + 4]
+  0053518A:  83 ec 08              sub     esp, 8
+  0053518D:  d8 0d e0 03 5b 00     fmul    dword ptr [0x5b03e0]
+  00535193:  dd 1c 24              fstp    qword ptr [esp]
+  00535196:  e8 ca b2 06 00        call    0x5a0465
+  0053519B:  d8 74 24 2c           fdiv    dword ptr [esp + 0x2c]
+  0053519F:  d9 44 24 0c           fld     dword ptr [esp + 0xc]
+  005351A3:  d8 0d e0 03 5b 00     fmul    dword ptr [0x5b03e0]
+  005351A9:  de c1                 faddp   st(1)
+  005351AB:  d8 44 24 14           fadd    dword ptr [esp + 0x14]
+  005351AF:  d9 5c 24 24           fstp    dword ptr [esp + 0x24]
+  005351B3:  d9 44 24 28           fld     dword ptr [esp + 0x28]
+  005351B7:  d8 4c 24 10           fmul    dword ptr [esp + 0x10]
+  005351BB:  d8 0d e0 03 5b 00     fmul    dword ptr [0x5b03e0]
+  005351C1:  dd 1c 24              fstp    qword ptr [esp]
+  005351C4:  e8 9c b2 06 00        call    0x5a0465
+  005351C9:  d8 74 24 2c           fdiv    dword ptr [esp + 0x2c]
+  005351CD:  a1 ec cb 69 00        mov     eax, dword ptr [0x69cbec]
+  005351D2:  83 c4 08              add     esp, 8
+  005351D5:  d9 44 24 08           fld     dword ptr [esp + 8]
+  005351D9:  d8 0d e0 03 5b 00     fmul    dword ptr [0x5b03e0]
+  005351DF:  de c1                 faddp   st(1)
+  005351E1:  d8 44 24 10           fadd    dword ptr [esp + 0x10]
+  005351E5:  d9 5c 24 20           fstp    dword ptr [esp + 0x20]
+  005351E9:  8b 08                 mov     ecx, dword ptr [eax]
+  005351EB:  8b 41 14              mov     eax, dword ptr [ecx + 0x14]
+  005351EE:  d9 80 dc 00 00 00     fld     dword ptr [eax + 0xdc]
+  005351F4:  d8 4c 24 24           fmul    dword ptr [esp + 0x24]
+  005351F8:  d8 80 e0 00 00 00     fadd    dword ptr [eax + 0xe0]
+  005351FE:  d8 74 24 24           fdiv    dword ptr [esp + 0x24]
+  00535202:  d9 5c 24 24           fstp    dword ptr [esp + 0x24]
+  00535206:  d9 44 24 24           fld     dword ptr [esp + 0x24]
+  0053520A:  d8 1d e8 03 5b 00     fcomp   dword ptr [0x5b03e8]
+  00535210:  df e0                 fnstsw  ax
+  00535212:  f6 c4 01              test    ah, 1
+  00535215:  75 52                 jne     0x535269
+  00535217:  d9 44 24 24           fld     dword ptr [esp + 0x24]
+  0053521B:  d8 1d 98 04 5b 00     fcomp   dword ptr [0x5b0498]
+  00535221:  df e0                 fnstsw  ax
+  00535223:  f6 c4 41              test    ah, 0x41
+  00535226:  74 41                 je      0x535269
+  00535228:  d9 46 28              fld     dword ptr [esi + 0x28]
+  0053522B:  d8 5c 24 24           fcomp   dword ptr [esp + 0x24]
+  0053522F:  df e0                 fnstsw  ax
+  00535231:  f6 c4 40              test    ah, 0x40
+  00535234:  75 18                 jne     0x53524e
+  00535236:  8b 54 24 24           mov     edx, dword ptr [esp + 0x24]
+  0053523A:  8b 4e 04              mov     ecx, dword ptr [esi + 4]
+  0053523D:  8b c2                 mov     eax, edx
+
+; Function: SYSTASK_sub_535241
+; Address:  0x00535241 - 0x00535280 (63 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_535241:
+  00535241:  28 50 6a              sub     byte ptr [eax + 0x6a], dl
+  00535244:  16                    push    ss
+  00535245:  51                    push    ecx
+  00535246:  e8 15 7c 00 00        call    0x53ce60
+  0053524B:  83 c4 0c              add     esp, 0xc
+  0053524E:  8b 54 24 40           mov     edx, dword ptr [esp + 0x40]
+  00535252:  8b 44 24 20           mov     eax, dword ptr [esp + 0x20]
+  00535256:  8b 4c 24 1c           mov     ecx, dword ptr [esp + 0x1c]
+  0053525A:  52                    push    edx
+  0053525B:  8b 56 04              mov     edx, dword ptr [esi + 4]
+  0053525E:  50                    push    eax
+  0053525F:  51                    push    ecx
+  00535260:  52                    push    edx
+  00535261:  e8 2a 6d 00 00        call    0x53bf90
+  00535266:  83 c4 10              add     esp, 0x10
+  00535269:  a1 ec cb 69 00        mov     eax, dword ptr [0x69cbec]
+  0053526E:  8b 48 04              mov     ecx, dword ptr [eax + 4]
+  00535271:  e8 ea f6 ff ff        call    0x534960
+  00535276:  5e                    pop     esi
+  00535277:  83 c4 28              add     esp, 0x28
+  0053527A:  c2 14 00              ret     0x14
+  0053527D:  90                    nop     
+  0053527E:  90                    nop     
+  0053527F:  90                    nop     
+
 ; Function: SYSTASK_call_sub_53cb90
 ; Address:  0x00535280 - 0x005352A0 (32 bytes)
 ; Module:   systask.c
@@ -495,6 +817,17 @@ _task_set_data:
   005352DE:  90                    nop     
   005352DF:  90                    nop     
 
+; Function: SYSTASK_sub_5352e0
+; Address:  0x005352E0 - 0x005352F0 (16 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_5352e0:
+  005352E0:  8b 44 24 08           mov     eax, dword ptr [esp + 8]
+  005352E4:  83 f8 03              cmp     eax, 3
+  005352E7:  77 3d                 ja      0x535326
+  005352E9:  ff 24 85 2c 53 53 00  jmp     dword ptr [eax*4 + 0x53532c]
+
 ; Function: task_get_word_e
 ; Address:  0x005352F0 - 0x005352FB (11 bytes)
 ; Module:   systask.c
@@ -544,6 +877,15 @@ _SYSTASK_is_entry_active:
   00535326:  33 c0                 xor     eax, eax
   00535328:  c3                    ret     
   00535329:  8d 49 00              lea     ecx, [ecx]
+
+; Function: SYSTASK_sub_53532c
+; Address:  0x0053532C - 0x00535340 (20 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_53532c:
+  0053532C:  .byte 0xf0, 0x52, 0x53, 0x00, 0xfb, 0x52, 0x53, 0x00, 0x06, 0x53, 0x53, 0x00, 0x1b, 0x53, 0x53, 0x00
+  0053533C:  .byte 0x90, 0x90, 0x90, 0x90
 
 ; Function: sub_00535340
 ; Address:  0x00535340 - 0x00535360 (32 bytes)
@@ -682,6 +1024,209 @@ _SYSTASK_compare_keys:
   0053540E:  90                    nop     
   0053540F:  90                    nop     
 
+; Function: SYSTASK_sub_535410
+; Address:  0x00535410 - 0x005355E0 (464 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_535410:
+  00535410:  a1 80 bf 69 00        mov     eax, dword ptr [0x69bf80]
+  00535415:  83 ec 20              sub     esp, 0x20
+  00535418:  53                    push    ebx
+  00535419:  33 db                 xor     ebx, ebx
+  0053541B:  3b c3                 cmp     eax, ebx
+  0053541D:  75 1e                 jne     0x53543d
+  0053541F:  c7 05 80 bf 69 00 01 00 00 00  mov     dword ptr [0x69bf80], 1
+  00535429:  e8 92 b8 03 00        call    0x570cc0
+  0053542E:  68 e0 55 53 00        push    0x5355e0
+  00535433:  68 0a 02 00 00        push    0x20a
+  00535438:  e8 93 39 00 00        call    0x538dd0
+  0053543D:  39 1d 78 bf 69 00     cmp     dword ptr [0x69bf78], ebx
+  00535443:  0f 85 b5 00 00 00     jne     0x5354fe
+  00535449:  53                    push    ebx
+  0053544A:  68 78 bf 69 00        push    0x69bf78
+  0053544F:  68 00 05 00 00        push    0x500
+  00535454:  53                    push    ebx
+  00535455:  ff 15 30 01 5b 00     call    dword ptr [0x5b0130]
+  0053545B:  50                    push    eax
+  0053545C:  e8 0f 7b 03 00        call    0x56cf70
+  00535461:  85 c0                 test    eax, eax
+  00535463:  0f 85 90 00 00 00     jne     0x5354f9
+  00535469:  a1 78 bf 69 00        mov     eax, dword ptr [0x69bf78]
+  0053546E:  8d 54 24 04           lea     edx, [esp + 4]
+  00535472:  53                    push    ebx
+  00535473:  52                    push    edx
+  00535474:  8b 08                 mov     ecx, dword ptr [eax]
+  00535476:  68 90 d9 5b 00        push    0x5bd990
+  0053547B:  50                    push    eax
+  0053547C:  ff 51 0c              call    dword ptr [ecx + 0xc]
+  0053547F:  85 c0                 test    eax, eax
+  00535481:  75 76                 jne     0x5354f9
+  00535483:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00535487:  56                    push    esi
+  00535488:  68 7c bf 69 00        push    0x69bf7c
+  0053548D:  68 b0 d8 5b 00        push    0x5bd8b0
+  00535492:  8b 08                 mov     ecx, dword ptr [eax]
+  00535494:  50                    push    eax
+  00535495:  ff 11                 call    dword ptr [ecx]
+  00535497:  8b f0                 mov     esi, eax
+  00535499:  8b 44 24 08           mov     eax, dword ptr [esp + 8]
+  0053549D:  50                    push    eax
+  0053549E:  8b 10                 mov     edx, dword ptr [eax]
+  005354A0:  ff 52 08              call    dword ptr [edx + 8]
+  005354A3:  3b f3                 cmp     esi, ebx
+  005354A5:  5e                    pop     esi
+  005354A6:  75 51                 jne     0x5354f9
+  005354A8:  a1 7c bf 69 00        mov     eax, dword ptr [0x69bf7c]
+  005354AD:  68 f0 cf 56 00        push    0x56cff0
+  005354B2:  50                    push    eax
+  005354B3:  8b 08                 mov     ecx, dword ptr [eax]
+  005354B5:  ff 51 2c              call    dword ptr [ecx + 0x2c]
+  005354B8:  85 c0                 test    eax, eax
+  005354BA:  75 3d                 jne     0x5354f9
+  005354BC:  a1 7c bf 69 00        mov     eax, dword ptr [0x69bf7c]
+  005354C1:  8d 4c 24 10           lea     ecx, [esp + 0x10]
+  005354C5:  c7 44 24 10 14 00 00 00  mov     dword ptr [esp + 0x10], 0x14
+  005354CD:  c7 44 24 14 10 00 00 00  mov     dword ptr [esp + 0x14], 0x10
+  005354D5:  89 5c 24 18           mov     dword ptr [esp + 0x18], ebx
+  005354D9:  89 5c 24 1c           mov     dword ptr [esp + 0x1c], ebx
+  005354DD:  c7 44 24 20 01 00 00 00  mov     dword ptr [esp + 0x20], 1
+  005354E5:  8b 10                 mov     edx, dword ptr [eax]
+  005354E7:  51                    push    ecx
+  005354E8:  6a 02                 push    2
+  005354EA:  50                    push    eax
+  005354EB:  ff 52 18              call    dword ptr [edx + 0x18]
+  005354EE:  f7 d8                 neg     eax
+  005354F0:  1b c0                 sbb     eax, eax
+  005354F2:  40                    inc     eax
+  005354F3:  89 44 24 08           mov     dword ptr [esp + 8], eax
+  005354F7:  75 05                 jne     0x5354fe
+  005354F9:  e8 32 01 00 00        call    0x535630
+  005354FE:  6a 02                 push    2
+  00535500:  6a 08                 push    8
+  00535502:  c7 05 58 bf 69 00 02 00 00 00  mov     dword ptr [0x69bf58], 2
+  0053550C:  89 1d 5c bf 69 00     mov     dword ptr [0x69bf5c], ebx
+  00535512:  89 1d 60 bf 69 00     mov     dword ptr [0x69bf60], ebx
+  00535518:  89 1d 64 bf 69 00     mov     dword ptr [0x69bf64], ebx
+  0053551E:  88 1d 68 bf 69 00     mov     byte ptr [0x69bf68], bl
+  00535524:  88 1d 69 bf 69 00     mov     byte ptr [0x69bf69], bl
+  0053552A:  88 1d 6a bf 69 00     mov     byte ptr [0x69bf6a], bl
+  00535530:  88 1d 6b bf 69 00     mov     byte ptr [0x69bf6b], bl
+  00535536:  e8 45 01 00 00        call    0x535680
+  0053553B:  6a 01                 push    1
+  0053553D:  6a 09                 push    9
+  0053553F:  e8 3c 01 00 00        call    0x535680
+  00535544:  8b 15 3c ca 5d 00     mov     edx, dword ptr [0x5dca3c]
+  0053554A:  a1 38 ca 5d 00        mov     eax, dword ptr [0x5dca38]
+  0053554F:  6a 64                 push    0x64
+  00535551:  52                    push    edx
+  00535552:  50                    push    eax
+  00535553:  53                    push    ebx
+  00535554:  53                    push    ebx
+  00535555:  53                    push    ebx
+  00535556:  e8 65 06 00 00        call    0x535bc0
+  0053555B:  a1 78 bf 69 00        mov     eax, dword ptr [0x69bf78]
+  00535560:  83 c4 28              add     esp, 0x28
+  00535563:  3b c3                 cmp     eax, ebx
+  00535565:  74 0c                 je      0x535573
+  00535567:  6a 04                 push    4
+  00535569:  6a 07                 push    7
+  0053556B:  e8 10 01 00 00        call    0x535680
+  00535570:  83 c4 08              add     esp, 8
+  00535573:  a1 84 bf 69 00        mov     eax, dword ptr [0x69bf84]
+  00535578:  3b c3                 cmp     eax, ebx
+  0053557A:  5b                    pop     ebx
+  0053557B:  75 17                 jne     0x535594
+  0053557D:  68 70 56 53 00        push    0x535670
+  00535582:  e8 d9 03 02 00        call    0x555960
+  00535587:  83 c4 04              add     esp, 4
+  0053558A:  c7 05 84 bf 69 00 01 00 00 00  mov     dword ptr [0x69bf84], 1
+  00535594:  8d 4c 24 04           lea     ecx, [esp + 4]
+  00535598:  51                    push    ecx
+  00535599:  ff 15 c4 02 5b 00     call    dword ptr [0x5b02c4]
+  0053559F:  8d 54 24 04           lea     edx, [esp + 4]
+  005355A3:  52                    push    edx
+  005355A4:  e8 97 04 02 00        call    0x555a40
+  005355A9:  50                    push    eax
+  005355AA:  ff 15 70 02 5b 00     call    dword ptr [0x5b0270]
+  005355B0:  85 c0                 test    eax, eax
+  005355B2:  74 1b                 je      0x5355cf
+  005355B4:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  005355B8:  50                    push    eax
+  005355B9:  6a 03                 push    3
+  005355BB:  e8 c0 00 00 00        call    0x535680
+  005355C0:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  005355C4:  51                    push    ecx
+  005355C5:  6a 04                 push    4
+  005355C7:  e8 b4 00 00 00        call    0x535680
+  005355CC:  83 c4 10              add     esp, 0x10
+  005355CF:  a1 80 bf 69 00        mov     eax, dword ptr [0x69bf80]
+  005355D4:  83 c4 20              add     esp, 0x20
+  005355D7:  c3                    ret     
+  005355D8:  90                    nop     
+  005355D9:  90                    nop     
+  005355DA:  90                    nop     
+  005355DB:  90                    nop     
+  005355DC:  90                    nop     
+  005355DD:  90                    nop     
+  005355DE:  90                    nop     
+  005355DF:  90                    nop     
+
+; Function: SYSTASK_sub_5355e0
+; Address:  0x005355E0 - 0x0053560F (47 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_5355e0:
+  005355E0:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  005355E4:  85 c0                 test    eax, eax
+  005355E6:  74 36                 je      0x53561e
+  005355E8:  a1 18 5a 6b 00        mov     eax, dword ptr [0x6b5a18]
+  005355ED:  8b 4c 24 08           mov     ecx, dword ptr [esp + 8]
+  005355F1:  3b c1                 cmp     eax, ecx
+  005355F3:  75 29                 jne     0x53561e
+  005355F5:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  005355F9:  b8 89 88 88 88        mov     eax, 0x88888889
+  005355FE:  c1 e9 10              shr     ecx, 0x10
+  00535601:  0f bf c9              movsx   ecx, cx
+  00535604:  f7 e9                 imul    ecx
+  00535606:  03 d1                 add     edx, ecx
+  00535608:  c1 fa 06              sar     edx, 6
+  0053560B:  8b c2                 mov     eax, edx
+
+; Function: SYSTASK_sub_53560f
+; Address:  0x0053560F - 0x0053561B (12 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_53560f:
+  0053560F:  1f                    pop     ds
+  00535610:  03 d0                 add     edx, eax
+  00535612:  a1 88 bf 69 00        mov     eax, dword ptr [0x69bf88]
+  00535617:  03 c2                 add     eax, edx
+
+; Function: SYSTASK_sub_53561b
+; Address:  0x0053561B - 0x00535630 (21 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_53561b:
+  0053561B:  bf 69 00 33 c0        mov     edi, 0xc0330069
+  00535620:  c2 18 00              ret     0x18
+  00535623:  90                    nop     
+  00535624:  90                    nop     
+  00535625:  90                    nop     
+  00535626:  90                    nop     
+  00535627:  90                    nop     
+  00535628:  90                    nop     
+  00535629:  90                    nop     
+  0053562A:  90                    nop     
+  0053562B:  90                    nop     
+  0053562C:  90                    nop     
+  0053562D:  90                    nop     
+  0053562E:  90                    nop     
+  0053562F:  90                    nop     
+
 ; Function: sub_00535630
 ; Address:  0x00535630 - 0x00535670 (64 bytes)
 ; Module:   systask.c
@@ -719,6 +1264,20 @@ _cleanup_task_sub:
   00535670:  e8 bb ff ff ff        call    0x535630
   00535675:  c7 05 80 bf 69 00 00 00 00 00  mov     dword ptr [0x69bf80], 0
   0053567F:  c3                    ret     
+
+; Function: SYSTASK_sub_535680
+; Address:  0x00535680 - 0x0053569D (29 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_sub_535680:
+  00535680:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00535684:  56                    push    esi
+  00535685:  83 c0 fd              add     eax, -3
+  00535688:  be 01 00 00 00        mov     esi, 1
+  0053568D:  83 f8 06              cmp     eax, 6
+  00535690:  0f 87 80 01 00 00     ja      0x535816
+  00535696:  ff 24 85 40 58 53 00  jmp     dword ptr [eax*4 + 0x535840]
 
 ; Function: SYSTASK_set_target_x
 ; Address:  0x0053569D - 0x005356C9 (44 bytes)

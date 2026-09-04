@@ -257,6 +257,89 @@ int SYSTASK_is_entry_active(void *entry)
     return (*(uint32_t *)((char *)entry + 8)) & 1;
 }
 
+/* VA: 0x00534FC0 */
+void SYSTASK_sub_534fc0(void *obj, int a1, int a2)
+{
+    (void)obj; (void)a1; (void)a2;
+}
+
+/* VA: 0x005352E0 */
+void SYSTASK_sub_5352e0(void *obj)
+{
+    if (obj) {
+        *(uint32_t *)((char *)obj + 4) = 0;
+    }
+}
+
+/* VA: 0x0053532C */
+int SYSTASK_sub_53532c(void *obj)
+{
+    if (!obj) return 0;
+    return *(int *)((char *)obj + 0xc);
+}
+
+/* VA: 0x0053560F */
+int SYSTASK_sub_53560f(void)
+{
+    return s_systask_target_x;
+}
+
+/* VA: 0x0053561B */
+void SYSTASK_sub_53561b(int val)
+{
+    s_systask_target_x = val;
+}
+
+/* VA: 0x00535680 */
+int SYSTASK_sub_535680(void)
+{
+    return s_systask_target_y;
+}
+
+/* VA: 0x00535020 */
+void SYSTASK_sub_535020(void *obj, int a1)
+{
+    if (obj) {
+        *(int *)((char *)obj + 8) = a1;
+    }
+}
+
+/* VA: 0x005355E0 */
+void SYSTASK_sub_5355e0(void *obj, int a1, int a2)
+{
+    (void)obj; (void)a1; (void)a2;
+}
+
+/* VA: 0x00535241 */
+void SYSTASK_sub_535241(void *obj, int a1, int a2)
+{
+    (void)obj; (void)a1; (void)a2;
+}
+
+/* VA: 0x00534FCC */
+void SYSTASK_sub_534fcc(void *obj, int a1, int a2, int a3)
+{
+    (void)obj; (void)a1; (void)a2; (void)a3;
+}
+
+/* VA: 0x00534E30 */
+void SYSTASK_sub_534e30(void)
+{
+}
+
+/* VA: 0x00535046 */
+void SYSTASK_sub_535046(void *obj, int a1, int a2)
+{
+    (void)obj; (void)a1; (void)a2;
+}
+
+/* VA: 0x00535410 */
+void SYSTASK_sub_535410(void *obj, int a1)
+{
+    (void)obj; (void)a1;
+}
+
+
 
 
 

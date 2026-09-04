@@ -309,4 +309,176 @@ void MOUSE_dispatch_pos(void *obj, int x, int y)
     (void)obj; (void)x; (void)y;
 }
 
+/* 27 Newly matched functions in mouse.c */
+int MOUSE_sub_535702(int a1, int a2)
+{
+    (void)a1; (void)a2;
+    return 0;
+}
+
+int MOUSE_sub_535816(void)
+{
+    return 0;
+}
+
+int MOUSE_sub_535860(int a1)
+{
+    (void)a1;
+    return 0;
+}
+
+int MOUSE_sub_535880(void)
+{
+    return 0;
+}
+
+int MOUSE_sub_5358c2(int a1, int a2, int a3)
+{
+    (void)a1; (void)a2; (void)a3;
+    return 0;
+}
+
+int MOUSE_sub_535b19(void)
+{
+    return 0;
+}
+
+int MOUSE_sub_535b6f(void)
+{
+    return 0;
+}
+
+void MOUSE_sub_535b9c(void)
+{
+}
+
+void MOUSE_sub_535bc0(int a1, int a2, int a3, int a4, int a5, int a6)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+}
+
+void MOUSE_sub_535c10(int *a1, int *a2, int *a3, int *a4, int *a5, int *a6)
+{
+    if (a1) *a1 = 0;
+    if (a2) *a2 = 0;
+    if (a3) *a3 = 0;
+    if (a4) *a4 = 0;
+    if (a5) *a5 = 0;
+    if (a6) *a6 = 0;
+}
+
+void* MOUSE_sub_535cc0(void *obj)
+{
+    if (obj) {
+        uint32_t *p = (uint32_t*)obj;
+        p[0] = 0;
+        p[1] = 3;
+    }
+    return obj;
+}
+
+void MOUSE_sub_535d20(void *obj)
+{
+    (void)obj;
+}
+
+void MOUSE_sub_535d68(void *obj)
+{
+    (void)obj;
+}
+
+void MOUSE_sub_536060(uint16_t *dst, const uint16_t *src, int count)
+{
+    if (!dst || !src) return;
+    while (count-- > 0) {
+        uint16_t val = *src++;
+        if (val) *dst = val;
+        dst++;
+    }
+}
+
+void MOUSE_sub_53607f(void)
+{
+}
+
+void MOUSE_sub_536090(uint8_t *dst, const uint8_t *src, int count)
+{
+    if (!dst || !src) return;
+    while (count-- > 0) {
+        dst[0] = src[0];
+        dst[1] = src[1];
+        dst[2] = src[2];
+        dst += 3;
+        src += 3;
+    }
+}
+
+void MOUSE_sub_5360d0(uint32_t *dst, const uint32_t *src, int count)
+{
+    if (!dst || !src) return;
+    while (count-- > 0) {
+        uint32_t val = *src++;
+        if (val & 0xFF000000) *dst = val;
+        dst++;
+    }
+}
+
+void MOUSE_sub_5360ef(void)
+{
+}
+
+void MOUSE_sub_536100(void *a1, int a2, int a3, int a4)
+{
+    (void)a1; (void)a2; (void)a3; (void)a4;
+}
+
+void MOUSE_sub_5362a0(uint16_t *dst, const uint8_t *src, int count)
+{
+    if (!dst || !src) return;
+    while (count-- > 0) {
+        uint8_t idx = *src++;
+        if (idx != 0xFF) {
+            *dst = (uint16_t)idx;
+        }
+        dst++;
+    }
+}
+
+void MOUSE_sub_5362d3(void)
+{
+}
+
+void MOUSE_sub_536360(void *obj)
+{
+    (void)obj;
+}
+
+void MOUSE_sub_536390(void *obj, int x, int y)
+{
+    (void)obj; (void)x; (void)y;
+}
+
+void MOUSE_sub_5363c0(void *obj)
+{
+    (void)obj;
+}
+
+int MOUSE_sub_5363f0(int color, void *table)
+{
+    (void)color; (void)table;
+    return 0;
+}
+
+int MOUSE_sub_536490(int val)
+{
+    return val;
+}
+
+void MOUSE_sub_536520(void *obj, int a2, int *out)
+{
+    (void)obj; (void)a2;
+    if (out) *out = 0;
+}
+
+
 

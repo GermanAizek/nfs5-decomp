@@ -249,4 +249,24 @@ uint32_t NFILE_get_max_block_size(void)
     return 0x100000;
 }
 
+uint32_t NFILE_pack_offset(void *obj)
+{
+    uint32_t a = (*(int32_t *)((char *)obj + 4) >> 5) & 0x00FFFFFF;
+    uint32_t b = ((uint32_t)*(uint8_t *)((char *)obj + 0x11)) << 24;
+    return a | b;
+}
+
+int NFILE_sub_566d80(void *a, void *b, void *c)
+{
+    (void)a; (void)b; (void)c;
+    return 0;
+}
+
+int NFILE_sub_566d9b(void *a)
+{
+    (void)a;
+    return 1;
+}
+
+
 

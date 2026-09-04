@@ -50,6 +50,43 @@ void  WINDOW_reset_metrics(void *win, int a1, int a2);
 /* VA: 0x00534B60 */
 void  WINDOW_set_name(void *win, const char *name);
 
+/* VA: 0x0053455B */
+int   CREATEW_sub_53455b(int a1);
+/* VA: 0x0053447A */
+int   CREATEW_sub_53447a(int a1);
+/* VA: 0x005342D7 */
+int   CREATEW_sub_5342d7(void *win);
+/* VA: 0x00534772 */
+void* CREATEW_sub_534772(void *ctx, int a1, int a2, int a3);
+/* VA: 0x00534050 */
+void  CREATEW_sub_534050(void *win, int a1);
+/* VA: 0x0053421D */
+int   CREATEW_sub_53421d(void *win);
+/* VA: 0x00534A8A */
+void  CREATEW_sub_534a8a(void *win, int a1, int a2);
+/* VA: 0x00534075 */
+void  CREATEW_sub_534075(void *win, int a1, int a2);
+/* VA: 0x00534A30 */
+void  CREATEW_sub_534a30(void *win, int a1, int a2);
+/* VA: 0x00533CC0 */
+void* CREATEW_sub_533cc0(void *ctx, int a1, int a2, int a3);
+/* VA: 0x00533F60 */
+void  CREATEW_sub_533f60(void);
+/* VA: 0x00534180 */
+void* CREATEW_sub_534180(void *win, int a1, int a2);
+/* VA: 0x00534246 */
+int   CREATEW_sub_534246(void *win, int a1, int a2);
+/* VA: 0x00534340 */
+void* CREATEW_sub_534340(void *win, int a1, int a2, int a3);
+/* VA: 0x00534490 */
+int   CREATEW_sub_534490(void *win, int a1, int a2);
+/* VA: 0x0053484C */
+void  CREATEW_sub_53484c(void *win, int a1);
+/* VA: 0x00534960 */
+void  CREATEW_sub_534960(void *win, int a1, int a2);
+/* VA: 0x00534AD0 */
+void  CREATEW_sub_534ad0(void *win, int a1, int a2);
+
 #ifdef __cplusplus
 }
 #endif

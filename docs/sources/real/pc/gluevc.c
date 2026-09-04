@@ -250,3 +250,113 @@ void THRASH_tupdate(THRASHTEXTURE*t,void*d,int p)      { CHK(tupdate); g_thrash.
 void THRASH_unlockwindow(int flip)                     { CHK(unlockwindow); g_thrash.unlockwindow(flip); }
 void THRASH_window(THRASH_HWND hwnd)                   { CHK(window); g_thrash.window(hwnd); }
 void THRASH_writerect(int x,int y,int w,int h,void*s)  { CHK(writerect); g_thrash.writerect(x,y,w,h,s); }
+
+/* --- Restored authentic functions --- */
+typedef void (__stdcall *pfn_6bb7d0_t)(int);
+extern pfn_6bb7d0_t dword_6BB7D0;
+extern uint32_t dword_6A42C0;
+extern uint32_t dword_5DC5B4;
+extern uint8_t byte_5DC59E;
+
+extern void sub_5824C0(void *p, int sz);
+extern void sub_571F30(int a, int b, int c);
+extern void sub_571890(uint32_t v);
+extern void sub_572150(void *a, void *b, void *c);
+
+/* VA: 0x005716F0 (32 bytes) */
+void GLUEVC_sub_5716F0(void *p)
+{
+    sub_5824C0(p, 0x100);
+}
+
+/* VA: 0x00571710 (16 bytes) */
+void GLUEVC_sub_571710(void)
+{
+    if (dword_6BB7D0) {
+        dword_6BB7D0(2);
+    }
+}
+
+/* VA: 0x00571720 (16 bytes) */
+void GLUEVC_sub_571720(void)
+{
+    if (dword_6BB7D0) {
+        dword_6BB7D0(2);
+    }
+}
+
+/* VA: 0x00571FB0 (16 bytes) */
+uint32_t GLUEVC_sub_571FB0(void)
+{
+    return dword_6A42C0;
+}
+
+/* VA: 0x00571FC0 (16 bytes) */
+void GLUEVC_sub_571FC0(void)
+{
+    sub_571F30(1, 1, 1);
+}
+
+/* VA: 0x00571FD0 (16 bytes) */
+void GLUEVC_sub_571FD0(void)
+{
+    sub_571F30(1, 1, 0);
+}
+
+/* VA: 0x005720B0 (16 bytes) */
+void GLUEVC_sub_5720B0(uint32_t v)
+{
+    sub_571890(v);
+}
+
+/* VA: 0x005720C0 (32 bytes) */
+void GLUEVC_sub_5720C0(void *obj)
+{
+    uint8_t val = *(uint8_t *)((char *)obj + 0x34);
+    sub_571890(val);
+}
+
+/* VA: 0x005720E0 (16 bytes) */
+uint32_t GLUEVC_sub_5720E0(void *obj)
+{
+    return *(uint8_t *)((char *)obj + 0x34);
+}
+
+/* VA: 0x005723C0 (32 bytes) */
+void GLUEVC_sub_5723C0(void *a, void *b, void *c)
+{
+    sub_572150(a, b, c);
+}
+
+/* VA: 0x005726B0 (32 bytes) */
+uint32_t GLUEVC_sub_5726B0(int a, int b)
+{
+    return (uint32_t)(((int)byte_5DC59E * a) >> 3) + dword_5DC5B4 * b;
+}
+
+/* VA: 0x005730E0 (16 bytes) */
+void* GLUEVC_sub_5730E0(void *this_ptr, int a, int b)
+{
+    (void)a; (void)b;
+    return *(void **)((char *)this_ptr + 8);
+}
+
+/* VA: 0x00573190 (16 bytes) */
+uint8_t GLUEVC_sub_573190(void)
+{
+    return 1;
+}
+
+/* VA: 0x005731A0 (16 bytes) */
+uint32_t GLUEVC_sub_5731A0(void)
+{
+    return 8;
+}
+
+/* VA: 0x005731B0 (32 bytes) */
+void* GLUEVC_sub_5731B0(int *ptr)
+{
+    *ptr = 1;
+    return (void *)0x005BE8B0;
+}
+

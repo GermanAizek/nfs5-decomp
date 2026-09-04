@@ -229,4 +229,66 @@ int FEIntro_PlayMADMovie(const char *filename) {
 int FEIntro_RunIntroSequence(int allow_skip) {
     return FEIntro::RunIntroSequence(allow_skip != 0) ? 1 : 0;
 }
+
+static uint32_t dword_65C158 = 0;
+static float    dword_659940 = 0.0f;
+static uint32_t dword_68E388 = 0;
+static uint32_t dword_68E38C = 0;
+static uint8_t  byte_68E2F0  = 0;
+static uint32_t dword_68E2F4 = 0;
+static uint32_t dword_68E2F8 = 0;
+
+void FEINTRO_sub_4dd010(void)                               /* VA: 0x004DD010 */
+{
+    dword_65C158 = 0x800000;
 }
+
+void FEINTRO_sub_4dd030(void)                               /* VA: 0x004DD030 */
+{
+    if (dword_65C158) {
+        dword_659940 = 1.0f / (float)dword_65C158;
+    }
+}
+
+void FEINTRO_sub_4dd230(void)                               /* VA: 0x004DD230 */
+{
+    dword_68E388 = 0;
+    dword_68E38C = 0;
+}
+
+uint8_t FEINTRO_sub_4dd240(void)                            /* VA: 0x004DD240 */
+{
+    return byte_68E2F0;
+}
+
+uint32_t FEINTRO_sub_4dd250(void)                           /* VA: 0x004DD250 */
+{
+    return dword_68E2F4;
+}
+
+uint32_t FEINTRO_sub_4dd260(void)                           /* VA: 0x004DD260 */
+{
+    return dword_68E2F8;
+}
+
+void FEINTRO_sub_4dd380(void)                               /* VA: 0x004DD380 */
+{
+    if (byte_68E2F0) {
+        byte_68E2F0 = 0;
+    }
+}
+
+void FEINTRO_sub_4de770(void *obj)                          /* VA: 0x004DE770 */
+{
+    uint8_t **p = (uint8_t **)obj;
+    uint8_t *node = *p;
+    if (node) {
+        node[0] = 0;
+        *(uint32_t *)(node + 4) = 0;
+        *(void **)(node + 8) = node;
+        *(void **)(node + 0xC) = node;
+    }
+}
+
+}
+

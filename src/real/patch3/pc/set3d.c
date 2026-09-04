@@ -96,3 +96,88 @@ const char* SET3D_getdrivername(void)
 int SET3D_getwidth(void)  { return g_width;  }
 int SET3D_getheight(void) { return g_height; }
 int SET3D_getbpp(void)    { return g_bpp;    }
+
+#ifndef _WIN32
+#define __stdcall
+#endif
+
+typedef void (__stdcall *pfn_6bb79c_t)(int, int);
+extern pfn_6bb79c_t dword_6BB79C;
+extern void sub_534CA0(int a);
+typedef void (*pfn_5dd928_t)(void);
+extern pfn_5dd928_t dword_5DD928;
+extern void sub_573F90(int a);
+extern uint32_t dword_5DCAFC;
+extern uint32_t dword_5DCA18;
+extern uint32_t dword_5DC5A0;
+typedef void (*pfn_5b0024_t)(void);
+extern pfn_5b0024_t dword_5B0024;
+
+/* VA: 0x00573D20 (16 bytes) */
+int SET3D_sub_573D20(void)
+{
+    if (dword_6BB79C) {
+        dword_6BB79C(0x25, 0);
+    }
+    return 0;
+}
+
+/* VA: 0x00573D30 (16 bytes) */
+void SET3D_sub_573D30(void)
+{
+    sub_534CA0(0);
+}
+
+/* VA: 0x00573E30 (32 bytes) */
+void SET3D_sub_573E30(int mode, int unused)
+{
+    (void)unused;
+    if (mode == 2) {
+        if (dword_5DD928) {
+            dword_5DD928();
+        }
+    }
+}
+
+/* VA: 0x00573E50 (32 bytes) */
+int SET3D_sub_573E50(void)
+{
+    sub_573F90(1);
+    dword_5DCAFC = 0;
+    return 1;
+}
+
+/* VA: 0x00573E70 (16 bytes) */
+void SET3D_sub_573E70(void)
+{
+    sub_573F90(1);
+}
+
+/* VA: 0x00574080 (32 bytes) */
+void SET3D_sub_574080(uint32_t code, uint32_t val)
+{
+    if (code == 0x3A) {
+        dword_5DCA18 = val;
+    }
+}
+
+/* VA: 0x005740D0 (16 bytes) */
+uint32_t SET3D_sub_5740D0(void)
+{
+    return dword_5DC5A0 & 0xFF;
+}
+
+/* VA: 0x005740E0 (16 bytes) */
+uint32_t SET3D_sub_5740E0(void)
+{
+    return dword_5DCA18;
+}
+
+/* VA: 0x005740F0 (16 bytes) */
+void SET3D_sub_5740F0(void)
+{
+    if (dword_5B0024) {
+        dword_5B0024();
+    }
+}
+

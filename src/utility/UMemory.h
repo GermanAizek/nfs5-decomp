@@ -25,4 +25,17 @@ private:
     void *m_freeList;
 };
 
+/* Reconstructed UMemory functions */
+extern "C" {
+void* UMEM_sub_59d1d0(void *arg);                       /* VA: 0x0059D1D0 */
+void* UMEM_sub_59d1e0(void *arg);                       /* VA: 0x0059D1E0 */
+void* UMEM_sub_59d200(void *arg);                       /* VA: 0x0059D200 */
+void* UMEM_sub_59d220(void);                            /* VA: 0x0059D220 */
+int   UMEM_sub_59d290(void *arg);                       /* VA: 0x0059D290 */
+void  UMEM_sub_59d4f0(void *ptr);                       /* VA: 0x0059D4F0 */
+void* UMEM_sub_59d75a(void *arg);                       /* VA: 0x0059D75A */
+void* UMEM_sub_59d7da(void *arg);                       /* VA: 0x0059D7DA */
+void* UMEM_sub_59d9c0(void *arg);                       /* VA: 0x0059D9C0 */
+}
+
 #endif // UTILITY_UMEMORY_H

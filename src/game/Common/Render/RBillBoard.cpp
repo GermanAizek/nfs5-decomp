@@ -161,3 +161,50 @@ public:
     void SetSize(float w, float h) { mWidth = w; mHeight = h; }
     void SetColour(unsigned int argb) { mColour = argb; }
 };
+
+/* ------------------------------------------------------------------ */
+/*  Reconstructed RBillBoard helpers                                  */
+/* ------------------------------------------------------------------ */
+extern "C" {
+static uint32_t dword_619B14 = 0;
+static float    dword_619B10 = 0.0f;
+static uint32_t dword_619B20 = 0;
+static float    dword_619B1C = 0.0f;
+static uint32_t dword_619B28 = 0;
+static float    dword_619B24 = 0.0f;
+static uint32_t dword_619B34 = 0;
+static float    dword_619B30 = 0.0f;
+static uint32_t dword_619B3C = 0;
+static float    dword_619B38 = 0.0f;
+static uint32_t dword_619B50 = 0;
+static float    dword_619B4C = 0.0f;
+static uint32_t dword_619B58 = 0;
+static float    dword_619B54 = 0.0f;
+static uint32_t dword_619B60 = 0;
+static float    dword_619B5C = 0.0f;
+static uint32_t dword_619B70 = 0;
+static float    dword_619B6C = 0.0f;
+uint32_t dword_626010 = 0;
+
+void     RBILL_0044fda0(void) { dword_619B14 = 0x800000; }                  /* VA: 0x0044FDA0 */
+void     RBILL_0044fdc0(void) { if (dword_619B14) dword_619B10 = 1.0f / (float)dword_619B14; } /* VA: 0x0044FDC0 */
+void     RBILL_00450050(void) { dword_619B20 = 0x800000; }                  /* VA: 0x00450050 */
+void     RBILL_00450070(void) { if (dword_619B20) dword_619B1C = 1.0f / (float)dword_619B20; } /* VA: 0x00450070 */
+void     RBILL_00450090(void) { dword_619B28 = 0x800000; }                  /* VA: 0x00450090 */
+void     RBILL_004500b0(void) { if (dword_619B28) dword_619B24 = 1.0f / (float)dword_619B28; } /* VA: 0x004500B0 */
+void     RBILL_00450210(void) { dword_619B34 = 0x800000; }                  /* VA: 0x00450210 */
+void     RBILL_00450230(void) { if (dword_619B34) dword_619B30 = 1.0f / (float)dword_619B34; } /* VA: 0x00450230 */
+void     RBILL_00450250(void) { dword_619B3C = 0x800000; }                  /* VA: 0x00450250 */
+void     RBILL_00450270(void) { if (dword_619B3C) dword_619B38 = 1.0f / (float)dword_619B3C; } /* VA: 0x00450270 */
+void     RBILL_00450ed0(void) { dword_619B50 = 0x800000; }                  /* VA: 0x00450ED0 */
+void     RBILL_00450ef0(void) { if (dword_619B50) dword_619B4C = 1.0f / (float)dword_619B50; } /* VA: 0x00450EF0 */
+void     RBILL_004515e0(void) { dword_619B58 = 0x800000; }                  /* VA: 0x004515E0 */
+void     RBILL_00451600(void) { if (dword_619B58) dword_619B54 = 1.0f / (float)dword_619B58; } /* VA: 0x00451600 */
+void     RBILL_00451620(void) { dword_619B60 = 0x800000; }                  /* VA: 0x00451620 */
+void     RBILL_00451640(void) { if (dword_619B60) dword_619B5C = 1.0f / (float)dword_619B60; } /* VA: 0x00451640 */
+uint32_t RBILL_004516b0(void) { return dword_626010; }                       /* VA: 0x004516B0 */
+int      RBILL_00451700(void *arg) { (void)arg; return 0; }                 /* VA: 0x00451700 */
+void     RBILL_00451710(void) { dword_619B70 = 0x800000; }                  /* VA: 0x00451710 */
+void     RBILL_00451730(void) { if (dword_619B70) dword_619B6C = 1.0f / (float)dword_619B70; } /* VA: 0x00451730 */
+}
+
