@@ -336,9 +336,79 @@ int main() {
     LOADSHP_init_default_cache();
     assert(LOADSHP_sub_5ad210(NULL, 0) == 1);
     assert(LOADSHP_sub_5ad530(NULL, NULL, 0) == 0);
+    assert(LOADSHP_find_block_by_ptr(NULL) == NULL);
 
+    // fontdraw 100% completion tests
+    FONTDRAW_set_property(font_ctx, 1, 1);
+    assert((*(uint32_t*)(font_ctx + 0xbc) & 1) != 0);
+    FONTDRAW_translate(NULL, 1.0f, 2.0f, 3.0f);
+    FONTDRAW_draw(NULL);
 
+    // systask additional tests
+    SYNCTASK_create_object(NULL, NULL, 0, 0);
+    SYNCTASK_post_vector_task(NULL, 1, 2, 3);
+    assert(SYSTASK_is_entry_active(NULL) == 0);
 
+    // createw additional tests
+    char win_buf[128];
+    memset(win_buf, 0, sizeof(win_buf));
+    WINDOW_set_name(win_buf, "MainWindow");
+    assert(strcmp(win_buf + 0x24, "MainWindow") == 0);
+    WINDOW_reset_metrics(win_buf, 0, 0);
+
+    // clip thread-safe list tests
+    assert(CLIP_list_find_index(NULL, NULL) == -1);
+    assert(CLIP_list_invoke_head(NULL) == -1);
+    assert(CLIP_list_get_at(NULL, 0) == NULL);
+
+    // lowtimer timer obj tests
+    void *t_obj = LOWTIMER_alloc_timer_obj(10, 20);
+    assert(t_obj != NULL);
+    LOWTIMER_free_timer_obj(t_obj);
+    LOWTIMER_cleanup_handle();
+
+    // mouse tests
+    uint8_t m_state[64];
+    MOUSE_init_state(m_state);
+    assert(*(uint32_t*)m_state == 1);
+    uint8_t src_mask[4] = {0x12, 0xFF, 0x34, 0x56};
+    uint8_t dst_mask[4] = {0x00, 0x00, 0x00, 0x00};
+    MOUSE_copy_transparent_mask(dst_mask, src_mask, 4);
+    assert(dst_mask[0] == 0x12 && dst_mask[1] == 0x00 && dst_mask[2] == 0x34 && dst_mask[3] == 0x56);
+    MOUSE_dispatch_pos(NULL, 100, 200);
+
+    // 9c. Testing newly restored depthconv, loadshp, movdfl, hlsfile functions
+    printf("[9c] Testing newly restored depthconv, loadshp, movdfl, hlsfile functions...\n");
+    assert(DEPTHCONV_get_bpp_by_type(0) == 1);
+    assert(DEPTHCONV_get_bpp_by_type(3) == 2);
+    assert(DEPTHCONV_get_bpp_by_type(8) == 4);
+    assert(DEPTHCONV_get_bpp_by_type(14) == -1);
+    assert(DEPTHCONV_get_format_entry(0) == 0);
+    assert(DEPTHCONV_get_format_entry(6) == 6);
+    assert(DEPTHCONV_get_format_entry(7) == 0);
+
+    uint8_t copy_src[16] = {1, 2, 3, 4, 5, 6, 7, 8};
+    uint8_t copy_dst[16] = {0};
+    DEPTHCONV_copy_1bpp(copy_dst, copy_src, 4);
+    assert(copy_dst[0] == 1 && copy_dst[3] == 4);
+    DEPTHCONV_copy_2bpp(copy_dst, copy_src, 2);
+    assert(copy_dst[0] == 1 && copy_dst[3] == 4);
+
+    assert(LOADSHP_create_surface(0, NULL, NULL, NULL) == 1);
+    LOADSHP_sub_5ad370(NULL, 0, 0);
+    LOADSHP_sub_5ad39a(0, 0);
+    assert(LOADSHP_sub_5ad3f0() == 0);
+    LOADSHP_sub_5ad3fd(NULL);
+    assert(LOADSHP_sub_5ad770(NULL, NULL, 0) == 1);
+
+    void *mov_buf = MOVDFL_create_stream_buffer(32, 64, 1);
+    assert(mov_buf != NULL);
+    free(mov_buf);
+
+    assert(HLSFILE_check_flag_and_jump() == 0);
+    assert(HLSFILE_calc_table_offset(1, 2, 3) == (3 + 25) * 16 + 1 * 296 + 2 * 12);
+    assert(HLSFILE_find_chunk_7c(NULL) == NULL);
+    assert(HLSFILE_find_chunk_6f(NULL) == NULL);
 
     // 10. utility: UMemory
     printf("[10] Testing UMemory (objectHeap, FastBlock)...\n");

@@ -64,6 +64,15 @@ void FONTDRAW_set_scale_y(void *ctx, int scale);
 /* VA: 0x0053CD8A */
 void FONTDRAW_set_scale_z(void *ctx, int scale);
 
+/* VA: 0x0053C9F0 */
+void FONTDRAW_translate(void *obj, float x, float y, float z);
+
+/* VA: 0x0053CA90 */
+void FONTDRAW_draw(void *obj);
+
+/* VA: 0x0053CB90 */
+void FONTDRAW_set_property(void *obj, int prop_id, int val);
+
 #ifdef __cplusplus
 }
 #endif

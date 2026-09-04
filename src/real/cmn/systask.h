@@ -58,6 +58,15 @@ void SYSTASK_set_target_y(int val);
 /* VA: 0x005356F5 */
 void SYSTASK_set_target_z(int val);
 
+/* VA: 0x00534D90 */
+void* SYNCTASK_create_object(void *obj, void *a1, int a2, int a3);
+
+/* VA: 0x00534F60 */
+void SYNCTASK_post_vector_task(void *ctx, int a1, int a2, int a3);
+
+/* VA: 0x0053531B */
+int SYSTASK_is_entry_active(void *entry);
+
 #ifdef __cplusplus
 }
 #endif

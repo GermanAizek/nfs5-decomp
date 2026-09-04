@@ -179,3 +179,65 @@ void FONTDRAW_set_scale_z(void *ctx, int scale)
     FONTDRAW_sub_53ce60(ctx, 3, val);
 }
 
+/* VA: 0x0053C9F0 */
+void FONTDRAW_translate(void *obj, float x, float y, float z)
+{
+    if (!obj) {
+        return;
+    }
+    float *pobj = (float *)obj;
+    float dx = x - pobj[3];
+    float dy = y - pobj[4];
+    float dz = z - pobj[5];
+    int count = *(int *)((char *)obj + 4);
+    if (count > 0) {
+        float *v = *(float **)((char *)obj + 8);
+        for (int i = 0; i < count; i++) {
+            v[0] += dx;
+            v[1] += dy;
+            v[2] += dz;
+            v = (float *)((char *)v + 0x20);
+        }
+    }
+    pobj[3] = x;
+    pobj[4] = y;
+    pobj[5] = z;
+}
+
+/* VA: 0x0053CA90 */
+void FONTDRAW_draw(void *obj)
+{
+    if (!obj) {
+        return;
+    }
+    int count = *(int *)((char *)obj + 4);
+    if (count <= 0) {
+        return;
+    }
+}
+
+/* VA: 0x0053CB90 */
+void FONTDRAW_set_property(void *obj, int prop_id, int val)
+{
+    switch (prop_id) {
+        case 0:  FONTDRAW_reset_scales(obj); break;
+        case 1:  FONTDRAW_set_flag_bit0(obj, val); break;
+        case 2:  FONTDRAW_set_flag_bit1(obj, val); break;
+        case 3:  FONTDRAW_set_flag_bit2(obj, val); break;
+        case 4:  FONTDRAW_set_prop_5c(obj, val); break;
+        case 5:  FONTDRAW_set_prop_60(obj, val); break;
+        case 6:  FONTDRAW_set_prop_64(obj, val); break;
+        case 7:  FONTDRAW_set_prop_68(obj, val); break;
+        case 8:  FONTDRAW_set_all_paddings(obj, val); break;
+        case 9:  FONTDRAW_set_pad_left(obj, val); break;
+        case 10: FONTDRAW_set_pad_top(obj, val); break;
+        case 11: FONTDRAW_set_pad_right(obj, val); break;
+        case 12: FONTDRAW_set_pad_bottom(obj, val); break;
+        case 13: FONTDRAW_set_scale_x(obj, val); break;
+        case 14: FONTDRAW_set_scale_y(obj, val); break;
+        case 15: FONTDRAW_set_scale_z(obj, val); break;
+        default: break;
+    }
+}
+
+

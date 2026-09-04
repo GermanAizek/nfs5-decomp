@@ -47,6 +47,24 @@ int  CLIP_lock_and_process(void *obj, int param);
 int  CLIP_lock_and_call_57F420(void *obj, int p1, int p2);
 int  CLIP_compare_rects(const void *r1, const void *r2);
 
+/* VA: 0x0057F060 */
+int   CLIP_list_find_index(void *list, void *node);
+
+/* VA: 0x0057F0B0 */
+int   CLIP_list_invoke_head(void *list);
+
+/* VA: 0x0057F0F0 */
+int   CLIP_list_invoke_head2(void *list);
+
+/* VA: 0x0057F130 */
+void* CLIP_list_find_if(void *list, void *predicate, void *user_data);
+
+/* VA: 0x0057F180 */
+void* CLIP_list_get_at(void *list, uint32_t index);
+
+/* VA: 0x0057F350 */
+void* CLIP_list_remove_at(void *list, void *node);
+
 #ifdef __cplusplus
 }
 #endif

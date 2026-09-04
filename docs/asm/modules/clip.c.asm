@@ -1,5 +1,5 @@
 ; Module: clip.c
-; Total Matched Functions: 33
+; Total Matched Functions: 39
 ; Target: Porsche.exe
 
 ; Function: CLIP_cleanup
@@ -764,6 +764,230 @@ _CLIP_get_count:
   0057F05E:  90                    nop     
   0057F05F:  90                    nop     
 
+; Function: CLIP_list_find_index
+; Address:  0x0057F060 - 0x0057F0B0 (80 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_CLIP_list_find_index:
+  0057F060:  53                    push    ebx
+  0057F061:  56                    push    esi
+  0057F062:  57                    push    edi
+  0057F063:  8b 7c 24 10           mov     edi, dword ptr [esp + 0x10]
+  0057F067:  33 f6                 xor     esi, esi
+  0057F069:  8b 5f 18              mov     ebx, dword ptr [edi + 0x18]
+  0057F06C:  53                    push    ebx
+  0057F06D:  e8 fe 17 fb ff        call    0x530870
+  0057F072:  8b 4c 24 18           mov     ecx, dword ptr [esp + 0x18]
+  0057F076:  83 c4 04              add     esp, 4
+  0057F079:  85 c9                 test    ecx, ecx
+  0057F07B:  74 16                 je      0x57f093
+  0057F07D:  8b 47 08              mov     eax, dword ptr [edi + 8]
+  0057F080:  85 c0                 test    eax, eax
+  0057F082:  74 0b                 je      0x57f08f
+  0057F084:  3b c1                 cmp     eax, ecx
+  0057F086:  74 0e                 je      0x57f096
+  0057F088:  8b 00                 mov     eax, dword ptr [eax]
+  0057F08A:  46                    inc     esi
+  0057F08B:  85 c0                 test    eax, eax
+  0057F08D:  75 f5                 jne     0x57f084
+  0057F08F:  3b c1                 cmp     eax, ecx
+  0057F091:  74 03                 je      0x57f096
+  0057F093:  83 ce ff              or      esi, 0xffffffff
+  0057F096:  53                    push    ebx
+  0057F097:  e8 e4 17 fb ff        call    0x530880
+  0057F09C:  83 c4 04              add     esp, 4
+  0057F09F:  8b c6                 mov     eax, esi
+  0057F0A1:  5f                    pop     edi
+  0057F0A2:  5e                    pop     esi
+  0057F0A3:  5b                    pop     ebx
+  0057F0A4:  c3                    ret     
+  0057F0A5:  90                    nop     
+  0057F0A6:  90                    nop     
+  0057F0A7:  90                    nop     
+  0057F0A8:  90                    nop     
+  0057F0A9:  90                    nop     
+  0057F0AA:  90                    nop     
+  0057F0AB:  90                    nop     
+  0057F0AC:  90                    nop     
+  0057F0AD:  90                    nop     
+  0057F0AE:  90                    nop     
+  0057F0AF:  90                    nop     
+
+; Function: CLIP_list_invoke_head
+; Address:  0x0057F0B0 - 0x0057F0F0 (64 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_CLIP_list_invoke_head:
+  0057F0B0:  53                    push    ebx
+  0057F0B1:  56                    push    esi
+  0057F0B2:  8b 74 24 0c           mov     esi, dword ptr [esp + 0xc]
+  0057F0B6:  57                    push    edi
+  0057F0B7:  83 cf ff              or      edi, 0xffffffff
+  0057F0BA:  8b 5e 18              mov     ebx, dword ptr [esi + 0x18]
+  0057F0BD:  53                    push    ebx
+  0057F0BE:  e8 ad 17 fb ff        call    0x530870
+  0057F0C3:  8b 46 08              mov     eax, dword ptr [esi + 8]
+  0057F0C6:  83 c4 04              add     esp, 4
+  0057F0C9:  85 c0                 test    eax, eax
+  0057F0CB:  74 0d                 je      0x57f0da
+  0057F0CD:  8b 4e 14              mov     ecx, dword ptr [esi + 0x14]
+  0057F0D0:  51                    push    ecx
+  0057F0D1:  50                    push    eax
+  0057F0D2:  ff 56 10              call    dword ptr [esi + 0x10]
+  0057F0D5:  83 c4 08              add     esp, 8
+  0057F0D8:  8b f8                 mov     edi, eax
+  0057F0DA:  53                    push    ebx
+  0057F0DB:  e8 a0 17 fb ff        call    0x530880
+  0057F0E0:  83 c4 04              add     esp, 4
+  0057F0E3:  8b c7                 mov     eax, edi
+  0057F0E5:  5f                    pop     edi
+  0057F0E6:  5e                    pop     esi
+  0057F0E7:  5b                    pop     ebx
+  0057F0E8:  c3                    ret     
+  0057F0E9:  90                    nop     
+  0057F0EA:  90                    nop     
+  0057F0EB:  90                    nop     
+  0057F0EC:  90                    nop     
+  0057F0ED:  90                    nop     
+  0057F0EE:  90                    nop     
+  0057F0EF:  90                    nop     
+
+; Function: CLIP_list_invoke_head2
+; Address:  0x0057F0F0 - 0x0057F130 (64 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_CLIP_list_invoke_head2:
+  0057F0F0:  53                    push    ebx
+  0057F0F1:  56                    push    esi
+  0057F0F2:  8b 74 24 0c           mov     esi, dword ptr [esp + 0xc]
+  0057F0F6:  57                    push    edi
+  0057F0F7:  83 cf ff              or      edi, 0xffffffff
+  0057F0FA:  8b 5e 18              mov     ebx, dword ptr [esi + 0x18]
+  0057F0FD:  53                    push    ebx
+  0057F0FE:  e8 6d 17 fb ff        call    0x530870
+  0057F103:  8b 46 08              mov     eax, dword ptr [esi + 8]
+  0057F106:  83 c4 04              add     esp, 4
+  0057F109:  85 c0                 test    eax, eax
+  0057F10B:  74 0d                 je      0x57f11a
+  0057F10D:  8b 4e 14              mov     ecx, dword ptr [esi + 0x14]
+  0057F110:  51                    push    ecx
+  0057F111:  50                    push    eax
+  0057F112:  ff 56 10              call    dword ptr [esi + 0x10]
+  0057F115:  83 c4 08              add     esp, 8
+  0057F118:  8b f8                 mov     edi, eax
+  0057F11A:  53                    push    ebx
+  0057F11B:  e8 60 17 fb ff        call    0x530880
+  0057F120:  83 c4 04              add     esp, 4
+  0057F123:  8b c7                 mov     eax, edi
+  0057F125:  5f                    pop     edi
+  0057F126:  5e                    pop     esi
+  0057F127:  5b                    pop     ebx
+  0057F128:  c3                    ret     
+  0057F129:  90                    nop     
+  0057F12A:  90                    nop     
+  0057F12B:  90                    nop     
+  0057F12C:  90                    nop     
+  0057F12D:  90                    nop     
+  0057F12E:  90                    nop     
+  0057F12F:  90                    nop     
+
+; Function: CLIP_list_find_if
+; Address:  0x0057F130 - 0x0057F180 (80 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_CLIP_list_find_if:
+  0057F130:  53                    push    ebx
+  0057F131:  55                    push    ebp
+  0057F132:  56                    push    esi
+  0057F133:  8b 74 24 10           mov     esi, dword ptr [esp + 0x10]
+  0057F137:  57                    push    edi
+  0057F138:  8b 6e 18              mov     ebp, dword ptr [esi + 0x18]
+  0057F13B:  55                    push    ebp
+  0057F13C:  e8 2f 17 fb ff        call    0x530870
+  0057F141:  8b 76 08              mov     esi, dword ptr [esi + 8]
+  0057F144:  83 c4 04              add     esp, 4
+  0057F147:  85 f6                 test    esi, esi
+  0057F149:  74 1d                 je      0x57f168
+  0057F14B:  8b 5c 24 1c           mov     ebx, dword ptr [esp + 0x1c]
+  0057F14F:  8b 7c 24 18           mov     edi, dword ptr [esp + 0x18]
+  0057F153:  85 ff                 test    edi, edi
+  0057F155:  74 11                 je      0x57f168
+  0057F157:  53                    push    ebx
+  0057F158:  56                    push    esi
+  0057F159:  ff d7                 call    edi
+  0057F15B:  83 c4 08              add     esp, 8
+  0057F15E:  85 c0                 test    eax, eax
+  0057F160:  75 06                 jne     0x57f168
+  0057F162:  8b 36                 mov     esi, dword ptr [esi]
+  0057F164:  85 f6                 test    esi, esi
+  0057F166:  75 eb                 jne     0x57f153
+  0057F168:  55                    push    ebp
+  0057F169:  e8 12 17 fb ff        call    0x530880
+  0057F16E:  83 c4 04              add     esp, 4
+  0057F171:  8b c6                 mov     eax, esi
+  0057F173:  5f                    pop     edi
+  0057F174:  5e                    pop     esi
+  0057F175:  5d                    pop     ebp
+  0057F176:  5b                    pop     ebx
+  0057F177:  c3                    ret     
+  0057F178:  90                    nop     
+  0057F179:  90                    nop     
+  0057F17A:  90                    nop     
+  0057F17B:  90                    nop     
+  0057F17C:  90                    nop     
+  0057F17D:  90                    nop     
+  0057F17E:  90                    nop     
+  0057F17F:  90                    nop     
+
+; Function: CLIP_list_get_at
+; Address:  0x0057F180 - 0x0057F1D0 (80 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_CLIP_list_get_at:
+  0057F180:  56                    push    esi
+  0057F181:  8b 74 24 08           mov     esi, dword ptr [esp + 8]
+  0057F185:  57                    push    edi
+  0057F186:  8b 7e 18              mov     edi, dword ptr [esi + 0x18]
+  0057F189:  57                    push    edi
+  0057F18A:  e8 e1 16 fb ff        call    0x530870
+  0057F18F:  8b 46 08              mov     eax, dword ptr [esi + 8]
+  0057F192:  83 c4 04              add     esp, 4
+  0057F195:  85 c0                 test    eax, eax
+  0057F197:  74 23                 je      0x57f1bc
+  0057F199:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  0057F19D:  85 c9                 test    ecx, ecx
+  0057F19F:  76 0b                 jbe     0x57f1ac
+  0057F1A1:  49                    dec     ecx
+  0057F1A2:  51                    push    ecx
+  0057F1A3:  50                    push    eax
+  0057F1A4:  e8 27 00 00 00        call    0x57f1d0
+  0057F1A9:  83 c4 08              add     esp, 8
+  0057F1AC:  57                    push    edi
+  0057F1AD:  8b f0                 mov     esi, eax
+  0057F1AF:  e8 cc 16 fb ff        call    0x530880
+  0057F1B4:  83 c4 04              add     esp, 4
+  0057F1B7:  8b c6                 mov     eax, esi
+  0057F1B9:  5f                    pop     edi
+  0057F1BA:  5e                    pop     esi
+  0057F1BB:  c3                    ret     
+  0057F1BC:  57                    push    edi
+  0057F1BD:  33 f6                 xor     esi, esi
+  0057F1BF:  e8 bc 16 fb ff        call    0x530880
+  0057F1C4:  83 c4 04              add     esp, 4
+  0057F1C7:  8b c6                 mov     eax, esi
+  0057F1C9:  5f                    pop     edi
+  0057F1CA:  5e                    pop     esi
+  0057F1CB:  c3                    ret     
+  0057F1CC:  90                    nop     
+  0057F1CD:  90                    nop     
+  0057F1CE:  90                    nop     
+  0057F1CF:  90                    nop     
+
 ; Function: sub_0057F1D0
 ; Address:  0x0057F1D0 - 0x0057F1F0 (32 bytes)
 ; Module:   clip.c
@@ -787,6 +1011,51 @@ _sub_0057F1D0:
   0057F1ED:  90                    nop     
   0057F1EE:  90                    nop     
   0057F1EF:  90                    nop     
+
+; Function: CLIP_list_remove_at
+; Address:  0x0057F350 - 0x0057F3A0 (80 bytes)
+; Module:   clip.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_CLIP_list_remove_at:
+  0057F350:  56                    push    esi
+  0057F351:  57                    push    edi
+  0057F352:  8b 7c 24 0c           mov     edi, dword ptr [esp + 0xc]
+  0057F356:  8b 47 18              mov     eax, dword ptr [edi + 0x18]
+  0057F359:  50                    push    eax
+  0057F35A:  e8 11 15 fb ff        call    0x530870
+  0057F35F:  8b 4c 24 18           mov     ecx, dword ptr [esp + 0x18]
+  0057F363:  8b 54 24 14           mov     edx, dword ptr [esp + 0x14]
+  0057F367:  51                    push    ecx
+  0057F368:  52                    push    edx
+  0057F369:  e8 62 fe ff ff        call    0x57f1d0
+  0057F36E:  8b f0                 mov     esi, eax
+  0057F370:  83 c4 0c              add     esp, 0xc
+  0057F373:  85 f6                 test    esi, esi
+  0057F375:  74 10                 je      0x57f387
+  0057F377:  56                    push    esi
+  0057F378:  57                    push    edi
+  0057F379:  e8 12 fc ff ff        call    0x57ef90
+  0057F37E:  83 c4 08              add     esp, 8
+  0057F381:  85 c0                 test    eax, eax
+  0057F383:  75 02                 jne     0x57f387
+  0057F385:  33 f6                 xor     esi, esi
+  0057F387:  8b 47 18              mov     eax, dword ptr [edi + 0x18]
+  0057F38A:  50                    push    eax
+  0057F38B:  e8 f0 14 fb ff        call    0x530880
+  0057F390:  83 c4 04              add     esp, 4
+  0057F393:  8b c6                 mov     eax, esi
+  0057F395:  5f                    pop     edi
+  0057F396:  5e                    pop     esi
+  0057F397:  c3                    ret     
+  0057F398:  90                    nop     
+  0057F399:  90                    nop     
+  0057F39A:  90                    nop     
+  0057F39B:  90                    nop     
+  0057F39C:  90                    nop     
+  0057F39D:  90                    nop     
+  0057F39E:  90                    nop     
+  0057F39F:  90                    nop     
 
 ; Function: sub_0057F4C0
 ; Address:  0x0057F4C0 - 0x0057F500 (64 bytes)

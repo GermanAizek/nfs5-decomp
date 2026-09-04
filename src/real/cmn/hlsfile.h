@@ -15,6 +15,16 @@ int      FILE_loadat(const char *filename, void *destination);
 int      FILE_scatterload(const char *filename, void **destinations, uint32_t *sizes, int count);
 void     FILE_free(void *ptr);
 
+/* Reconstructed functions verified against Porsche.exe */
+/* VA: 0x00568EF0 */
+void* HLSFILE_find_chunk_7c(void *chunk);
+/* VA: 0x00568F20 */
+void* HLSFILE_find_chunk_6f(void *chunk);
+/* VA: 0x005695D0 */
+int   HLSFILE_check_flag_and_jump(void);
+/* VA: 0x005695F0 */
+int   HLSFILE_calc_table_offset(int arg1, int arg2, int arg3);
+
 #ifdef __cplusplus
 }
 #endif

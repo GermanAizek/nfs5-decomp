@@ -1,5 +1,5 @@
 ; Module: mouse.c
-; Total Matched Functions: 29
+; Total Matched Functions: 34
 ; Target: Porsche.exe
 
 ; Function: MOUSE_set_state_cc
@@ -440,6 +440,36 @@ _sub_00535F90:
   00535FAE:  90                    nop     
   00535FAF:  90                    nop     
 
+; Function: MOUSE_init_state
+; Address:  0x00535FB0 - 0x00535FE0 (48 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_MOUSE_init_state:
+  00535FB0:  8b c1                 mov     eax, ecx
+  00535FB2:  33 c9                 xor     ecx, ecx
+  00535FB4:  c7 00 01 00 00 00     mov     dword ptr [eax], 1
+  00535FBA:  c7 40 04 02 00 00 00  mov     dword ptr [eax + 4], 2
+  00535FC1:  89 48 08              mov     dword ptr [eax + 8], ecx
+  00535FC4:  89 48 0c              mov     dword ptr [eax + 0xc], ecx
+  00535FC7:  89 48 10              mov     dword ptr [eax + 0x10], ecx
+  00535FCA:  c7 40 14 ff ff ff ff  mov     dword ptr [eax + 0x14], 0xffffffff
+  00535FD1:  c3                    ret     
+  00535FD2:  90                    nop     
+  00535FD3:  90                    nop     
+  00535FD4:  90                    nop     
+  00535FD5:  90                    nop     
+  00535FD6:  90                    nop     
+  00535FD7:  90                    nop     
+  00535FD8:  90                    nop     
+  00535FD9:  90                    nop     
+  00535FDA:  90                    nop     
+  00535FDB:  90                    nop     
+  00535FDC:  90                    nop     
+  00535FDD:  90                    nop     
+  00535FDE:  90                    nop     
+  00535FDF:  90                    nop     
+
 ; Function: MOUSE_set_field_0
 ; Address:  0x00535FE0 - 0x00535FF0 (16 bytes)
 ; Module:   mouse.c
@@ -534,6 +564,122 @@ _MOUSE_set_field_14_18:
   0053603D:  90                    nop     
   0053603E:  90                    nop     
   0053603F:  90                    nop     
+
+; Function: MOUSE_copy_transparent_mask
+; Address:  0x00536040 - 0x00536060 (32 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_MOUSE_copy_transparent_mask:
+  00536040:  8b 4c 24 08           mov     ecx, dword ptr [esp + 8]
+  00536044:  8b 54 24 04           mov     edx, dword ptr [esp + 4]
+  00536048:  56                    push    esi
+  00536049:  8b 74 24 10           mov     esi, dword ptr [esp + 0x10]
+  0053604D:  8a 01                 mov     al, byte ptr [ecx]
+  0053604F:  41                    inc     ecx
+  00536050:  3c ff                 cmp     al, 0xff
+  00536052:  74 02                 je      0x536056
+  00536054:  88 02                 mov     byte ptr [edx], al
+  00536056:  42                    inc     edx
+  00536057:  4e                    dec     esi
+  00536058:  75 f3                 jne     0x53604d
+  0053605A:  5e                    pop     esi
+  0053605B:  c3                    ret     
+  0053605C:  90                    nop     
+  0053605D:  90                    nop     
+  0053605E:  90                    nop     
+  0053605F:  90                    nop     
+
+; Function: MOUSE_dispatch_packed_pos
+; Address:  0x005362E0 - 0x00536310 (48 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_MOUSE_dispatch_packed_pos:
+  005362E0:  8b 4c 24 04           mov     ecx, dword ptr [esp + 4]
+  005362E4:  8b 41 0c              mov     eax, dword ptr [ecx + 0xc]
+  005362E7:  8b d0                 mov     edx, eax
+  005362E9:  c1 e2 04              shl     edx, 4
+  005362EC:  c1 e0 14              shl     eax, 0x14
+  005362EF:  c1 fa 14              sar     edx, 0x14
+  005362F2:  c1 f8 14              sar     eax, 0x14
+  005362F5:  52                    push    edx
+  005362F6:  50                    push    eax
+  005362F7:  51                    push    ecx
+  005362F8:  e8 03 fe ff ff        call    0x536100
+  005362FD:  83 c4 0c              add     esp, 0xc
+  00536300:  c3                    ret     
+  00536301:  90                    nop     
+  00536302:  90                    nop     
+  00536303:  90                    nop     
+  00536304:  90                    nop     
+  00536305:  90                    nop     
+  00536306:  90                    nop     
+  00536307:  90                    nop     
+  00536308:  90                    nop     
+  00536309:  90                    nop     
+  0053630A:  90                    nop     
+  0053630B:  90                    nop     
+  0053630C:  90                    nop     
+  0053630D:  90                    nop     
+  0053630E:  90                    nop     
+  0053630F:  90                    nop     
+
+; Function: MOUSE_dispatch_relative_pos
+; Address:  0x00536310 - 0x00536340 (48 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_MOUSE_dispatch_relative_pos:
+  00536310:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00536314:  8b 54 24 0c           mov     edx, dword ptr [esp + 0xc]
+  00536318:  0f bf 48 0a           movsx   ecx, word ptr [eax + 0xa]
+  0053631C:  2b d1                 sub     edx, ecx
+  0053631E:  0f bf 48 08           movsx   ecx, word ptr [eax + 8]
+  00536322:  52                    push    edx
+  00536323:  8b 54 24 0c           mov     edx, dword ptr [esp + 0xc]
+  00536327:  2b d1                 sub     edx, ecx
+  00536329:  52                    push    edx
+  0053632A:  50                    push    eax
+  0053632B:  e8 d0 fd ff ff        call    0x536100
+  00536330:  83 c4 0c              add     esp, 0xc
+  00536333:  c3                    ret     
+  00536334:  90                    nop     
+  00536335:  90                    nop     
+  00536336:  90                    nop     
+  00536337:  90                    nop     
+  00536338:  90                    nop     
+  00536339:  90                    nop     
+  0053633A:  90                    nop     
+  0053633B:  90                    nop     
+  0053633C:  90                    nop     
+  0053633D:  90                    nop     
+  0053633E:  90                    nop     
+  0053633F:  90                    nop     
+
+; Function: MOUSE_dispatch_pos
+; Address:  0x00536340 - 0x00536360 (32 bytes)
+; Module:   mouse.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_MOUSE_dispatch_pos:
+  00536340:  8b 44 24 0c           mov     eax, dword ptr [esp + 0xc]
+  00536344:  8b 4c 24 08           mov     ecx, dword ptr [esp + 8]
+  00536348:  8b 54 24 04           mov     edx, dword ptr [esp + 4]
+  0053634C:  50                    push    eax
+  0053634D:  51                    push    ecx
+  0053634E:  52                    push    edx
+  0053634F:  e8 ac fd ff ff        call    0x536100
+  00536354:  83 c4 0c              add     esp, 0xc
+  00536357:  c3                    ret     
+  00536358:  90                    nop     
+  00536359:  90                    nop     
+  0053635A:  90                    nop     
+  0053635B:  90                    nop     
+  0053635C:  90                    nop     
+  0053635D:  90                    nop     
+  0053635E:  90                    nop     
+  0053635F:  90                    nop     
 
 ; Function: MOUSE_get_element_count
 ; Address:  0x005364F0 - 0x00536500 (16 bytes)

@@ -1,5 +1,5 @@
 ; Module: lowtimer.c
-; Total Matched Functions: 22
+; Total Matched Functions: 25
 ; Target: Porsche.exe
 
 ; Function: SecondaryTimerThread
@@ -549,6 +549,103 @@ _sub_0053AEB0:
   0053AEDD:  90                    nop     
   0053AEDE:  90                    nop     
   0053AEDF:  90                    nop     
+
+; Function: LOWTIMER_cleanup_handle
+; Address:  0x0053AEE0 - 0x0053AF20 (64 bytes)
+; Module:   lowtimer.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_LOWTIMER_cleanup_handle:
+  0053AEE0:  a1 74 ca 69 00        mov     eax, dword ptr [0x69ca74]
+  0053AEE5:  85 c0                 test    eax, eax
+  0053AEE7:  74 27                 je      0x53af10
+  0053AEE9:  a1 70 ca 69 00        mov     eax, dword ptr [0x69ca70]
+  0053AEEE:  50                    push    eax
+  0053AEEF:  e8 8c ff ff ff        call    0x53ae80
+  0053AEF4:  83 c4 04              add     esp, 4
+  0053AEF7:  c7 05 70 ca 69 00 00 00 00 00  mov     dword ptr [0x69ca70], 0
+  0053AF01:  e8 ba 0f 00 00        call    0x53bec0
+  0053AF06:  c7 05 74 ca 69 00 00 00 00 00  mov     dword ptr [0x69ca74], 0
+  0053AF10:  c3                    ret     
+  0053AF11:  90                    nop     
+  0053AF12:  90                    nop     
+  0053AF13:  90                    nop     
+  0053AF14:  90                    nop     
+  0053AF15:  90                    nop     
+  0053AF16:  90                    nop     
+  0053AF17:  90                    nop     
+  0053AF18:  90                    nop     
+  0053AF19:  90                    nop     
+  0053AF1A:  90                    nop     
+  0053AF1B:  90                    nop     
+  0053AF1C:  90                    nop     
+  0053AF1D:  90                    nop     
+  0053AF1E:  90                    nop     
+  0053AF1F:  90                    nop     
+
+; Function: LOWTIMER_alloc_timer_obj
+; Address:  0x0053B0E0 - 0x0053B110 (48 bytes)
+; Module:   lowtimer.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_LOWTIMER_alloc_timer_obj:
+  0053B0E0:  68 d4 00 00 00        push    0xd4
+  0053B0E5:  e8 46 08 00 00        call    0x53b930
+  0053B0EA:  8b 4c 24 08           mov     ecx, dword ptr [esp + 8]
+  0053B0EE:  8b 54 24 0c           mov     edx, dword ptr [esp + 0xc]
+  0053B0F2:  83 c4 04              add     esp, 4
+  0053B0F5:  89 08                 mov     dword ptr [eax], ecx
+  0053B0F7:  89 50 04              mov     dword ptr [eax + 4], edx
+  0053B0FA:  c7 40 10 00 00 00 00  mov     dword ptr [eax + 0x10], 0
+  0053B101:  c3                    ret     
+  0053B102:  90                    nop     
+  0053B103:  90                    nop     
+  0053B104:  90                    nop     
+  0053B105:  90                    nop     
+  0053B106:  90                    nop     
+  0053B107:  90                    nop     
+  0053B108:  90                    nop     
+  0053B109:  90                    nop     
+  0053B10A:  90                    nop     
+  0053B10B:  90                    nop     
+  0053B10C:  90                    nop     
+  0053B10D:  90                    nop     
+  0053B10E:  90                    nop     
+  0053B10F:  90                    nop     
+
+; Function: LOWTIMER_free_timer_obj
+; Address:  0x0053B460 - 0x0053B490 (48 bytes)
+; Module:   lowtimer.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_LOWTIMER_free_timer_obj:
+  0053B460:  56                    push    esi
+  0053B461:  8b 74 24 08           mov     esi, dword ptr [esp + 8]
+  0053B465:  85 f6                 test    esi, esi
+  0053B467:  74 19                 je      0x53b482
+  0053B469:  8b 46 10              mov     eax, dword ptr [esi + 0x10]
+  0053B46C:  85 c0                 test    eax, eax
+  0053B46E:  74 09                 je      0x53b479
+  0053B470:  50                    push    eax
+  0053B471:  e8 da 04 00 00        call    0x53b950
+  0053B476:  83 c4 04              add     esp, 4
+  0053B479:  56                    push    esi
+  0053B47A:  e8 d1 04 00 00        call    0x53b950
+  0053B47F:  83 c4 04              add     esp, 4
+  0053B482:  5e                    pop     esi
+  0053B483:  c3                    ret     
+  0053B484:  90                    nop     
+  0053B485:  90                    nop     
+  0053B486:  90                    nop     
+  0053B487:  90                    nop     
+  0053B488:  90                    nop     
+  0053B489:  90                    nop     
+  0053B48A:  90                    nop     
+  0053B48B:  90                    nop     
+  0053B48C:  90                    nop     
+  0053B48D:  90                    nop     
+  0053B48E:  90                    nop     
+  0053B48F:  90                    nop     
 
 ; Function: timer_set_flag
 ; Address:  0x0053B490 - 0x0053B4A0 (16 bytes)

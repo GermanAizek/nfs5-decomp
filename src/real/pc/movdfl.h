@@ -18,6 +18,17 @@ int MOVDFL_sub_5700F0(void *tbl, int initial_sz, int target_sz);
 int MOVDFL_sub_570040(void *desc);
 void MOVDFL_sub_56FFF0(int a1, int a2, int a3);
 
+/* VA: 0x00570160 */
+int  MOVDFL_find_subdivision_index(void *tbl, float target_val, int *out_idx);
+/* VA: 0x005701A7 */
+int  MOVDFL_sub_5701a7(void *tbl, int val);
+/* VA: 0x005701C0 */
+void* MOVDFL_create_stream_buffer(int initial_sz, int target_sz, int format);
+/* VA: 0x00570202 */
+void MOVDFL_sub_570202(void *desc);
+/* VA: 0x00570212 */
+void MOVDFL_sub_570212(void *desc);
+
 #ifdef __cplusplus
 }
 #endif

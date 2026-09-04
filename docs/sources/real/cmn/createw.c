@@ -186,4 +186,60 @@ void* CREATEW_sub_5346E0(void *this_ptr, void *src)
     return this_ptr;
 }
 
+/* VA: 0x005342F0 */
+void* WINDOW_sub_destroy(void *obj, uint8_t flags)
+{
+    if (!obj) return NULL;
+    int **pref = (int **)((char *)obj + 0x20);
+    if (pref && *pref) {
+        (**pref)--;
+        if (**pref == 0) {
+            free(*pref);
+        }
+    }
+    if (flags & 1) {
+        free(obj);
+    }
+    return obj;
+}
+
+/* VA: 0x00534740 */
+void* WINDOW_alloc_sub1(void *ctx, int a1, int a2, int a3)
+{
+    (void)ctx; (void)a1; (void)a2; (void)a3;
+    return malloc(0x54);
+}
+
+/* VA: 0x005347A0 */
+void* WINDOW_alloc_sub2(void *ctx, int a1, int a2, int a3, int a4)
+{
+    (void)ctx; (void)a1; (void)a2; (void)a3; (void)a4;
+    return malloc(0x54);
+}
+
+/* VA: 0x00534800 */
+void WINDOW_reset_metrics(void *win, int a1, int a2)
+{
+    if (!win) return;
+    if (a1 == 0 && a2 == 0) {
+        *(int *)((char *)win + 0xc) = 0;
+        *(int *)((char *)win + 0x8) = 0;
+    }
+}
+
+/* VA: 0x00534B60 */
+void WINDOW_set_name(void *win, const char *name)
+{
+    if (!win || !name) return;
+    char *dst = (char *)win + 0x24;
+    int i = 0;
+    while (name[i] && i < 19) {
+        dst[i] = name[i];
+        i++;
+    }
+    dst[i] = '\0';
+    ((char *)win)[0x37] = '\0';
+}
+
+
 

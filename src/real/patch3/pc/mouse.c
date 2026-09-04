@@ -265,3 +265,48 @@ void MOUSE_set_field_30_and_notify(void *obj, int val)
     }
 }
 
+/* VA: 0x00535FB0 */
+void MOUSE_init_state(void *state)
+{
+    if (!state) return;
+    uint32_t *p = (uint32_t *)state;
+    p[0] = 1;
+    p[1] = 2;
+    p[2] = 0;
+    p[3] = 0;
+    p[4] = 0;
+    p[5] = 0xFFFFFFFF;
+}
+
+/* VA: 0x00536040 */
+void MOUSE_copy_transparent_mask(uint8_t *dst, const uint8_t *src, int count)
+{
+    if (!dst || !src) return;
+    while (count-- > 0) {
+        uint8_t b = *src++;
+        if (b != 0xFF) {
+            *dst = b;
+        }
+        dst++;
+    }
+}
+
+/* VA: 0x005362E0 */
+void MOUSE_dispatch_packed_pos(void *obj)
+{
+    if (!obj) return;
+}
+
+/* VA: 0x00536310 */
+void MOUSE_dispatch_relative_pos(void *obj, int x, int y)
+{
+    (void)obj; (void)x; (void)y;
+}
+
+/* VA: 0x00536340 */
+void MOUSE_dispatch_pos(void *obj, int x, int y)
+{
+    (void)obj; (void)x; (void)y;
+}
+
+

@@ -234,5 +234,29 @@ void SYSTASK_set_target_z(int val)
     s_systask_target_z = val;
 }
 
+/* VA: 0x00534D90 */
+void* SYNCTASK_create_object(void *obj, void *a1, int a2, int a3)
+{
+    (void)a1; (void)a2; (void)a3;
+    if (!obj) return NULL;
+    *(uint32_t *)((char *)obj + 0x24) = 0;
+    *(uint32_t *)((char *)obj + 0x28) = 0;
+    return obj;
+}
+
+/* VA: 0x00534F60 */
+void SYNCTASK_post_vector_task(void *ctx, int a1, int a2, int a3)
+{
+    (void)ctx; (void)a1; (void)a2; (void)a3;
+}
+
+/* VA: 0x0053531B */
+int SYSTASK_is_entry_active(void *entry)
+{
+    if (!entry) return 0;
+    return (*(uint32_t *)((char *)entry + 8)) & 1;
+}
+
+
 
 

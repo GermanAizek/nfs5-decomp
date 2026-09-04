@@ -1,6 +1,124 @@
 ; Module: fontdraw.c
-; Total Matched Functions: 19
+; Total Matched Functions: 22
 ; Target: Porsche.exe
+
+; Function: FONTDRAW_translate
+; Address:  0x0053C9F0 - 0x0053CA90 (160 bytes)
+; Module:   fontdraw.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_FONTDRAW_translate:
+  0053C9F0:  8b 4c 24 04           mov     ecx, dword ptr [esp + 4]
+  0053C9F4:  83 ec 08              sub     esp, 8
+  0053C9F7:  85 c9                 test    ecx, ecx
+  0053C9F9:  75 26                 jne     0x53ca21
+  0053C9FB:  68 a4 9a 5b 00        push    0x5b9aa4
+  0053CA00:  c7 05 e4 ca 5d 00 88 9a 5b 00  mov     dword ptr [0x5dcae4], 0x5b9a88
+  0053CA0A:  c7 05 e8 ca 5d 00 4e 03 00 00  mov     dword ptr [0x5dcae8], 0x34e
+  0053CA14:  ff 15 60 cb 5d 00     call    dword ptr [0x5dcb60]
+  0053CA1A:  83 c4 04              add     esp, 4
+  0053CA1D:  83 c4 08              add     esp, 8
+  0053CA20:  c3                    ret     
+  0053CA21:  d9 44 24 10           fld     dword ptr [esp + 0x10]
+  0053CA25:  d8 61 0c              fsub    dword ptr [ecx + 0xc]
+  0053CA28:  8b 51 04              mov     edx, dword ptr [ecx + 4]
+  0053CA2B:  85 d2                 test    edx, edx
+  0053CA2D:  d9 5c 24 0c           fstp    dword ptr [esp + 0xc]
+  0053CA31:  d9 44 24 14           fld     dword ptr [esp + 0x14]
+  0053CA35:  d8 61 10              fsub    dword ptr [ecx + 0x10]
+  0053CA38:  d9 5c 24 00           fstp    dword ptr [esp]
+  0053CA3C:  d9 44 24 18           fld     dword ptr [esp + 0x18]
+  0053CA40:  d8 61 14              fsub    dword ptr [ecx + 0x14]
+  0053CA43:  d9 5c 24 04           fstp    dword ptr [esp + 4]
+  0053CA47:  7e 26                 jle     0x53ca6f
+  0053CA49:  8b 41 08              mov     eax, dword ptr [ecx + 8]
+  0053CA4C:  d9 44 24 0c           fld     dword ptr [esp + 0xc]
+  0053CA50:  d8 00                 fadd    dword ptr [eax]
+  0053CA52:  83 c0 20              add     eax, 0x20
+  0053CA55:  4a                    dec     edx
+  0053CA56:  d9 58 e0              fstp    dword ptr [eax - 0x20]
+  0053CA59:  d9 44 24 00           fld     dword ptr [esp]
+  0053CA5D:  d8 40 e4              fadd    dword ptr [eax - 0x1c]
+  0053CA60:  d9 58 e4              fstp    dword ptr [eax - 0x1c]
+  0053CA63:  d9 44 24 04           fld     dword ptr [esp + 4]
+  0053CA67:  d8 40 e8              fadd    dword ptr [eax - 0x18]
+  0053CA6A:  d9 58 e8              fstp    dword ptr [eax - 0x18]
+  0053CA6D:  75 dd                 jne     0x53ca4c
+  0053CA6F:  8b 44 24 10           mov     eax, dword ptr [esp + 0x10]
+  0053CA73:  8b 54 24 14           mov     edx, dword ptr [esp + 0x14]
+  0053CA77:  89 41 0c              mov     dword ptr [ecx + 0xc], eax
+  0053CA7A:  8b 44 24 18           mov     eax, dword ptr [esp + 0x18]
+  0053CA7E:  89 51 10              mov     dword ptr [ecx + 0x10], edx
+  0053CA81:  89 41 14              mov     dword ptr [ecx + 0x14], eax
+  0053CA84:  83 c4 08              add     esp, 8
+  0053CA87:  c3                    ret     
+  0053CA88:  90                    nop     
+  0053CA89:  90                    nop     
+  0053CA8A:  90                    nop     
+  0053CA8B:  90                    nop     
+  0053CA8C:  90                    nop     
+  0053CA8D:  90                    nop     
+  0053CA8E:  90                    nop     
+  0053CA8F:  90                    nop     
+
+; Function: FONTDRAW_draw
+; Address:  0x0053CA90 - 0x0053CB10 (128 bytes)
+; Module:   fontdraw.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_FONTDRAW_draw:
+  0053CA90:  55                    push    ebp
+  0053CA91:  8b ec                 mov     ebp, esp
+  0053CA93:  53                    push    ebx
+  0053CA94:  8b 5d 08              mov     ebx, dword ptr [ebp + 8]
+  0053CA97:  56                    push    esi
+  0053CA98:  57                    push    edi
+  0053CA99:  85 db                 test    ebx, ebx
+  0053CA9B:  75 2a                 jne     0x53cac7
+  0053CA9D:  68 c0 9a 5b 00        push    0x5b9ac0
+  0053CAA2:  c7 05 e4 ca 5d 00 88 9a 5b 00  mov     dword ptr [0x5dcae4], 0x5b9a88
+  0053CAAC:  c7 05 e8 ca 5d 00 96 03 00 00  mov     dword ptr [0x5dcae8], 0x396
+  0053CAB6:  ff 15 60 cb 5d 00     call    dword ptr [0x5dcb60]
+  0053CABC:  83 c4 04              add     esp, 4
+  0053CABF:  8d 65 f4              lea     esp, [ebp - 0xc]
+  0053CAC2:  5f                    pop     edi
+  0053CAC3:  5e                    pop     esi
+  0053CAC4:  5b                    pop     ebx
+  0053CAC5:  5d                    pop     ebp
+  0053CAC6:  c3                    ret     
+  0053CAC7:  8b 7b 04              mov     edi, dword ptr [ebx + 4]
+  0053CACA:  85 ff                 test    edi, edi
+  0053CACC:  7e 38                 jle     0x53cb06
+  0053CACE:  8b f7                 mov     esi, edi
+  0053CAD0:  c1 e6 05              shl     esi, 5
+  0053CAD3:  8b c6                 mov     eax, esi
+  0053CAD5:  83 c0 03              add     eax, 3
+  0053CAD8:  24 fc                 and     al, 0xfc
+  0053CADA:  e8 c1 38 06 00        call    0x5a03a0
+  0053CADF:  8b 4b 08              mov     ecx, dword ptr [ebx + 8]
+  0053CAE2:  8b c4                 mov     eax, esp
+  0053CAE4:  56                    push    esi
+  0053CAE5:  51                    push    ecx
+  0053CAE6:  50                    push    eax
+  0053CAE7:  89 45 08              mov     dword ptr [ebp + 8], eax
+  0053CAEA:  e8 b1 3e ff ff        call    0x5309a0
+  0053CAEF:  8b 15 84 ca 69 00     mov     edx, dword ptr [0x69ca84]
+  0053CAF5:  8b 45 08              mov     eax, dword ptr [ebp + 8]
+  0053CAF8:  8b 0b                 mov     ecx, dword ptr [ebx]
+  0053CAFA:  52                    push    edx
+  0053CAFB:  50                    push    eax
+  0053CAFC:  57                    push    edi
+  0053CAFD:  51                    push    ecx
+  0053CAFE:  e8 0d f5 ff ff        call    0x53c010
+  0053CB03:  83 c4 1c              add     esp, 0x1c
+  0053CB06:  8d 65 f4              lea     esp, [ebp - 0xc]
+  0053CB09:  5f                    pop     edi
+  0053CB0A:  5e                    pop     esi
+  0053CB0B:  5b                    pop     ebx
+  0053CB0C:  5d                    pop     ebp
+  0053CB0D:  c3                    ret     
+  0053CB0E:  90                    nop     
+  0053CB0F:  90                    nop     
 
 ; Function: sub_0053CB10
 ; Address:  0x0053CB10 - 0x0053CB60 (80 bytes)
@@ -71,6 +189,18 @@ _sub_0053CB80:
   0053CB8D:  90                    nop     
   0053CB8E:  90                    nop     
   0053CB8F:  90                    nop     
+
+; Function: FONTDRAW_set_property
+; Address:  0x0053CB90 - 0x0053CBA7 (23 bytes)
+; Module:   fontdraw.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_FONTDRAW_set_property:
+  0053CB90:  8b 44 24 08           mov     eax, dword ptr [esp + 8]
+  0053CB94:  83 ec 08              sub     esp, 8
+  0053CB97:  83 f8 10              cmp     eax, 0x10
+  0053CB9A:  0f 87 4c 02 00 00     ja      0x53cdec
+  0053CBA0:  ff 24 85 14 ce 53 00  jmp     dword ptr [eax*4 + 0x53ce14]
 
 ; Function: FONTDRAW_reset_scales
 ; Address:  0x0053CBA7 - 0x0053CBD8 (49 bytes)

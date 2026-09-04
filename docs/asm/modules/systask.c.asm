@@ -1,5 +1,5 @@
 ; Module: systask.c
-; Total Matched Functions: 24
+; Total Matched Functions: 27
 ; Target: Porsche.exe
 
 ; Function: SYNCTASK_add
@@ -247,6 +247,53 @@ _SYSTASK_jmp_sub_535fb0:
   00534D8E:  90                    nop     
   00534D8F:  90                    nop     
 
+; Function: SYNCTASK_create_object
+; Address:  0x00534D90 - 0x00534E00 (112 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYNCTASK_create_object:
+  00534D90:  56                    push    esi
+  00534D91:  8b f1                 mov     esi, ecx
+  00534D93:  8d 4e 08              lea     ecx, [esi + 8]
+  00534D96:  e8 f5 11 00 00        call    0x535f90
+  00534D9B:  8b 4c 24 08           mov     ecx, dword ptr [esp + 8]
+  00534D9F:  8b 44 24 0c           mov     eax, dword ptr [esp + 0xc]
+  00534DA3:  c7 06 f8 96 5b 00     mov     dword ptr [esi], 0x5b96f8
+  00534DA9:  51                    push    ecx
+  00534DAA:  a3 28 bd 69 00        mov     dword ptr [0x69bd28], eax
+  00534DAF:  e8 dc 5e 00 00        call    0x53ac90
+  00534DB4:  50                    push    eax
+  00534DB5:  89 46 04              mov     dword ptr [esi + 4], eax
+  00534DB8:  e8 83 b2 03 00        call    0x570040
+  00534DBD:  33 c0                 xor     eax, eax
+  00534DBF:  83 c4 08              add     esp, 8
+  00534DC2:  89 46 24              mov     dword ptr [esi + 0x24], eax
+  00534DC5:  89 46 28              mov     dword ptr [esi + 0x28], eax
+  00534DC8:  38 05 2c bd 69 00     cmp     byte ptr [0x69bd2c], al
+  00534DCE:  74 23                 je      0x534df3
+  00534DD0:  8b 56 04              mov     edx, dword ptr [esi + 4]
+  00534DD3:  68 00 00 00 bf        push    0xbf000000
+  00534DD8:  6a 14                 push    0x14
+  00534DDA:  52                    push    edx
+  00534DDB:  e8 80 80 00 00        call    0x53ce60
+  00534DE0:  8b 46 04              mov     eax, dword ptr [esi + 4]
+  00534DE3:  68 00 00 00 bf        push    0xbf000000
+  00534DE8:  6a 15                 push    0x15
+  00534DEA:  50                    push    eax
+  00534DEB:  e8 70 80 00 00        call    0x53ce60
+  00534DF0:  83 c4 18              add     esp, 0x18
+  00534DF3:  8b c6                 mov     eax, esi
+  00534DF5:  5e                    pop     esi
+  00534DF6:  c2 0c 00              ret     0xc
+  00534DF9:  90                    nop     
+  00534DFA:  90                    nop     
+  00534DFB:  90                    nop     
+  00534DFC:  90                    nop     
+  00534DFD:  90                    nop     
+  00534DFE:  90                    nop     
+  00534DFF:  90                    nop     
+
 ; Function: SYNCTASK_destroy_object
 ; Address:  0x00534E00 - 0x00534E30 (48 bytes)
 ; Module:   systask.c
@@ -332,6 +379,50 @@ _sub_00534F30:
   00534F5D:  90                    nop     
   00534F5E:  90                    nop     
   00534F5F:  90                    nop     
+
+; Function: SYNCTASK_post_vector_task
+; Address:  0x00534F60 - 0x00534FC0 (96 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYNCTASK_post_vector_task:
+  00534F60:  83 ec 10              sub     esp, 0x10
+  00534F63:  8b 44 24 14           mov     eax, dword ptr [esp + 0x14]
+  00534F67:  8b 54 24 18           mov     edx, dword ptr [esp + 0x18]
+  00534F6B:  89 44 24 00           mov     dword ptr [esp], eax
+  00534F6F:  8b 44 24 1c           mov     eax, dword ptr [esp + 0x1c]
+  00534F73:  d9 41 24              fld     dword ptr [ecx + 0x24]
+  00534F76:  50                    push    eax
+  00534F77:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  00534F7B:  83 ec 10              sub     esp, 0x10
+  00534F7E:  89 54 24 18           mov     dword ptr [esp + 0x18], edx
+  00534F82:  8b d4                 mov     edx, esp
+  00534F84:  c7 44 24 20 00 00 80 3f  mov     dword ptr [esp + 0x20], 0x3f800000
+  00534F8C:  d9 5c 24 1c           fstp    dword ptr [esp + 0x1c]
+  00534F90:  89 02                 mov     dword ptr [edx], eax
+  00534F92:  8b 44 24 18           mov     eax, dword ptr [esp + 0x18]
+  00534F96:  89 42 04              mov     dword ptr [edx + 4], eax
+  00534F99:  8b 44 24 1c           mov     eax, dword ptr [esp + 0x1c]
+  00534F9D:  89 42 08              mov     dword ptr [edx + 8], eax
+  00534FA0:  8b 44 24 20           mov     eax, dword ptr [esp + 0x20]
+  00534FA4:  89 42 0c              mov     dword ptr [edx + 0xc], eax
+  00534FA7:  e8 74 00 00 00        call    0x535020
+  00534FAC:  83 c4 10              add     esp, 0x10
+  00534FAF:  c2 0c 00              ret     0xc
+  00534FB2:  90                    nop     
+  00534FB3:  90                    nop     
+  00534FB4:  90                    nop     
+  00534FB5:  90                    nop     
+  00534FB6:  90                    nop     
+  00534FB7:  90                    nop     
+  00534FB8:  90                    nop     
+  00534FB9:  90                    nop     
+  00534FBA:  90                    nop     
+  00534FBB:  90                    nop     
+  00534FBC:  90                    nop     
+  00534FBD:  90                    nop     
+  00534FBE:  90                    nop     
+  00534FBF:  90                    nop     
 
 ; Function: SYSTASK_call_sub_53cb90
 ; Address:  0x00535280 - 0x005352A0 (32 bytes)
@@ -439,6 +530,20 @@ _SYSTASK_lookup_key_entry:
   00535312:  8a 54 88 10           mov     dl, byte ptr [eax + ecx*4 + 0x10]
   00535316:  8b 44 02 0c           mov     eax, dword ptr [edx + eax + 0xc]
   0053531A:  c3                    ret     
+
+; Function: SYSTASK_is_entry_active
+; Address:  0x0053531B - 0x0053532C (17 bytes)
+; Module:   systask.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_SYSTASK_is_entry_active:
+  0053531B:  8b 44 24 04           mov     eax, dword ptr [esp + 4]
+  0053531F:  8b 40 08              mov     eax, dword ptr [eax + 8]
+  00535322:  83 e0 01              and     eax, 1
+  00535325:  c3                    ret     
+  00535326:  33 c0                 xor     eax, eax
+  00535328:  c3                    ret     
+  00535329:  8d 49 00              lea     ecx, [ecx]
 
 ; Function: sub_00535340
 ; Address:  0x00535340 - 0x00535360 (32 bytes)

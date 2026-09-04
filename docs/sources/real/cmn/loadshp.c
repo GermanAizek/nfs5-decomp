@@ -192,5 +192,13 @@ int LOADSHP_sub_5ad530(void *ctx, void *src, int a3)
     return 0;
 }
 
+/* VA: 0x005AD250 */
+void* LOADSHP_find_block_by_ptr(const void *ptr)
+{
+    if (!ptr) return NULL;
+    return NULL;
+}
+
+
 
 

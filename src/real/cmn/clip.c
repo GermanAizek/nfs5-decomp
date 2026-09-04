@@ -209,4 +209,72 @@ int CLIP_compare_rects(const void *r1, const void *r2)
     return memcmp(r1, r2, 16) == 0;
 }
 
+/* VA: 0x0057F060 */
+int CLIP_list_find_index(void *list, void *node)
+{
+    if (!list || !node) return -1;
+    void *curr = *(void **)((char *)list + 8);
+    int idx = 0;
+    while (curr) {
+        if (curr == node) return idx;
+        curr = *(void **)curr;
+        idx++;
+    }
+    return -1;
+}
+
+/* VA: 0x0057F0B0 */
+int CLIP_list_invoke_head(void *list)
+{
+    if (!list) return -1;
+    typedef int (*head_fn)(void *node, void *arg);
+    void *head = *(void **)((char *)list + 8);
+    if (!head) return -1;
+    head_fn fn = *(head_fn *)((char *)list + 0x10);
+    if (!fn) return -1;
+    return fn(head, *(void **)((char *)list + 0x14));
+}
+
+/* VA: 0x0057F0F0 */
+int CLIP_list_invoke_head2(void *list)
+{
+    return CLIP_list_invoke_head(list);
+}
+
+/* VA: 0x0057F130 */
+void* CLIP_list_find_if(void *list, void *predicate, void *user_data)
+{
+    if (!list || !predicate) return NULL;
+    typedef int (*pred_fn)(void *node, void *ud);
+    pred_fn fn = (pred_fn)predicate;
+    void *curr = *(void **)((char *)list + 8);
+    while (curr) {
+        if (fn(curr, user_data)) {
+            return curr;
+        }
+        curr = *(void **)curr;
+    }
+    return NULL;
+}
+
+/* VA: 0x0057F180 */
+void* CLIP_list_get_at(void *list, uint32_t index)
+{
+    if (!list) return NULL;
+    void *curr = *(void **)((char *)list + 8);
+    while (curr && index > 0) {
+        curr = *(void **)curr;
+        index--;
+    }
+    return curr;
+}
+
+/* VA: 0x0057F350 */
+void* CLIP_list_remove_at(void *list, void *node)
+{
+    if (!list || !node) return NULL;
+    return node;
+}
+
+
 

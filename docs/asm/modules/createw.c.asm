@@ -1,5 +1,5 @@
 ; Module: createw.c
-; Total Matched Functions: 21
+; Total Matched Functions: 26
 ; Target: Porsche.exe
 
 ; Function: WINDOW_create_window_mode
@@ -197,6 +197,46 @@ _Window_scalar_destructor:
   0053417A:  8b c6                 mov     eax, esi
   0053417C:  5e                    pop     esi
   0053417D:  c2 04 00              ret     4
+
+; Function: WINDOW_sub_destroy
+; Address:  0x005342F0 - 0x00534340 (80 bytes)
+; Module:   createw.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_WINDOW_sub_destroy:
+  005342F0:  56                    push    esi
+  005342F1:  8b f1                 mov     esi, ecx
+  005342F3:  8b 46 20              mov     eax, dword ptr [esi + 0x20]
+  005342F6:  c7 06 c4 96 5b 00     mov     dword ptr [esi], 0x5b96c4
+  005342FC:  8b 10                 mov     edx, dword ptr [eax]
+  005342FE:  4a                    dec     edx
+  005342FF:  89 10                 mov     dword ptr [eax], edx
+  00534301:  8b 46 20              mov     eax, dword ptr [esi + 0x20]
+  00534304:  83 38 00              cmp     dword ptr [eax], 0
+  00534307:  75 1c                 jne     0x534325
+  00534309:  8b 46 08              mov     eax, dword ptr [esi + 8]
+  0053430C:  85 c0                 test    eax, eax
+  0053430E:  74 09                 je      0x534319
+  00534310:  50                    push    eax
+  00534311:  e8 8a ef 01 00        call    0x5532a0
+  00534316:  83 c4 04              add     esp, 4
+  00534319:  8b 4e 20              mov     ecx, dword ptr [esi + 0x20]
+  0053431C:  51                    push    ecx
+  0053431D:  e8 ce 91 06 00        call    0x59d4f0
+  00534322:  83 c4 04              add     esp, 4
+  00534325:  f6 44 24 08 01        test    byte ptr [esp + 8], 1
+  0053432A:  74 09                 je      0x534335
+  0053432C:  56                    push    esi
+  0053432D:  e8 be 91 06 00        call    0x59d4f0
+  00534332:  83 c4 04              add     esp, 4
+  00534335:  8b c6                 mov     eax, esi
+  00534337:  5e                    pop     esi
+  00534338:  c2 04 00              ret     4
+  0053433B:  90                    nop     
+  0053433C:  90                    nop     
+  0053433D:  90                    nop     
+  0053433E:  90                    nop     
+  0053433F:  90                    nop     
 
 ; Function: CREATEW_sub_534570
 ; Address:  0x00534570 - 0x005345A4 (52 bytes)
@@ -463,6 +503,35 @@ _sub_005346E0:
   0053473E:  90                    nop     
   0053473F:  90                    nop     
 
+; Function: WINDOW_alloc_sub1
+; Address:  0x00534740 - 0x00534772 (50 bytes)
+; Module:   createw.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_WINDOW_alloc_sub1:
+  00534740:  56                    push    esi
+  00534741:  57                    push    edi
+  00534742:  8b 7c 24 0c           mov     edi, dword ptr [esp + 0xc]
+  00534746:  8b f1                 mov     esi, ecx
+  00534748:  85 ff                 test    edi, edi
+  0053474A:  6a 54                 push    0x54
+  0053474C:  74 24                 je      0x534772
+  0053474E:  e8 3d 8d 06 00        call    0x59d490
+  00534753:  83 c4 04              add     esp, 4
+  00534756:  85 c0                 test    eax, eax
+  00534758:  74 3b                 je      0x534795
+  0053475A:  8b 4c 24 14           mov     ecx, dword ptr [esp + 0x14]
+  0053475E:  8b 54 24 10           mov     edx, dword ptr [esp + 0x10]
+  00534762:  51                    push    ecx
+  00534763:  52                    push    edx
+  00534764:  56                    push    esi
+  00534765:  57                    push    edi
+  00534766:  8b c8                 mov     ecx, eax
+  00534768:  e8 13 fa ff ff        call    0x534180
+  0053476D:  5f                    pop     edi
+  0053476E:  5e                    pop     esi
+  0053476F:  c2 0c 00              ret     0xc
+
 ; Function: WINDOW_exit_stub_0c
 ; Address:  0x00534795 - 0x005347A0 (11 bytes)
 ; Module:   createw.c
@@ -477,6 +546,33 @@ _WINDOW_exit_stub_0c:
   0053479D:  90                    nop     
   0053479E:  90                    nop     
   0053479F:  90                    nop     
+
+; Function: WINDOW_alloc_sub2
+; Address:  0x005347A0 - 0x005347D1 (49 bytes)
+; Module:   createw.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_WINDOW_alloc_sub2:
+  005347A0:  56                    push    esi
+  005347A1:  8b f1                 mov     esi, ecx
+  005347A3:  6a 54                 push    0x54
+  005347A5:  e8 e6 8c 06 00        call    0x59d490
+  005347AA:  83 c4 04              add     esp, 4
+  005347AD:  85 c0                 test    eax, eax
+  005347AF:  74 20                 je      0x5347d1
+  005347B1:  8b 4c 24 14           mov     ecx, dword ptr [esp + 0x14]
+  005347B5:  8b 54 24 10           mov     edx, dword ptr [esp + 0x10]
+  005347B9:  51                    push    ecx
+  005347BA:  8b 4c 24 10           mov     ecx, dword ptr [esp + 0x10]
+  005347BE:  52                    push    edx
+  005347BF:  8b 54 24 10           mov     edx, dword ptr [esp + 0x10]
+  005347C3:  56                    push    esi
+  005347C4:  51                    push    ecx
+  005347C5:  52                    push    edx
+  005347C6:  8b c8                 mov     ecx, eax
+  005347C8:  e8 73 fb ff ff        call    0x534340
+  005347CD:  5e                    pop     esi
+  005347CE:  c2 10 00              ret     0x10
 
 ; Function: WINDOW_exit_stub_10
 ; Address:  0x005347D1 - 0x005347E0 (15 bytes)
@@ -521,6 +617,42 @@ _WINDOW_destroy_child:
   005347FE:  90                    nop     
   005347FF:  90                    nop     
 
+; Function: WINDOW_reset_metrics
+; Address:  0x00534800 - 0x0053484C (76 bytes)
+; Module:   createw.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_WINDOW_reset_metrics:
+  00534800:  51                    push    ecx
+  00534801:  53                    push    ebx
+  00534802:  55                    push    ebp
+  00534803:  56                    push    esi
+  00534804:  8b 74 24 14           mov     esi, dword ptr [esp + 0x14]
+  00534808:  33 c0                 xor     eax, eax
+  0053480A:  57                    push    edi
+  0053480B:  3b f0                 cmp     esi, eax
+  0053480D:  89 4c 24 10           mov     dword ptr [esp + 0x10], ecx
+  00534811:  75 39                 jne     0x53484c
+  00534813:  39 44 24 1c           cmp     dword ptr [esp + 0x1c], eax
+  00534817:  75 33                 jne     0x53484c
+  00534819:  89 41 0c              mov     dword ptr [ecx + 0xc], eax
+  0053481C:  89 41 08              mov     dword ptr [ecx + 8], eax
+  0053481F:  8a 0d 28 c6 5d 00     mov     cl, byte ptr [0x5dc628]
+  00534825:  84 c9                 test    cl, cl
+  00534827:  0f 84 21 01 00 00     je      0x53494e
+  0053482D:  8a 0d fe bb 69 00     mov     cl, byte ptr [0x69bbfe]
+  00534833:  84 c9                 test    cl, cl
+  00534835:  0f 84 13 01 00 00     je      0x53494e
+  0053483B:  50                    push    eax
+  0053483C:  e8 df f1 01 00        call    0x553a20
+  00534841:  83 c4 04              add     esp, 4
+  00534844:  5f                    pop     edi
+  00534845:  5e                    pop     esi
+  00534846:  5d                    pop     ebp
+  00534847:  5b                    pop     ebx
+  00534848:  59                    pop     ecx
+  00534849:  c2 08 00              ret     8
+
 ; Function: WINDOW_call_553c10
 ; Address:  0x00534A20 - 0x00534A30 (16 bytes)
 ; Module:   createw.c
@@ -537,3 +669,50 @@ _WINDOW_call_553c10:
   00534A2D:  90                    nop     
   00534A2E:  90                    nop     
   00534A2F:  90                    nop     
+
+; Function: WINDOW_set_name
+; Address:  0x00534B60 - 0x00534BA0 (64 bytes)
+; Module:   createw.c
+; Target:   Porsche.exe (MSVC 6.0 / Win32 PE)
+.intel_syntax noprefix
+_WINDOW_set_name:
+  00534B60:  53                    push    ebx
+  00534B61:  56                    push    esi
+  00534B62:  8b 74 24 0c           mov     esi, dword ptr [esp + 0xc]
+  00534B66:  8d 41 24              lea     eax, [ecx + 0x24]
+  00534B69:  57                    push    edi
+  00534B6A:  33 db                 xor     ebx, ebx
+  00534B6C:  8a 16                 mov     dl, byte ptr [esi]
+  00534B6E:  33 ff                 xor     edi, edi
+  00534B70:  88 10                 mov     byte ptr [eax], dl
+  00534B72:  40                    inc     eax
+  00534B73:  46                    inc     esi
+  00534B74:  3a d3                 cmp     dl, bl
+  00534B76:  74 14                 je      0x534b8c
+  00534B78:  47                    inc     edi
+  00534B79:  83 ff 13              cmp     edi, 0x13
+  00534B7C:  7d 0e                 jge     0x534b8c
+  00534B7E:  8a 16                 mov     dl, byte ptr [esi]
+  00534B80:  3a d3                 cmp     dl, bl
+  00534B82:  74 08                 je      0x534b8c
+  00534B84:  88 10                 mov     byte ptr [eax], dl
+  00534B86:  40                    inc     eax
+  00534B87:  46                    inc     esi
+  00534B88:  3a d3                 cmp     dl, bl
+  00534B8A:  75 ec                 jne     0x534b78
+  00534B8C:  5f                    pop     edi
+  00534B8D:  88 59 37              mov     byte ptr [ecx + 0x37], bl
+  00534B90:  5e                    pop     esi
+  00534B91:  5b                    pop     ebx
+  00534B92:  c2 04 00              ret     4
+  00534B95:  90                    nop     
+  00534B96:  90                    nop     
+  00534B97:  90                    nop     
+  00534B98:  90                    nop     
+  00534B99:  90                    nop     
+  00534B9A:  90                    nop     
+  00534B9B:  90                    nop     
+  00534B9C:  90                    nop     
+  00534B9D:  90                    nop     
+  00534B9E:  90                    nop     
+  00534B9F:  90                    nop     

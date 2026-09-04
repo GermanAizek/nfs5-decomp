@@ -35,6 +35,21 @@ void* CREATEW_sub_534110(void *this_ptr, void *param);
 void  CREATEW_sub_5345C0(int a1, int a2);
 void* CREATEW_sub_5346E0(void *this_ptr, void *src);
 
+/* VA: 0x005342F0 */
+void* WINDOW_sub_destroy(void *obj, uint8_t flags);
+
+/* VA: 0x00534740 */
+void* WINDOW_alloc_sub1(void *ctx, int a1, int a2, int a3);
+
+/* VA: 0x005347A0 */
+void* WINDOW_alloc_sub2(void *ctx, int a1, int a2, int a3, int a4);
+
+/* VA: 0x00534800 */
+void  WINDOW_reset_metrics(void *win, int a1, int a2);
+
+/* VA: 0x00534B60 */
+void  WINDOW_set_name(void *win, const char *name);
+
 #ifdef __cplusplus
 }
 #endif

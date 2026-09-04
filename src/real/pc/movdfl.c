@@ -86,3 +86,64 @@ void MOVDFL_sub_56FFF0(int a1, int a2, int a3)
     (void)a1; (void)a2; (void)a3;
 }
 
+/* VA: 0x00570160: Searches subdivision table for segment containing target_val */
+int MOVDFL_find_subdivision_index(void *tbl, float target_val, int *out_idx)
+{
+    if (!tbl || !out_idx) return 0;
+    uint32_t count = *(uint32_t*)((char*)tbl + 4);
+    if ((int32_t)count <= 0) return 0;
+
+    uint32_t *entries = (uint32_t*)((char*)tbl + 8);
+    for (uint32_t i = 0; i < count; i++) {
+        float start = (float)entries[i * 2];
+        float len = (float)entries[i * 2 + 1];
+        if (target_val >= start && target_val < (start + len)) {
+            *out_idx = (int)i;
+            return 1;
+        }
+    }
+    return 0;
+}
+
+/* VA: 0x005701A7: Table validation helper */
+int MOVDFL_sub_5701a7(void *tbl, int val)
+{
+    (void)tbl; (void)val;
+    return 1;
+}
+
+/* VA: 0x005701C0: Allocates and initializes stream buffer descriptor */
+void* MOVDFL_create_stream_buffer(int initial_sz, int target_sz, int format)
+{
+    void *buf = malloc(0x9c);
+    if (!buf) return NULL;
+    *(int*)((char*)buf + 0) = initial_sz;
+    *(int*)((char*)buf + 4) = target_sz;
+    MOVDFL_sub_5700F0((char*)buf + 0x10, initial_sz, target_sz);
+
+    if (format == 1) {
+        *(int*)((char*)buf + 8) = 1;
+        *(int*)((char*)buf + 0xc) = 4;
+    } else {
+        *(int*)((char*)buf + 8) = 6;
+    }
+    return buf;
+}
+
+/* VA: 0x00570202: Sets descriptor parameters for direct buffer */
+void MOVDFL_sub_570202(void *desc)
+{
+    if (desc) {
+        *(int*)((char*)desc + 8) = 1;
+        *(int*)((char*)desc + 0xc) = 4;
+    }
+}
+
+/* VA: 0x00570212: Sets descriptor parameters for packed buffer */
+void MOVDFL_sub_570212(void *desc)
+{
+    if (desc) {
+        *(int*)((char*)desc + 8) = 6;
+    }
+}
+

@@ -1,13 +1,13 @@
 <div align="center">
   <p>
     <a href="https://github.com/GermanAizek/nfs5-decomp">
-      <img src="docs/assets/preview.png" alt="Need For Speed: Porsche Unleashed" />
+      <img src="docs/assets/preview.png" alt="Need For Speed: Porsche Unleashed" width="50%" height="50%" />
     </a>
   </p>
 </div>
 
 <h1 align="center">
-  AQEMU
+  Need For Speed: Porsche Unleashed
 </h1>
 
 NFS5-decomp - attempt bit2bit decompile original Demo version from here (https://archive.org/details/NeedForSpeedPorscheUnleashedDemo)

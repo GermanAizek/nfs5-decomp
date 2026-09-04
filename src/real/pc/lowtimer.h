@@ -39,6 +39,15 @@ void* lowtimer_lookup_resource(void *table, const char *name);
 void* lowtimer_sub_53AC50(void *table, const char *name);
 void lowtimer_sub_53A860(int p1, int p2, int p3);
 
+/* VA: 0x0053AEE0 */
+void  LOWTIMER_cleanup_handle(void);
+
+/* VA: 0x0053B0E0 */
+void* LOWTIMER_alloc_timer_obj(int param1, int param2);
+
+/* VA: 0x0053B460 */
+void  LOWTIMER_free_timer_obj(void *obj);
+
 #ifdef __cplusplus
 }
 #endif

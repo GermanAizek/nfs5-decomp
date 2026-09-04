@@ -46,6 +46,21 @@ void MOUSE_init_struct(void *obj);
 void MOUSE_sub_535C80(int a1, int a2, int a3, int a4, int a5);
 void MOUSE_set_field_30_and_notify(void *obj, int val);
 
+/* VA: 0x00535FB0 */
+void MOUSE_init_state(void *state);
+
+/* VA: 0x00536040 */
+void MOUSE_copy_transparent_mask(uint8_t *dst, const uint8_t *src, int count);
+
+/* VA: 0x005362E0 */
+void MOUSE_dispatch_packed_pos(void *obj);
+
+/* VA: 0x00536310 */
+void MOUSE_dispatch_relative_pos(void *obj, int x, int y);
+
+/* VA: 0x00536340 */
+void MOUSE_dispatch_pos(void *obj, int x, int y);
+
 #ifdef __cplusplus
 }
 #endif
