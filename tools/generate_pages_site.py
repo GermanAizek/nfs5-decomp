@@ -72,6 +72,29 @@ SUBSYSTEM_MAP = {
 }
 
 
+def get_subsystem(raw_path: str) -> str:
+    if raw_path in SUBSYSTEM_MAP:
+        return SUBSYSTEM_MAP[raw_path]
+    norm = raw_path.replace("\\", "/").lower()
+    if "frontend" in norm or "feintro" in norm or "hud" in norm:
+        return "Frontend & UI"
+    if "render" in norm or "ddraw" in norm or "thrash" in norm:
+        return "3D Engine & Render"
+    if "net" in norm or "tcp" in norm or "tapi" in norm or "packet" in norm:
+        return "Network & Multiplayer"
+    if "world" in norm or "sky" in norm or "scene" in norm or "envmap" in norm or "bworld" in norm or "wworld" in norm:
+        return "World & Environment"
+    if "race" in norm or "replay" in norm:
+        return "Game Simulation & Race"
+    if "career" in norm:
+        return "Career & Progression"
+    if "car" in norm or "ai" in norm or "physics" in norm:
+        return "AI & Physics"
+    if "utility" in norm or "memory" in norm:
+        return "Memory & Utilities"
+    return "Game Logic & Sim (Unmapped)"
+
+
 def get_short_module_name(raw_path: str) -> str:
     if raw_path == "unknown":
         return "unknown (unmapped)"
@@ -82,7 +105,7 @@ def get_short_module_name(raw_path: str) -> str:
 
 def map_source_to_relpath(src_raw: str) -> str:
     """Maps symbols.csv SourceFile path to repo-relative filesystem path."""
-    if not src_raw or src_raw == "unknown":
+    if not src_raw:
         return None
     norm = src_raw.replace("\\", "/")
     if norm.startswith("/real/"):
@@ -97,6 +120,53 @@ def map_source_to_relpath(src_raw: str) -> str:
         return "src/engine/render/RCustomLayers.cpp"
     elif "UMemory.cpp" in norm:
         return "src/utility/UMemory.cpp"
+    elif "Frontend" in norm or "frontend" in norm:
+        filename = norm.split("/")[-1]
+        return f"src/frontend/common/Src/{filename}"
+    elif "replay.c" in norm:
+        return "src/game/replay/replay.c"
+    elif "sky.c" in norm:
+        return "src/game/world/sky.c"
+    elif "skilltest.c" in norm:
+        return "src/game/world/skilltest.c"
+    elif "career.c" in norm:
+        return "src/game/career/career.c"
+    elif "hud.c" in norm:
+        return "src/game/hud/hud.c"
+    elif "track_select.c" in norm:
+        return "src/game/world/track_select.c"
+    elif "race_result.c" in norm:
+        return "src/game/race/race_result.c"
+    elif "net_packet.c" in norm:
+        return "src/game/net/net_packet.c"
+    elif "physics_parts.c" in norm:
+        return "src/game/car/physics_parts.c"
+    elif "scene.c" in norm:
+        return "src/game/world/scene.c"
+    elif "race_finish.c" in norm:
+        return "src/game/race/race_finish.c"
+    elif "nfsnet.c" in norm:
+        return "src/game/net/nfsnet.c"
+    elif "livery.c" in norm:
+        return "src/game/car/livery.c"
+    elif norm.endswith("/race.c") or norm.endswith("race.c"):
+        return "src/game/race/race.c"
+    elif "ai.c" in norm:
+        return "src/game/ai/ai.c"
+    elif "bworld.c" in norm:
+        return "src/game/world/bworld.c"
+    elif "carspecs.c" in norm:
+        return "src/game/car/carspecs.c"
+    elif "wanimation.c" in norm:
+        return "src/game/world/wanimation.c"
+    elif "thrash_init.c" in norm:
+        return "src/game/render/thrash_init.c"
+    elif "envmap.c" in norm:
+        return "src/game/world/envmap.c"
+    elif "wworld.c" in norm:
+        return "src/game/world/wworld.c"
+    elif src_raw == "unknown":
+        return "src/engine/runtime_stubs.c"
     return None
 
 
@@ -370,7 +440,7 @@ def build_progress_data(repo_root: str, docs_dir: str):
 
         raw_source = sym.get("SourceFile") or chk.get("source_file") or "unknown"
         short_mod = get_short_module_name(raw_source)
-        subsys_name = SUBSYSTEM_MAP.get(raw_source, "Game Logic & Sim (Unmapped)")
+        subsys_name = get_subsystem(raw_source)
 
         # Determine function name
         fn_name = matched_info.get("name") or sym.get("Name") or chk.get("name") or f"sub_{va[2:]}"

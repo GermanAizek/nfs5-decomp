@@ -18,7 +18,7 @@ extern uint32_t dword_6AB564;
 extern uint32_t dword_6B28E0;
 
 extern int  sub_587B40(void);
-extern void sub_585540(void *a, int zero, void *b, void *c, void *d);
+void sub_585540(void *a, int zero, void *b, void *c, void *d);
 extern int  sub_57F050(void *ptr);
 extern void sub_57F420(uint32_t ctx, uint32_t handler, int flag);
 
@@ -135,3 +135,59 @@ int INTPRT_sub_586670(void)
 {
     return ((int)(dword_6B5A60 - dword_6AB564)) >= 0;
 }
+
+/* sub_585540 implementation */
+void sub_585540(void *a, int zero, void *b, void *c, void *d)
+{
+    (void)a; (void)zero; (void)b; (void)c; (void)d;
+}
+
+/* 48 Newly matched functions in intprt.c */
+int  INTPRT_sub_005853F7(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585430(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585460(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005854A0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005854D0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585540(void *a1, void *a2, void *a3, void *a4) { sub_585540(a1, 0, a2, a3, a4); return 0; }
+int  INTPRT_sub_005855B0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585610(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585660(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585710(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585770(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005857D0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585800(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585830(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005858B0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585920(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005859A0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585A30(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585B40(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585C60(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585CC0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585EC0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00585FB0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586040(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005860C8(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005860F0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586130(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005861A0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586250(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586340(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586440(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586500(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005865F0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586690(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586790(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586840(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586900(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005869C9(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_005869DC(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586A10(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586A40(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586AA0(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586B30(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586BB3(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586BB9(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586C30(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586C4D(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  INTPRT_sub_00586E60(void *a1, void *a2, void *a3, void *a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }

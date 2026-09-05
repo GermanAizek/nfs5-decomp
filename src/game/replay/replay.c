@@ -25,35 +25,44 @@
 #include <stdio.h>
 
 /* -------------------------------------------------------------------------
- * Extern globals (original addresses in parentheses)
+ * Globals (original addresses in parentheses)
  * ------------------------------------------------------------------------- */
-extern char  g_dataPath[];          /* 0x659240 - game data root path */
-extern char  g_replaySubDir[];      /* 0x697E14 - replay sub-directory */
-extern int   g_replayMode;          /* 0x5E793C - replay playback mode */
-extern int   g_replayTick;          /* 0x5EB724 - final game tick counter */
-extern int   g_replayFileLoaded;    /* 0x5E78D4 - flag: replay file loaded */
-extern char  g_replayFilePath[];    /* 0x604960 - resolved replay file path */
-extern char  g_replayDefault[];     /* 0x6049A4 - default replay path */
+#define REPLAY_BUF_DWORDS  0xF89
+
+char     g_dataPath[260] = "";               /* 0x659240 - game data root path (BSS empty) */
+char     g_replaySubDir[260] = "Replay/";    /* 0x697E14 - replay sub-directory */
+int      g_replayMode = 0;                   /* 0x5E793C - replay playback mode */
+int      g_replayTick = 0;                   /* 0x5EB724 - final game tick counter */
+int      g_replayFileLoaded = 0;             /* 0x5E78D4 - flag: replay file loaded */
+char     g_replayFilePath[260] = "";         /* 0x604960 - resolved replay file path */
+char     g_replayDefault[260] = "replay.rpl";/* 0x6049A4 - default replay path */
 
 /* Replay data buffer           @ 0x5E7900 (size ~0xF89 * 4 = ~15908 bytes) */
-extern uint32_t g_replayBuf[];      /* 0x5E7900 */
-extern uint32_t g_replaySrc[];      /* 0x6552C8 - source copy */
-#define REPLAY_BUF_DWORDS  0xF89
+uint32_t g_replayBuf[REPLAY_BUF_DWORDS];     /* 0x5E7900 */
+uint32_t g_replaySrc[REPLAY_BUF_DWORDS];     /* 0x6552C8 - source copy */
+
+int g_replaySprW = 64;                       /* 0x5B0EE0 */
+int g_replaySprOriW = 32;                    /* 0x5B0EF0 */
+int g_replaySprDivH = 16;                    /* 0x5B0EF4 */
 
 /* -------------------------------------------------------------------------
  * Internal helpers (original VA in comment)
  * ------------------------------------------------------------------------- */
-static void  *nfs_malloc(uint32_t sz);                   /* 0x59D490 */
-static int    nfs_sprintf(char *d, const char *fmt, ...);/* 0x59F4CF */
-static void  *nfs_fopen(const char *p, int fl);          /* 0x59BDD0 */
-static int    nfs_fread(void *buf, int sz, int cnt, void *f); /* 0x59C530 */
-static void   nfs_printf(const char *fmt, ...);          /* 0x59FC8B */
-static void   nfs_fclose_simple(void *f);                /* 0x59C660 */
+static void  *nfs_malloc(uint32_t sz) { return malloc(sz); }
+#define nfs_sprintf sprintf
+static void  *nfs_fopen(const char *p, int fl) { return (void*)fopen(p, fl ? "wb" : "rb"); }
+static int    nfs_fread(void *buf, int sz, int cnt, void *f) { return (int)fread(buf, sz, cnt, (FILE*)f); }
+#define nfs_printf printf
+static void   nfs_fclose_simple(void *f) { if (f) fclose((FILE*)f); }
 
 /* HUD sprite draw              @ 0x422DF0 */
 static void HUD_DrawNamedSprite(const char *name,
                                 int x, int y, int w, int h,
-                                int flags_a, int flags_b, int frameIdx, int unk);
+                                int flags_a, int flags_b, int frameIdx, int unk)
+{
+    (void)name; (void)x; (void)y; (void)w; (void)h;
+    (void)flags_a; (void)flags_b; (void)frameIdx; (void)unk;
+}
 
 /* -------------------------------------------------------------------------
  * 0x00413FB0  Replay_Init  (92 bytes)

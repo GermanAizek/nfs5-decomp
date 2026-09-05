@@ -14,6 +14,7 @@
 
 #include <cstdio>
 #include <cstring>
+#include <cstdint>
 #include "../../thrash/thrash.h"
 
 /* ------------------------------------------------------------------ */

@@ -76,6 +76,30 @@ void TRACK_sub_004b7ad0(void *obj, void *arg);                          /* VA: 0
 void TRACK_sub_004b7ae0(void *obj, void *arg);                          /* VA: 0x004B7AE0 */
 void TRACK_sub_004b7af0(void *obj, void *arg);                          /* VA: 0x004B7AF0 */
 
+int  TrackSelect_Init(void);
+void TrackSelect_Shutdown(void);
+int  TrackSelect_GetSelectedTrack(void);
+void TrackSelect_SetSelectedTrack(int trackId);
+
+/* Authentic Porsche.exe Engine Entry and Main Loop */
+int   TRACK_sub_004B5B90(void *hInstance, void *hPrevInstance, char *lpCmdLine, int nCmdShow); /* VA: 0x004B5B90 */
+int   TRACK_sub_004B5ED0(int argc, char **argv);                                                /* VA: 0x004B5ED0 */
+void  TRACK_sub_004A5210(void);                                                                 /* VA: 0x004A5210 */
+void  TRACK_sub_004A4C40(void);                                                                 /* VA: 0x004A4C40 */
+void  TRACK_sub_004A4CE0(void);                                                                 /* VA: 0x004A4CE0 */
+void  TRACK_sub_004A5CA0(int a, int b);                                                         /* VA: 0x004A5CA0 */
+void  TRACK_sub_004A5DC0(void);                                                                 /* VA: 0x004A5DC0 */
+void  TRACK_sub_004A42B0(int a);                                                                /* VA: 0x004A42B0 */
+void *TRACK_sub_004B5AE0(int argc, char **argv);                                                /* VA: 0x004B5AE0 */
+void  TRACK_sub_004B3FE0(void *p);                                                              /* VA: 0x004B3FE0 */
+int   TRACK_sub_004B4130(void *p);                                                              /* VA: 0x004B4130 */
+void  TRACK_sub_004B4200(void *p);                                                              /* VA: 0x004B4200 */
+void  TRACK_sub_004B5C30(void);                                                                 /* VA: 0x004B5C30 */
+void  TRACK_sub_004ABFE0(void);                                                                 /* VA: 0x004ABFE0 */
+void  TRACK_sub_004A7D00(void);                                                                 /* VA: 0x004A7D00 */
+void  TRACK_sub_004A6290(void);                                                                 /* VA: 0x004A6290 */
+void  TRACK_sub_004B5D70(void);                                                                 /* VA: 0x004B5D70 */
+
 #ifdef __cplusplus
 }
 #endif

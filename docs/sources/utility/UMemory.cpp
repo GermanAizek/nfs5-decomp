@@ -72,6 +72,11 @@ void UMemory_Free(void *ptr)
     }
 }
 
+size_t UMemory_GetAllocatedBytes()
+{
+    return g_allocatedBytes;
+}
+
 FastBlock::FastBlock(size_t blockSize, size_t count)
     : m_blockSize(blockSize), m_count(count), m_pool(nullptr), m_freeList(nullptr)
 {
@@ -112,6 +117,16 @@ void FastBlock::Deallocate(void *ptr)
     if (!ptr) return;
     *(void**)ptr = m_freeList;
     m_freeList = ptr;
+}
+
+size_t FastBlock::GetBlockSize() const
+{
+    return m_blockSize;
+}
+
+size_t FastBlock::GetCount() const
+{
+    return m_count;
 }
 
 extern "C" {

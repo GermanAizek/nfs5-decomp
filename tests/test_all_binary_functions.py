@@ -23,8 +23,12 @@ def run_full_binary_test(pe_path="Porsche.exe", db_path="tools/function_checksum
     start_time = time.time()
 
     if not os.path.exists(pe_path):
-        print(f"Error: {pe_path} not found!")
-        return False
+        if pe_path == "Porsche.exe" and os.path.exists("Porsche_original.exe"):
+            pe_path = "Porsche_original.exe"
+            print(f"Target Binary redirected to: {pe_path}")
+        else:
+            print(f"Error: {pe_path} not found!")
+            return False
     if not os.path.exists(db_path):
         print(f"Error: {db_path} not found!")
         return False
@@ -119,7 +123,12 @@ def run_full_binary_test(pe_path="Porsche.exe", db_path="tools/function_checksum
     return True
 
 def main():
-    pe_path = sys.argv[1] if len(sys.argv) > 1 else "Porsche.exe"
+    if len(sys.argv) > 1:
+        pe_path = sys.argv[1]
+    elif os.path.exists("Porsche_original.exe"):
+        pe_path = "Porsche_original.exe"
+    else:
+        pe_path = "Porsche.exe"
     db_path = sys.argv[2] if len(sys.argv) > 2 else "tools/function_checksums.json"
     ok = run_full_binary_test(pe_path, db_path)
     sys.exit(0 if ok else 1)

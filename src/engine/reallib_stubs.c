@@ -6,7 +6,9 @@
 #include <stddef.h>
 
 /* weak attributes allow unit tests or actual implementations to override */
-#if defined(__GNUC__) || defined(__clang__)
+#if defined(_WIN32)
+#define WEAK_SYM
+#elif defined(__GNUC__) || defined(__clang__)
 #define WEAK_SYM __attribute__((weak))
 #else
 #define WEAK_SYM
@@ -71,6 +73,12 @@ WEAK_SYM void *dword_6ACE9C = NULL;
 WEAK_SYM uint8_t byte_5E0558 = 0;
 WEAK_SYM uint8_t byte_5E0559 = 0;
 WEAK_SYM uint32_t dword_69C4CC = 0;
+WEAK_SYM uint32_t dword_6A3A48 = 0;
+WEAK_SYM uint32_t dword_6A39F0 = 0;
+WEAK_SYM void (*dword_5B0298)(void) = NULL;
+WEAK_SYM uint32_t dword_5DD8A4 = 0;
+WEAK_SYM uint32_t dword_69C480 = 0;
+WEAK_SYM uint32_t dword_6AF5FC = 0;
 
 WEAK_SYM void sub_5831D0(void *a, int b, int c) { (void)a; (void)b; (void)c; }
 WEAK_SYM void sub_55CFC0(void) {}

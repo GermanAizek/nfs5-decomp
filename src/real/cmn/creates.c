@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#if defined(_WIN32)
+#include <windows.h>
+#endif
 
 #define MAX_SHAPE_WIDTH  16384
 #define MAX_SHAPE_HEIGHT 8192

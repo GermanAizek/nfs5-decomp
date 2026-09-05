@@ -12,6 +12,8 @@ int ogl_width = 0;
 int ogl_height = 0;
 int ogl_bpp = 0;
 int ogl_fullscreen = 0;
+int ogl_disp_w = 0;
+int ogl_disp_h = 0;
 THRASHTEXTURE* ogl_current_texture = NULL;
 
 OGLTexture ogl_texture_pool[MAX_TEXTURES];

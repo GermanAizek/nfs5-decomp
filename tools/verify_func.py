@@ -24,6 +24,10 @@ def _get_db(db_path):
     return _db_cache[db_path]
 
 def _get_pe_text(pe_path):
+    if pe_path == "Porsche.exe" and os.path.exists("Porsche_original.exe"):
+        pe_path = "Porsche_original.exe"
+    elif not os.path.exists(pe_path) and os.path.exists("Porsche_original.exe"):
+        pe_path = "Porsche_original.exe"
     if pe_path not in _pe_cache:
         pe = pefile.PE(pe_path)
         base = pe.OPTIONAL_HEADER.ImageBase

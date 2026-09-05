@@ -22,6 +22,12 @@ uint32_t FEINTRO_sub_4dd260(void);                               /* VA: 0x004DD2
 void     FEINTRO_sub_4dd380(void);                               /* VA: 0x004DD380 */
 void     FEINTRO_sub_4de770(void *obj);                          /* VA: 0x004DE770 */
 
+void     FEIntro_StopMovie(void);
+int      FEIntro_IsPlaying(void);
+int      FEIntro_GetFrameCount(void);
+void     FEIntro_Play(void);
+void     sub_004DC790(void);                                     /* VA: 0x004DC790 */
+
 #ifdef __cplusplus
 }
 

@@ -14,6 +14,12 @@ const char *FEGarage_GetDealerCar1(void);
 void    FEGarage_QuickFix(const char *action);
 void    FEGarage_OwnedCarsBars(int carIdx);
 void    FEGarage_SellCar(const char *action);
+int     FEGarage_GetOwnedCarCount(void);
+int     FEGarage_IsCarAvailable(int carIdx);
+int     FEGarage_CheatCash(int *pPlayerMoney);
+int     FEGarage_UsedCarRefreshCheat(void);
+int     FEGarage_JumpBackAYear(int *pYear);
+int     FEGarage_JumpFwdAYear(int *pYear);
 
 /* Reconstructed functions */
 void    GARAGE_sub_510700(void);                             /* VA: 0x00510700 */

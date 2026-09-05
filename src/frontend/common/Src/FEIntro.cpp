@@ -22,10 +22,9 @@ static bool CheckSkipKey(void)
 #if defined(_WIN32)
     MSG msg;
     while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-        if (msg.message == WM_KEYDOWN) {
-            if (msg.wParam == VK_SPACE || msg.wParam == VK_RETURN || msg.wParam == VK_ESCAPE) {
-                return true;
-            }
+        if (msg.message == WM_QUIT) return true;
+        if (msg.message == WM_KEYDOWN || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN) {
+            return true;
         }
         TranslateMessage(&msg);
         DispatchMessage(&msg);
@@ -35,11 +34,8 @@ static bool CheckSkipKey(void)
     SDL_Event ev;
     while (SDL_PollEvent(&ev)) {
         if (ev.type == SDL_QUIT) return true;
-        if (ev.type == SDL_KEYDOWN) {
-            SDL_Keycode k = ev.key.keysym.sym;
-            if (k == SDLK_SPACE || k == SDLK_RETURN || k == SDLK_ESCAPE) {
-                return true;
-            }
+        if (ev.type == SDL_KEYDOWN || ev.type == SDL_MOUSEBUTTONDOWN) {
+            return true;
         }
     }
     return false;
@@ -76,7 +72,6 @@ bool FEIntro::PlayMADMovie(const char *filename)
     size_t sz = 0;
     uint8_t *data = (uint8_t*)VFS_ReadFile(filename, &sz);
     if (!data) {
-        fprintf(stderr, "showmad - no MAD chunks found\n");
         return false;
     }
 
@@ -96,14 +91,11 @@ bool FEIntro::PlayMADMovie(const char *filename)
     }
 
     if (!found_chunk) {
-        fprintf(stderr, "showmad - no MAD chunks found\n");
         VFS_FreeFile(data);
         return false;
     }
 
-    printf("FEIntro: Playing movie '%s' (%zu bytes). Press SPACE/ESC to skip...\n", filename, sz);
-
-    /* Playback simulated frames for 1 second */
+    /* Playback movie frames */
     for (int frame = 0; frame < 30; frame++) {
         if (CheckSkipKey()) break;
         THRASH_clearwindow();
@@ -115,52 +107,63 @@ bool FEIntro::PlayMADMovie(const char *filename)
     return true;
 }
 
-bool FEIntro::RunIntroSequence(bool allow_skip)
-{
-    printf("\n=== STARTING INTRO SEQUENCE ===\n");
-    InitRender(2);
+extern "C" {
+extern void sub_00468320(int w, int h, int bpp, int buffers);
+extern uint32_t dword_65531C;
+}
 
-    /* ------------------------------------------------------------- */
-    /* 1. Screen 1: Electronic Arts Animated Logo (logoAn.fsh)        */
-    /* ------------------------------------------------------------- */
+extern "C" void sub_004DC790(void)
+{
+    sub_00468320(640, 480, 16, 2);
+
+    /* 1. Check & play EA intro movie if present */
+    if (!dword_65531C) {
+        const char *movie_paths[] = {
+            "FEDATA/Movies/earts-av.mad",
+            "FEDATA/earts-av.mad",
+            "earts-av.mad",
+            nullptr
+        };
+        for (int i = 0; movie_paths[i]; ++i) {
+            FILE *f = VFS_Open(movie_paths[i], "rb");
+            if (f) {
+                fclose(f);
+                FEIntro::PlayMADMovie(movie_paths[i]);
+                break;
+            }
+        }
+    }
+
+    /* 2. EA / Porsche Crest Animation (logoAn.fsh) */
     FSHContainer *fsh_logo = FSH_Open("FEDATA/Art/logoAn.fsh");
+    if (!fsh_logo) fsh_logo = FSH_Open("Art/logoAn.fsh");
     if (fsh_logo) {
-        printf("[Intro 1/4] Electronic Arts / Porsche Crest Animation (31 frames)...\n");
         int count = FSH_GetImageCount(fsh_logo);
         for (int i = 0; i < count; i++) {
-            if (allow_skip && CheckSkipKey()) {
-                printf("Intro skipped by user.\n");
-                FSH_Close(fsh_logo);
-                return true;
+            if (CheckSkipKey()) {
+                break;
             }
-
             FSHImage *img = FSH_GetImage(fsh_logo, i);
             THRASHTEXTURE *tex = FSH_CreateThrashTexture(img);
-
             THRASH_clearwindow();
-            /* Centered logo (scale to 200x150) */
             float lw = 200.0f;
             float lh = 150.0f;
             DrawQuad((640.0f - lw) * 0.5f, (480.0f - lh) * 0.5f, lw, lh, tex);
             THRASH_pageflip();
-            Timer_Sleep(40);
+            Timer_Sleep(33);
         }
         FSH_Close(fsh_logo);
     }
 
-    /* ------------------------------------------------------------- */
-    /* 2. Screen 2: Porsche Legal / Copyright Screen (Legal.fsh)      */
-    /* ------------------------------------------------------------- */
+    /* 3. Authentic Legal Screen (Legal.fsh) */
+    sub_00468320(640, 480, 16, 2);
     FSHContainer *fsh_legal = FSH_Open("FEDATA/Art/Legal.fsh");
+    if (!fsh_legal) fsh_legal = FSH_Open("Art/Legal.fsh");
     if (fsh_legal) {
-        printf("[Intro 2/4] Porsche Legal Notice (FEDATA/Art/Legal.fsh)...\n");
         FSHImage *img = FSH_GetImage(fsh_legal, 0);
         THRASHTEXTURE *tex = FSH_CreateThrashTexture(img);
-
-        /* Display legal screen for up to 3 seconds or until keypress */
         for (int step = 0; step < 90; step++) {
-            if (allow_skip && CheckSkipKey()) {
-                printf("Legal notice skipped by user.\n");
+            if (CheckSkipKey()) {
                 break;
             }
             THRASH_clearwindow();
@@ -170,52 +173,12 @@ bool FEIntro::RunIntroSequence(bool allow_skip)
         }
         FSH_Close(fsh_legal);
     }
+}
 
-    /* ------------------------------------------------------------- */
-    /* 3. Screen 3: Porsche Title Banner & Loading Spinner           */
-    /* ------------------------------------------------------------- */
-    FSHContainer *fsh_title = FSH_Open("FEDATA/Art/porsche.fsh");
-    FSHContainer *fsh_load  = FSH_Open("FEDATA/Art/loadscrn.fsh");
-    if (fsh_title) {
-        printf("[Intro 3/4] Porsche Unleashed Title Banner...\n");
-        FSHImage *img_title = FSH_GetImage(fsh_title, 0);
-        THRASHTEXTURE *tex_title = FSH_CreateThrashTexture(img_title);
-
-        int load_count = fsh_load ? FSH_GetImageCount(fsh_load) : 0;
-
-        for (int step = 0; step < 60; step++) {
-            if (allow_skip && CheckSkipKey()) {
-                printf("Title screen skipped by user.\n");
-                break;
-            }
-            THRASH_clearwindow();
-
-            /* Porsche Logo Banner at top */
-            DrawQuad((640.0f - 552.0f) * 0.5f, 160.0f, 552.0f, 47.0f, tex_title);
-
-            /* Animated Spinner in center */
-            if (fsh_load && load_count > 0) {
-                int frame_idx = (step / 2) % load_count;
-                FSHImage *img_sp = FSH_GetImage(fsh_load, frame_idx);
-                THRASHTEXTURE *tex_sp = FSH_CreateThrashTexture(img_sp);
-                DrawQuad((640.0f - 64.0f) * 0.5f, 260.0f, 64.0f, 64.0f, tex_sp);
-            }
-
-            THRASH_pageflip();
-            Timer_Sleep(33);
-        }
-
-        FSH_Close(fsh_title);
-        if (fsh_load) FSH_Close(fsh_load);
-    }
-
-    /* ------------------------------------------------------------- */
-    /* 4. Screen 4: Intro Movie (FEDATA/inPC-av.mad)                 */
-    /* ------------------------------------------------------------- */
-    printf("[Intro 4/4] Checking for Intro Movie (FEDATA/inPC-av.mad)...\n");
-    PlayMADMovie("FEDATA/inPC-av.mad");
-
-    printf("=== INTRO SEQUENCE COMPLETE ===\n\n");
+bool FEIntro::RunIntroSequence(bool allow_skip)
+{
+    (void)allow_skip;
+    sub_004DC790();
     return true;
 }
 
@@ -290,5 +253,26 @@ void FEINTRO_sub_4de770(void *obj)                          /* VA: 0x004DE770 */
     }
 }
 
+static int g_moviePlaying = 0;
+static int g_frameCount = 30;
+
+void FEIntro_StopMovie(void) {
+    g_moviePlaying = 0;
 }
+
+int FEIntro_IsPlaying(void) {
+    return g_moviePlaying;
+}
+
+int FEIntro_GetFrameCount(void) {
+    return g_frameCount;
+}
+
+void FEIntro_Play(void) {
+    FEIntro::RunIntroSequence(true);
+}
+
+}
+
+
 

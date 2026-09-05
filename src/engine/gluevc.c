@@ -183,10 +183,6 @@ int THRASH_opendll(const char *path)
         FreeLibrary(g_hDriver);
         g_hDriver = NULL;
         return 0;
-    }
-
-    printf("THRASH driver loaded: %s\n",
-           g_thrash.about ? g_thrash.about() : path);
     return 1;
 }
 

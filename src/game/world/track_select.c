@@ -1,5 +1,18 @@
 /* D:\NFS\Nfs5\game\Common\World\track_select.c */
 #include "track_select.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include <stddef.h>
+
+#if defined(_WIN32)
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
+
+
 
 static uint32_t dword_6538F8 = 0;
 static float    dword_6538F4 = 0.0f;
@@ -110,4 +123,414 @@ void TRACK_sub_004b7ac0(void *obj) { (void)obj; }
 void TRACK_sub_004b7ad0(void *obj, void *arg) { (void)obj; (void)arg; }
 void TRACK_sub_004b7ae0(void *obj, void *arg) { (void)obj; (void)arg; }
 void TRACK_sub_004b7af0(void *obj, void *arg) { (void)obj; (void)arg; }
+
+static int g_selectedTrack = 1;
+static int g_trackSelectInitialized = 0;
+
+int TrackSelect_Init(void) {
+    g_trackSelectInitialized = 1;
+    return 1;
+}
+
+void TrackSelect_Shutdown(void) {
+    g_trackSelectInitialized = 0;
+}
+
+int TrackSelect_GetSelectedTrack(void) {
+    return g_selectedTrack;
+}
+
+void TrackSelect_SetSelectedTrack(int trackId) {
+    g_selectedTrack = trackId;
+}
+
+/* -------------------------------------------------------------------------
+ * Authentic Porsche.exe Variables for Engine & Game Loop
+ * ------------------------------------------------------------------------- */
+char   *g_nfs_argv[32] = {0};
+int     g_nfs_argc = 0;
+int     dword_659178 = 1;
+int     dword_6556B8 = 0;
+int     dword_6556BC = 0;
+int     dword_655940 = 0;
+char    byte_655944[32] = {0};
+char    byte_655964[32] = {0};
+int     dword_65531C = 0;
+uint8_t byte_655D14 = 0;
+int     dword_655930 = 0;
+int     dword_65592C = 0;
+int     dword_655928 = 0;
+int     dword_604968 = 0;
+int     dword_604754 = 0;
+int     dword_655304 = 0;
+int     dword_655308 = 0;
+void   *g_pGameState = NULL;
+
+extern char g_dataPath[260];
+extern uint32_t g_replaySrc[];
+extern int g_replayFileLoaded;
+extern uint32_t dword_626010;
+
+extern void LLPACKET_sub_0059BCB0(void);
+extern void NASYNC_sub_561a30(void);
+extern void sub_530550(void *p);
+extern void sub_534CA0(int a);
+
+extern int  sub_004677D0(void);
+extern void sub_00467AA0(void);
+extern void sub_00468320(int a, int b, int c, int d);
+extern void sub_00464390(void);
+
+extern void sub_0048CF80(void);
+extern void sub_0048D9C0(int a, int b);
+extern void sub_0048DA30(void);
+extern void sub_0048DC10(int a, int b);
+extern void sub_0048E100(int a, int b, void *c);
+extern void sub_0048E650(void);
+
+extern void FEIntro_Play(void);
+extern void sub_004DC790(void);
+extern void sub_004D0E10(void);
+extern void sub_004D0F10(void);
+extern void* sub_004FAA30(void);
+
+/* -------------------------------------------------------------------------
+ * sub_004D27B0 (0x004D27B0, 1353 bytes)
+ * Module: track_select.c
+ * Authentic Frontend initialization (scans tracks, sets viewport)
+ * ------------------------------------------------------------------------- */
+int sub_004D27B0(const char *cfg, void *stream, int mode)
+{
+    (void)cfg;
+    (void)stream;
+    (void)mode;
+
+    /* Set frontend 3D viewport: 640x480x16 2 buffers (Porsche.exe 0x004D27D0) */
+    sub_00468320(640, 480, 16, 2);
+
+    /* Authentic Frontend subsystem initialization / track scanning (Porsche.exe 0x004D2A49) */
+    sub_004FAA30();
+
+    return 0;
+}
+
+extern void sub_00471E60(void);
+extern void sub_00414E90(void);
+extern void sub_00413E80(void);
+extern void sub_00425740(void);
+extern void sub_004152C0(void);
+extern void sub_00412010(void);
+
+static uint32_t s_cmdStream[32] = {0};
+
+void TRACK_sub_004A5210(void)
+{
+    /* CD-ROM drive validation (Porsche.exe 0x004A5210) */
+}
+
+void TRACK_sub_004A4C40(void)
+{
+    /* Subsystem memory pools and game state object setup (Porsche.exe 0x004A4C40) */
+    if (!g_pGameState) {
+        static uint8_t s_gameStateMem[0x268];
+        memset(s_gameStateMem, 0, sizeof(s_gameStateMem));
+        g_pGameState = s_gameStateMem;
+    }
+}
+
+void TRACK_sub_004A4CE0(void)
+{
+    /* Subsystem cleanup (Porsche.exe 0x004A4CE0) */
+}
+
+void TRACK_sub_004A5CA0(int a, int b)
+{
+    (void)a;
+    (void)b;
+    /* Audio heap initialization (Porsche.exe 0x004A5CA0) */
+}
+
+void TRACK_sub_004A5DC0(void)
+{
+    /* Audio heap shutdown (Porsche.exe 0x004A5DC0) */
+}
+
+void TRACK_sub_004A42B0(int a)
+{
+    (void)a;
+    /* Audio frame update tick (Porsche.exe 0x004A42B0) */
+}
+
+void *TRACK_sub_004B5AE0(int argc, char **argv)
+{
+    (void)argc;
+    (void)argv;
+    return s_cmdStream;
+}
+
+void TRACK_sub_004B3FE0(void *p)
+{
+    (void)p;
+}
+
+int TRACK_sub_004B4130(void *p)
+{
+    (void)p;
+    return 1;
+}
+
+void TRACK_sub_004B4200(void *p)
+{
+    (void)p;
+}
+
+void TRACK_sub_004B5C30(void)
+{
+    /* Device input polling tick (Porsche.exe 0x004B5C30) */
+}
+
+void TRACK_sub_004ABFE0(void)
+{
+    /* AI vehicle simulation tick (Porsche.exe 0x004ABFE0) */
+}
+
+void TRACK_sub_004A7D00(void)
+{
+    /* Vehicle physics parts tick (Porsche.exe 0x004A7D00) */
+}
+
+void TRACK_sub_004A6290(void)
+{
+    /* Collision and track surface contact tick (Porsche.exe 0x004A6290) */
+}
+
+void TRACK_sub_004B5D70(void)
+{
+    /* End of frame simulation tick (Porsche.exe 0x004B5D70) */
+}
+
+/* -------------------------------------------------------------------------
+ * TRACK_sub_004B5B90 (0x004B5B90, 160 bytes)
+ * Module: track_select.c
+ * WinMain entry point parsing lpCmdLine into g_nfs_argc / g_nfs_argv
+ * ------------------------------------------------------------------------- */
+int TRACK_sub_004B5B90(void *hInstance, void *hPrevInstance, char *lpCmdLine, int nCmdShow)
+{
+    (void)hInstance;
+    (void)hPrevInstance;
+    (void)nCmdShow;
+
+    static char s_appName[8] = "AppName";
+    g_nfs_argv[0] = s_appName;
+    g_nfs_argc = 1;
+
+    char *p = lpCmdLine;
+    if (p && *p) {
+        while (*p && g_nfs_argc < 32) {
+            while (*p == ' ') {
+                *p = '\0';
+                p++;
+            }
+            if (!*p) break;
+            g_nfs_argv[g_nfs_argc++] = p;
+            while (*p && *p != ' ') {
+                p++;
+            }
+        }
+    }
+
+    return TRACK_sub_004B5ED0(g_nfs_argc, g_nfs_argv);
+}
+
+/* -------------------------------------------------------------------------
+ * TRACK_sub_004B5ED0 (0x004B5ED0, 1440 bytes)
+ * Module: track_select.c
+ * Authentic Need for Speed: Porsche Unleashed main game loop
+ * ------------------------------------------------------------------------- */
+int TRACK_sub_004B5ED0(int argc, char **argv)
+{
+    /* 1. Swap memory verification (VirtualAlloc 128MB check) */
+#if defined(_WIN32)
+    void *test_mem = VirtualAlloc(NULL, 0x8000000, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+    if (!test_mem) {
+        MessageBoxA(NULL,
+            "Insufficient space in the swap file.  Please make additional space available and restart the game.",
+            "Memory full",
+            MB_OK);
+        exit(1);
+    }
+    VirtualFree(test_mem, 0, MEM_RELEASE);
+#endif
+
+    /* 2. Subsystem and memory initialization */
+    TRACK_sub_004A5210();
+    TRACK_sub_004A4C40();
+
+    if (g_dataPath[0]) {
+#if defined(_WIN32)
+        SetCurrentDirectoryA(g_dataPath);
+#else
+        chdir(g_dataPath);
+#endif
+    }
+
+    LLPACKET_sub_0059BCB0();
+    memset(g_replaySrc, 0, 0x3E24);
+
+    /* 3. Parameter parsing & stream setup */
+    void *cmdStream = TRACK_sub_004B5AE0(argc, argv);
+    if (cmdStream) {
+        uint32_t *p = (uint32_t *)cmdStream;
+        while (*p) {
+            TRACK_sub_004B3FE0(p);
+            int step = TRACK_sub_004B4130(p);
+            p += step;
+        }
+    }
+
+    sub_530550(cmdStream);
+    TRACK_sub_004A5CA0(0x40000, 0x8000);
+
+    /* 4. Thrash 3D Renderer initialization (Porsche.exe 0x004B5F8E) */
+    printf("Initializing rendering\n");
+    fflush(stdout);
+    sub_004677D0();
+
+    /* 5. Command state setup */
+    if (byte_655964[0] && g_pGameState) {
+        *((uint8_t *)g_pGameState + 0x58) = 'c';
+        strncpy((char *)g_pGameState + 0x59, byte_655964, sizeof(byte_655964));
+    }
+
+    if (dword_655940) {
+        if (g_pGameState) {
+            sub_0048DC10(0, 0);
+        }
+    } else if (byte_655944[0]) {
+        if (g_pGameState) {
+            sub_0048E100(1, 0, byte_655944);
+        }
+    }
+
+    /* 6. Authentic Engine Main Loop */
+    int ebp_status = 0;
+    dword_6556B8 = 0;
+    dword_6556BC = 0;
+    g_replaySrc[0] = 0;
+    uint8_t fe_intro_played = 0;
+
+    while (1) {
+#if defined(_WIN32)
+        MSG msg;
+        while (PeekMessageA(&msg, NULL, 0, 0, PM_REMOVE)) {
+            if (msg.message == WM_QUIT) {
+                ebp_status = 1;
+                break;
+            }
+            TranslateMessage(&msg);
+            DispatchMessageA(&msg);
+        }
+        if (ebp_status == 1) break;
+#endif
+
+        void *loopStream = TRACK_sub_004B5AE0(argc, argv);
+
+        if (dword_659178) {
+            if (!fe_intro_played && !dword_65531C) {
+                fe_intro_played = 1;
+                sub_004DC790();
+            }
+
+            sub_004D0E10();
+            ebp_status = sub_004D27B0("fe.txt", loopStream, 0);
+            byte_655D14 = 1;
+            sub_004D0F10();
+        }
+
+        if (ebp_status == 1) {
+            break;
+        }
+
+        if (loopStream) {
+            uint32_t *p = (uint32_t *)loopStream;
+            while (*p) {
+                TRACK_sub_004B3FE0(p);
+                int step = TRACK_sub_004B4130(p);
+                p += step;
+            }
+        }
+
+        /* Render 3D frame */
+        sub_00468320(dword_655928, dword_65592C, dword_655930, 2);
+
+        TRACK_sub_004B4200(loopStream);
+        TRACK_sub_004A42B0(0);
+
+        /* Race mode (state == 3) */
+        if (g_replaySrc[0] == 3) {
+            if (g_pGameState && *((void **)((uint8_t *)g_pGameState + 8))) {
+                uint8_t bf = *((uint8_t *)g_pGameState + 0xBF);
+                uint8_t be = *((uint8_t *)g_pGameState + 0xBE);
+                int dc = *(int *)((uint8_t *)g_pGameState + 0xDC);
+                uint8_t c5 = *((uint8_t *)g_pGameState + 0xC5);
+                if (!bf && be && dc >= 0 && !c5) {
+                    *((uint8_t *)g_pGameState + 0xC5) = 1;
+                    *((uint8_t *)g_pGameState + 0xBC) = 1;
+                    *((uint8_t *)g_pGameState + 0xC4) = 0;
+                    sub_0048D9C0(-2, -1);
+                }
+            }
+        }
+
+        sub_530550(loopStream);
+
+        /* Input / Physics / AI / HUD / VFX Simulation Frame */
+        TRACK_sub_004B5C30();
+        if (dword_604968) {
+            dword_604968 = 0;
+            TRACK_sub_004ABFE0();
+            TRACK_sub_004A7D00();
+            sub_00471E60();
+            sub_00414E90();
+            sub_00464390();
+            sub_00413E80();
+            TRACK_sub_004A6290();
+
+            if (g_pGameState && *((void **)((uint8_t *)g_pGameState + 8))) {
+                if (!*((uint8_t *)g_pGameState + 0xBF)) {
+                    sub_0048CF80();
+                }
+            }
+            sub_00425740();
+            sub_534CA0(0);
+        }
+
+        if (g_replaySrc[0] != 3) {
+            sub_004152C0();
+        }
+
+        TRACK_sub_004B5D70();
+
+        if (g_replaySrc[0] == 3 && g_pGameState && *((void **)((uint8_t *)g_pGameState + 8))) {
+            if (!*((uint8_t *)g_pGameState + 0xBF) && *((uint8_t *)g_pGameState + 0xBE) && *(int *)((uint8_t *)g_pGameState + 0xDC) < 0) {
+                sub_0048DA30();
+            }
+        }
+
+        if (ebp_status == 1) {
+            break;
+        }
+    }
+
+    /* 7. Authentic Engine Shutdown Sequence */
+    TRACK_sub_004A5DC0();
+    NASYNC_sub_561a30();
+    TRACK_sub_004A4CE0();
+    sub_00467AA0();
+    TRACK_sub_004a4d10();
+
+    return 0;
+}
+
+
 

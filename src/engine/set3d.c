@@ -106,17 +106,16 @@ int SET3D_getdriverlist(void)
 /* ------------------------------------------------------------------ */
 int SET3D_init(const char *driver_path, int width, int height, int bpp)
 {
-    fprintf(stderr, "Initializing rendering\n");
-
     s_width  = width;
     s_height = height;
     s_bpp    = bpp;
 
-    /* Prefer explicit path; fall back to Linux default */
-    const char *path = driver_path;
+    const char *driver_env = getenv("THRASH_DRIVER");
+    if (!driver_env) driver_env = getenv("THRASH_DRIVERNAME");
+    const char *path = driver_env ? driver_env : driver_path;
     if (!path || !path[0]) {
 #ifdef _WIN32
-        path = "Drivers\\dx7z.dll";
+        path = "Drivers/openglz.dll";
 #else
         path = "Drivers/openglz.so";
 #endif
@@ -135,6 +134,12 @@ int SET3D_init(const char *driver_path, int width, int height, int bpp)
 
     if (!THRASH_init()) {
         fprintf(stderr, "SET3D_init: THRASH_init() failed\n");
+        THRASH_closedll();
+        return 0;
+    }
+
+    if (!THRASH_setvideomode(s_width, s_height, s_bpp)) {
+        fprintf(stderr, "SET3D_init: THRASH_setvideomode failed\n");
         THRASH_closedll();
         return 0;
     }

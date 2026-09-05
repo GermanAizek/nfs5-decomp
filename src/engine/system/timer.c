@@ -1,4 +1,25 @@
 #include "timer.h"
+#ifdef _WIN32
+#include <windows.h>
+
+static LARGE_INTEGER g_freq;
+static LARGE_INTEGER g_start_time;
+static double g_last_frame_time = 0.0;
+
+void Timer_Init(void)
+{
+    QueryPerformanceFrequency(&g_freq);
+    QueryPerformanceCounter(&g_start_time);
+    g_last_frame_time = Timer_GetSeconds();
+}
+
+double Timer_GetSeconds(void)
+{
+    LARGE_INTEGER now;
+    QueryPerformanceCounter(&now);
+    return (double)(now.QuadPart - g_start_time.QuadPart) / (double)g_freq.QuadPart;
+}
+#else
 #include <time.h>
 #include <unistd.h>
 
@@ -18,6 +39,7 @@ double Timer_GetSeconds(void)
     return (double)(ts.tv_sec - g_start_time.tv_sec) +
            (double)(ts.tv_nsec - g_start_time.tv_nsec) / 1000000000.0;
 }
+#endif
 
 uint32_t Timer_GetTicksMs(void)
 {
@@ -39,14 +61,23 @@ void Timer_LimitFPS(int target_fps)
     double frame_time = 1.0 / (double)target_fps;
     double elapsed = Timer_GetSeconds() - g_last_frame_time;
     if (elapsed < frame_time) {
+#ifdef _WIN32
+        DWORD sleep_ms = (DWORD)((frame_time - elapsed) * 1000.0);
+        if (sleep_ms > 0) Sleep(sleep_ms);
+#else
         useconds_t sleep_us = (useconds_t)((frame_time - elapsed) * 1000000.0);
         usleep(sleep_us);
+#endif
     }
 }
 
 void Timer_Sleep(int ms)
 {
     if (ms > 0) {
+#ifdef _WIN32
+        Sleep((DWORD)ms);
+#else
         usleep((useconds_t)ms * 1000);
+#endif
     }
 }

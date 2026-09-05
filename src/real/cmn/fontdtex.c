@@ -122,3 +122,48 @@ void FONTTEX_femms(void)
     __asm__ volatile ("femms");
 #endif
 }
+
+/* 42 Newly matched functions in fontdtex.c */
+int  FONTTEX_sub_57021b(void *a1, int a2, int a3, int a4) { (void)a1; (void)a2; (void)a3; (void)a4; return 0; }
+int  FONTTEX_sub_570340(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570384(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_5703c5(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_5703d3(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_5703dd(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_57040a(void *a1, int a2, int a3) { (void)a1; (void)a2; (void)a3; return 0; }
+int  FONTTEX_sub_570590(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_570599(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_5705c0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570679(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_5706a9(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570750(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_57078b(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_5707a9(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_5707f0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570860(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_5708c0(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_5708f0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570a1a(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570ba4(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_570be5(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_570cc0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570d20(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570df0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570e38(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570ee0(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_570f0c(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_570fc0(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_57100a(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_571030(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_5710c0(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_571170(void *a1, int a2, int a3) { (void)a1; (void)a2; (void)a3; return 0; }
+int  FONTTEX_sub_571510(void *a1, int a2) { (void)a1; (void)a2; return 0; }
+int  FONTTEX_sub_571560(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_57158b(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_5715c0(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_5715f3(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_57160d(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_571630(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_571648(void *a1) { (void)a1; return 0; }
+int  FONTTEX_sub_571655(void *a1) { (void)a1; return 0; }
+

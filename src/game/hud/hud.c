@@ -47,53 +47,143 @@
  * Globals
  * ------------------------------------------------------------------------- */
 
+int g_screenWidth = 640;
+int g_hudWidth = 640;
+int g_hudAlreadyLoaded = 0;
+
 /* HUD file paths                @ 0x60A770 (base dir), 0x60A790 (hud1 path),
  *                                 0x60A7E8 (hud2 path) */
-extern char g_hudBaseDir[128];   /* 0x60A770 */
-extern char g_hud1Path[128];     /* 0x60A790 */
-extern char g_hud2Path[128];     /* 0x60A7E8 */
+char g_hudBaseDir[128] = {0};   /* 0x60A770 */
+char g_hud1Path[128] = {0};     /* 0x60A790 */
+char g_hud2Path[128] = {0};     /* 0x60A7E8 */
 
 /* Data path                     @ 0x659240 */
 extern char g_dataPath[];        /* 0x659240 */
 
 /* .loc file globals */
-extern void   *g_locFile;        /* 0x60A854 */
-extern void   *g_locListA;       /* 0x60A6F8 */
-extern void   *g_locListB;       /* 0x60A7E4 */
-extern int     g_locCount;       /* 0x60A83C */
-extern uint8_t g_locLoaded;      /* 0x60A850 */
-extern int     g_locWidth;       /* 0x60A6FC */
-extern int     g_locFlags;       /* 0x60A838 */
+void   *g_locFile = NULL;        /* 0x60A854 */
+void   *g_locListA = NULL;       /* 0x60A6F8 */
+void   *g_locListB = NULL;       /* 0x60A7E4 */
+int     g_locCount = 0;          /* 0x60A83C */
+uint8_t g_locLoaded = 0;         /* 0x60A850 */
+int     g_locWidth = 640;        /* 0x60A6FC */
+int     g_locFlags = 0;          /* 0x60A838 */
 
 /* HUD load parameters           @ 0x60A84C, 0x60A844 */
-extern int g_hudParam0;          /* 0x60A84C */
-extern int g_hudParam1;          /* 0x60A844 */
+int g_hudParam0 = 0;             /* 0x60A84C */
+int g_hudParam1 = 0;             /* 0x60A844 */
 
 /* Screen resolution              @ 0x6591F0 */
-extern char g_hudLocSubDir[];    /* 0x6591F0 */
-extern char g_hudDataSubDir[];   /* 0x659240 */
+char g_hudLocSubDir[64] = "hud/";    /* 0x6591F0 */
+char g_hudDataSubDir[64] = "data/";  /* 0x659240 */
 
 /* Countdown sprite globals       @ 0x5B07B8 / 0x5B07BC */
-extern int g_countdownW;         /* 0x5B07B8 */
-extern int g_countdownH;         /* 0x5B07BC */
+int g_countdownW = 64;          /* 0x5B07B8 */
+int g_countdownH = 64;          /* 0x5B07BC */
+
+int g_hud2Param0 = 0;
+float g_speedX = 0.0f;
+float g_speedY = 0.0f;
+float g_speedZ = 0.0f;
+int g_factoryPeopleX = 0;
+int g_factoryPeopleY = 0;
+int g_factoryPeopleW = 32;
+int g_factoryPeopleH = 32;
 
 /* -------------------------------------------------------------------------
  * Internal helpers
  * ------------------------------------------------------------------------- */
-static void  *nfs_malloc(uint32_t sz);                       /* 0x59D490 */
-static int    nfs_sprintf(char *d, const char *fmt, ...);    /* 0x59F4CF */
-static int    nfs_file_exists(const char *path);             /* 0x59C120 */
-static void   nfs_fclose_buf(char *buf, int size);           /* 0x59C6A0 */
-static void   nfs_fload(void *dst, int sz, void *src);       /* 0x59C530 */
-static void   nfs_fread2(int a, int b, void *c);             /* 0x59C620 */
-static void  *nfs_fopen_loc(const char *path, int fl);       /* 0x59BDD0 */
-static void   nfs_parse_loc(void *dst, void *src, int fl);   /* 0x535340 */
-static void   nfs_get_cdpath(char *out);                     /* 0x4B6870 */
+#include <stdarg.h>
+
+static void *nfs_malloc(uint32_t sz) {
+    return malloc(sz);
+}
+
+static int nfs_sprintf(char *d, const char *fmt, ...) {
+    va_list ap;
+    va_start(ap, fmt);
+    int res = vsprintf(d, fmt, ap);
+    va_end(ap);
+    return res;
+}
+
+static int nfs_file_exists(const char *path) {
+    FILE *f = fopen(path, "rb");
+    if (f) { fclose(f); return 1; }
+    return 0;
+}
+
+static void nfs_fclose_buf(char *buf, int size) {
+    (void)buf; (void)size;
+}
+
+static void nfs_fload(void *dst, int sz, void *src) {
+    (void)dst; (void)sz; (void)src;
+}
+
+static void nfs_fread2(int a, int b, void *c) {
+    (void)a; (void)b; (void)c;
+}
+
+static void *nfs_fopen_loc(const char *path, int fl) {
+    (void)path; (void)fl;
+    return malloc(64);
+}
+
+static void nfs_parse_loc(void *dst, void *src, int fl) {
+    (void)dst; (void)src; (void)fl;
+}
+
+static void nfs_get_cdpath(char *out) {
+    if (out) strcpy(out, "./");
+}
+
+int HUD_Init(void) {
+    g_locLoaded = 1;
+    g_hudAlreadyLoaded = 1;
+    return 1;
+}
+
+void HUD_Shutdown(void) {
+    if (g_locFile) {
+        free(g_locFile);
+        g_locFile = NULL;
+    }
+    if (g_locListA) {
+        free(g_locListA);
+        g_locListA = NULL;
+    }
+    if (g_locListB) {
+        free(g_locListB);
+        g_locListB = NULL;
+    }
+    g_locLoaded = 0;
+    g_hudAlreadyLoaded = 0;
+}
+
+int HUD_IsLoaded(void) {
+    return g_locLoaded;
+}
+
+int HUD_GetCountdownWidth(void) {
+    return g_countdownW;
+}
+
+int HUD_GetCountdownHeight(void) {
+    return g_countdownH;
+}
+
+void HUD_PrepareState(void) {
+}
 
 /* HUD sprite draw               @ 0x422DF0 */
 void HUD_DrawNamedSprite(const char *name,
                          int x, int y, int w, int h,
-                         int frame, int alpha, int flipX, int flipY);
+                         int frame, int alpha, int flipX, int flipY)
+{
+    (void)name; (void)x; (void)y; (void)w; (void)h;
+    (void)frame; (void)alpha; (void)flipX; (void)flipY;
+}
 
 /* -------------------------------------------------------------------------
  * 0x0041E130  HUD_GetScreenWidth  (16 bytes)
@@ -466,5 +556,10 @@ int HUD_sub_4208e0(void) { return 0; }
 uint64_t HUD_sub_420900(void) { return ((uint64_t)0x1B << 32) | 0x78; }
 int HUD_sub_420910(void) { return 0; }
 int HUD_sub_420930(void) { return 0; }
+
+void sub_00425740(void)
+{
+}
+
 
 

@@ -1,4 +1,5 @@
 #include "ogl_main.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 void THRASH_window(THRASH_HWND hwnd) {
@@ -14,15 +15,84 @@ int THRASH_setvideomode(int w, int h, int bpp) {
     ogl_height = h;
     ogl_bpp = bpp;
 
+    const char *win_env = getenv("NFS5_WINDOWED");
+    if (!win_env) win_env = getenv("THRASH_WINDOWED");
+    int windowed = (win_env && (strcmp(win_env, "1") == 0 || strcmp(win_env, "true") == 0 || strcmp(win_env, "yes") == 0));
+    ogl_fullscreen = !windowed;
+
 #ifdef _WIN32
     if (!ogl_hwnd) {
-        ogl_hwnd = GetActiveWindow();
-        if (!ogl_hwnd) ogl_hwnd = GetForegroundWindow();
+        static int class_registered = 0;
+        const char *cls_name = "NFS5_THRASH_GL";
+        HINSTANCE hInst = GetModuleHandleA(NULL);
+        if (!class_registered) {
+            WNDCLASSA wc = {0};
+            wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+            wc.lpfnWndProc = DefWindowProcA;
+            wc.hInstance = hInst;
+            wc.lpszClassName = cls_name;
+            wc.hCursor = LoadCursorA(NULL, IDC_ARROW);
+            RegisterClassA(&wc);
+            class_registered = 1;
+        }
+
+        int screen_w = GetSystemMetrics(SM_CXSCREEN);
+        int screen_h = GetSystemMetrics(SM_CYSCREEN);
+        if (screen_w <= 0) screen_w = w;
+        if (screen_h <= 0) screen_h = h;
+
+        int win_x = 0, win_y = 0, win_w = screen_w, win_h = screen_h;
+        DWORD dwStyle = WS_POPUP | WS_VISIBLE;
+        DWORD dwExStyle = WS_EX_APPWINDOW;
+
+        if (windowed) {
+            dwExStyle = 0;
+            dwStyle = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
+            RECT rc = { 0, 0, w, h };
+            AdjustWindowRect(&rc, dwStyle, FALSE);
+            win_w = rc.right - rc.left;
+            win_h = rc.bottom - rc.top;
+            win_x = (screen_w - win_w) / 2;
+            win_y = (screen_h - win_h) / 2;
+            if (win_x < 0) win_x = CW_USEDEFAULT;
+            if (win_y < 0) win_y = CW_USEDEFAULT;
+        }
+
+        ogl_hwnd = CreateWindowExA(
+            dwExStyle, cls_name, "Need for Speed: Porsche Unleashed",
+            dwStyle,
+            win_x, win_y, win_w, win_h,
+            NULL, NULL, hInst, NULL
+        );
+        if (ogl_hwnd) {
+            ShowWindow(ogl_hwnd, SW_SHOW);
+            SetForegroundWindow(ogl_hwnd);
+            SetFocus(ogl_hwnd);
+            UpdateWindow(ogl_hwnd);
+
+            MSG msg;
+            while (PeekMessageA(&msg, NULL, 0, 0, PM_REMOVE)) {
+                TranslateMessage(&msg);
+                DispatchMessageA(&msg);
+            }
+        }
     }
     if (!ogl_hwnd) return 0;
 
+    RECT client_rc = { 0 };
+    GetClientRect(ogl_hwnd, &client_rc);
+    int disp_w = client_rc.right - client_rc.left;
+    int disp_h = client_rc.bottom - client_rc.top;
+    if (disp_w <= 0) disp_w = w;
+    if (disp_h <= 0) disp_h = h;
+    ogl_disp_w = disp_w;
+    ogl_disp_h = disp_h;
+
     ogl_hdc = GetDC(ogl_hwnd);
-    if (!ogl_hdc) return 0;
+    if (!ogl_hdc) {
+        fprintf(stderr, "THRASH_setvideomode: GetDC failed (err=%lu)\n", GetLastError());
+        return 0;
+    }
 
     PIXELFORMATDESCRIPTOR pfd = {
         sizeof(PIXELFORMATDESCRIPTOR),
@@ -44,30 +114,59 @@ int THRASH_setvideomode(int w, int h, int bpp) {
     };
 
     int format = ChoosePixelFormat(ogl_hdc, &pfd);
-    if (!format) return 0;
-    SetPixelFormat(ogl_hdc, format, &pfd);
+    if (!format) {
+        pfd.cColorBits = 32;
+        format = ChoosePixelFormat(ogl_hdc, &pfd);
+    }
+    if (!format) {
+        fprintf(stderr, "THRASH_setvideomode: ChoosePixelFormat failed (err=%lu)\n", GetLastError());
+        return 0;
+    }
+    int current_format = GetPixelFormat(ogl_hdc);
+    if (current_format == 0) {
+        if (!SetPixelFormat(ogl_hdc, format, &pfd)) {
+            fprintf(stderr, "THRASH_setvideomode: SetPixelFormat failed (err=%lu, format=%d)\n", GetLastError(), format);
+            return 0;
+        }
+    }
 
     ogl_hglrc = wglCreateContext(ogl_hdc);
-    if (!ogl_hglrc) return 0;
-    wglMakeCurrent(ogl_hdc, ogl_hglrc);
+    if (!ogl_hglrc) {
+        fprintf(stderr, "THRASH_setvideomode: wglCreateContext failed (err=%lu)\n", GetLastError());
+        return 0;
+    }
+    if (!wglMakeCurrent(ogl_hdc, ogl_hglrc)) {
+        fprintf(stderr, "THRASH_setvideomode: wglMakeCurrent failed (err=%lu)\n", GetLastError());
+        return 0;
+    }
 
 #else
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-    ogl_window = SDL_CreateWindow("NFS: Porsche Unleashed (THRASH GL)",
+    Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
+    if (ogl_fullscreen) {
+        flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+    }
+
+    ogl_window = SDL_CreateWindow("Need for Speed: Porsche Unleashed",
                                   SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                  w, h, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+                                  w, h, flags);
     if (!ogl_window) return 0;
 
     ogl_context = SDL_GL_CreateContext(ogl_window);
     if (!ogl_context) return 0;
+
+    int disp_w = w, disp_h = h;
+    SDL_GL_GetDrawableSize(ogl_window, &disp_w, &disp_h);
+    ogl_disp_w = disp_w;
+    ogl_disp_h = disp_h;
 #endif
 
-    glViewport(0, 0, w, h);
+    glViewport(0, 0, ogl_disp_w, ogl_disp_h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0, w, h, 0, -1, 1); // 2D screen space
+    glOrtho(0, w, h, 0, -1, 1); // 2D screen space (virtual 640x480)
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -101,9 +200,9 @@ void THRASH_pageflip(void) {
 }
 
 void* THRASH_lockwindow(void) {
-    void* buffer = malloc(ogl_width * ogl_height * 4);
+    void* buffer = malloc(ogl_disp_w * ogl_disp_h * 4);
     if (buffer) {
-        glReadPixels(0, 0, ogl_width, ogl_height, GL_BGRA, GL_UNSIGNED_BYTE, buffer);
+        glReadPixels(0, 0, ogl_disp_w, ogl_disp_h, GL_BGRA, GL_UNSIGNED_BYTE, buffer);
     }
     return buffer;
 }
@@ -115,6 +214,11 @@ void THRASH_unlockwindow(int flip) {
 }
 
 void THRASH_clip(int x, int y, int w, int h) {
-    glScissor(x, ogl_height - (y + h), w, h);
+    if (ogl_width <= 0 || ogl_height <= 0) return;
+    int sx = (int)((float)x * (float)ogl_disp_w / (float)ogl_width);
+    int sy = (int)((float)(ogl_height - (y + h)) * (float)ogl_disp_h / (float)ogl_height);
+    int sw = (int)((float)w * (float)ogl_disp_w / (float)ogl_width);
+    int sh = (int)((float)h * (float)ogl_disp_h / (float)ogl_height);
+    glScissor(sx, sy, sw, sh);
     glEnable(GL_SCISSOR_TEST);
 }

@@ -290,5 +290,21 @@ void FEINTRO_sub_4de770(void *obj)                          /* VA: 0x004DE770 */
     }
 }
 
+static int g_moviePlaying = 0;
+static int g_frameCount = 30;
+
+void FEIntro_StopMovie(void) {
+    g_moviePlaying = 0;
 }
+
+int FEIntro_IsPlaying(void) {
+    return g_moviePlaying;
+}
+
+int FEIntro_GetFrameCount(void) {
+    return g_frameCount;
+}
+
+}
+
 

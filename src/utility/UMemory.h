@@ -10,6 +10,7 @@ bool UMemory_Init(size_t min_mb);
 void UMemory_Shutdown();
 void* UMemory_Alloc(size_t size, const char *file = nullptr, int line = 0);
 void  UMemory_Free(void *ptr);
+size_t UMemory_GetAllocatedBytes();
 
 class FastBlock {
 public:
@@ -17,6 +18,8 @@ public:
     ~FastBlock();
     void* Allocate();
     void  Deallocate(void *ptr);
+    size_t GetBlockSize() const;
+    size_t GetCount() const;
 
 private:
     size_t m_blockSize;

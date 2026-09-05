@@ -38,6 +38,8 @@ extern int ogl_width;
 extern int ogl_height;
 extern int ogl_bpp;
 extern int ogl_fullscreen;
+extern int ogl_disp_w;
+extern int ogl_disp_h;
 extern THRASHTEXTURE* ogl_current_texture;
 
 // Texture pool

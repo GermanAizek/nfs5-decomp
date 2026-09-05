@@ -41,6 +41,15 @@ extern "C" {
  *   0x00432EBD  HUD_DrawSpeed           (856 bytes) - "%.1f %.1f %.1f"
  * ------------------------------------------------------------------------- */
 
+/* HUD subsystem lifecycle */
+int  HUD_Init(void);
+void HUD_Shutdown(void);
+int  HUD_IsLoaded(void);
+int  HUD_GetScreenWidth(int val);
+int  HUD_Clamp127(int val);
+int  HUD_GetCountdownWidth(void);
+int  HUD_GetCountdownHeight(void);
+
 /* HUD .loc file loading */
 void HUD_LoadLocFile(int width, int height, int flags, const char *subDir);
 

@@ -4,6 +4,10 @@ project(NFS5 C CXX)
 set(CMAKE_C_STANDARD   11)
 set(CMAKE_CXX_STANDARD 14)
 
+if(WIN32)
+    add_link_options(-static-libgcc -static-libstdc++)
+endif()
+
 # ── Output: put DLL/SO directly into Drivers/ ────────────────────────
 set(DRIVER_OUTPUT_DIR "${CMAKE_SOURCE_DIR}/Drivers")
 file(MAKE_DIRECTORY "${DRIVER_OUTPUT_DIR}")
@@ -171,7 +175,6 @@ if(BUILD_ENGINE)
         src/real/patch3/pc/tcp.c
         src/utility/UMemory.cpp
         src/frontend/fert/src/Window.cpp
-        src/frontend/fert/src/FEMainScreen.cpp
         src/frontend/common/Src/FEError.cpp
         src/frontend/common/Src/FEIntro.cpp
         src/game/Common/Render/RBillBoard.cpp
@@ -207,12 +210,50 @@ if(BUILD_ENGINE)
         src/engine/input/input.c
         src/engine/system/timer.c
         src/engine/audio/audio.c
-        src/engine/gamedata/cardata.c
-        src/engine/gamedata/trackdata.c
-        src/engine/gamedata/dashhud.c
         src/engine/reallib_stubs.c
         src/game/world/track_select.c
         src/game/hud/hud.c
+        src/game/replay/replay.c
+        src/game/world/sky.c
+        src/game/world/skilltest.c
+        src/frontend/common/Src/fe_game_options.c
+        src/frontend/common/Src/fe_credits.c
+        src/frontend/common/Src/fe_options.c
+        src/frontend/common/Src/fe_career.c
+        src/frontend/common/Src/fe_showcase.c
+        src/frontend/common/Src/fe_chronicle.c
+        src/frontend/common/Src/fe_font.c
+        src/frontend/common/Src/fe_practice.c
+        src/frontend/common/Src/fe_tournament.c
+        src/frontend/common/Src/fe_accessors.c
+        src/game/career/career.c
+        src/frontend/common/Src/fe_game_setup.c
+        src/frontend/common/Src/fe_race_model.c
+        src/frontend/common/Src/fe_dealership.c
+        src/frontend/common/Src/fe_stats.c
+        src/game/race/race_result.c
+        src/game/net/net_packet.c
+        src/game/car/physics_parts.c
+        src/game/world/scene.c
+        src/engine/runtime_stubs.c
+        src/frontend/common/Src/fe_car_list.c
+        src/frontend/common/Src/fe_movie.c
+        src/frontend/common/Src/fe_comms.c
+        src/frontend/common/Src/fe_lobby.c
+        src/frontend/common/Src/fe_track_select.c
+        src/game/race/race_finish.c
+        src/frontend/common/Src/fe_car_setup.c
+        src/game/net/nfsnet.c
+        src/game/car/livery.c
+        src/game/race/race.c
+        src/game/ai/ai.c
+        src/game/world/bworld.c
+        src/game/car/carspecs.c
+        src/game/world/wanimation.c
+        src/game/render/thrash_init.c
+        src/game/world/envmap.c
+        src/game/world/wworld.c
+        src/frontend/common/Src/fe_garage.c
     )
 
     add_library(nfs5engine STATIC ${ENGINE_SOURCES})
@@ -224,7 +265,6 @@ if(BUILD_ENGINE)
         src/engine/input
         src/engine/system
         src/engine/audio
-        src/engine/gamedata
         src/engine/compat
         src/real/cmn
         src/real/pc
@@ -232,6 +272,14 @@ if(BUILD_ENGINE)
         src/real/patch3/pc
         src/game/hud
         src/game/world
+        src/game/replay
+        src/game/career
+        src/game/race
+        src/game/net
+        src/game/car
+        src/game/ai
+        src/game/render
+        src/frontend/common/Src
         ${SDL2_INCLUDE_DIRS}
     )
 
@@ -240,7 +288,7 @@ if(BUILD_ENGINE)
     if(UNIX)
         target_link_libraries(nfs5engine dl pthread m ${SDL2_LIBRARIES})
 
-        add_executable(nfs5 src/engine/main.c)
+        add_executable(nfs5 src/engine/entry.c)
         target_include_directories(nfs5 PRIVATE
             src/thrash
             src/engine
@@ -248,7 +296,6 @@ if(BUILD_ENGINE)
             src/engine/input
             src/engine/system
             src/engine/audio
-            src/engine/gamedata
             src/real/cmn
             src/real/pc
             src/real/patch3/cmn
@@ -271,7 +318,45 @@ if(BUILD_ENGINE)
             INSTALL_RPATH "${DRIVER_OUTPUT_DIR}"
         )
     else()
-        target_link_libraries(nfs5engine user32 gdi32 reallib)
+        target_link_libraries(nfs5engine user32 gdi32 winmm ddraw dxguid version reallib)
+
+        add_executable(nfs5 WIN32 src/engine/entry.c)
+        target_include_directories(nfs5 PRIVATE
+            src/thrash
+            src/engine
+            src/engine/file
+            src/engine/input
+            src/engine/system
+            src/engine/audio
+            src/real/cmn
+            src/real/pc
+            src/real/patch3/cmn
+            src/real/patch3/pc
+        )
+        target_link_options(nfs5 PRIVATE -mwindows)
+        target_link_libraries(nfs5
+            nfs5engine
+            reallib
+            nfs5engine
+            ${OPENGL_LIBRARIES}
+            user32
+            gdi32
+            winmm
+            ddraw
+            dxguid
+            version
+        )
+        set_target_properties(nfs5 PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}"
+            OUTPUT_NAME "Porsche"
+            SUFFIX ".exe"
+        )
+        add_custom_command(TARGET nfs5 POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${CMAKE_SOURCE_DIR}/Porsche.exe"
+                "${CMAKE_SOURCE_DIR}/nfs5.exe"
+            COMMENT "Creating nfs5.exe alias of Porsche.exe"
+        )
     endif()
 
     target_compile_definitions(nfs5engine PRIVATE
@@ -294,22 +379,50 @@ if(BUILD_ENGINE)
         src/game/Common/Render
         src/game/hud
         src/game/world
+        src/game/replay
+        src/game/career
+        src/game/race
+        src/game/net
+        src/game/car
         ${SDL2_INCLUDE_DIRS}
     )
-    target_link_libraries(test_reallib
-        reallib
-        nfs5engine
-        ${OPENGL_LIBRARIES}
-        ${SDL2_LIBRARIES}
-        dl
-        pthread
-        m
-    )
+    if(WIN32)
+        target_link_options(test_reallib PRIVATE "-Wl,--allow-multiple-definition")
+        target_link_libraries(test_reallib
+            reallib
+            nfs5engine
+            ${OPENGL_LIBRARIES}
+            user32
+            gdi32
+            winmm
+            ddraw
+            dxguid
+            version
+        )
+        set_target_properties(test_reallib PROPERTIES
+            SUFFIX ".exe"
+        )
+    else()
+        target_link_libraries(test_reallib
+            reallib
+            nfs5engine
+            ${OPENGL_LIBRARIES}
+            ${SDL2_LIBRARIES}
+            dl
+            pthread
+            m
+        )
+    endif()
 
     add_executable(test_rtti tests/test_rtti.cpp)
     target_include_directories(test_rtti PRIVATE
         src/rtti_classes
     )
+    if(WIN32)
+        set_target_properties(test_rtti PROPERTIES
+            SUFFIX ".exe"
+        )
+    endif()
 
     enable_testing()
     add_test(NAME TestReallib COMMAND test_reallib)
@@ -319,6 +432,11 @@ if(BUILD_ENGINE)
     set_tests_properties(TestReallib TestRTTI TestMatchedFunctions TestAllBinaryFunctions PROPERTIES
         WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     )
+    if(WIN32)
+        set_tests_properties(TestReallib TestRTTI PROPERTIES
+            ENVIRONMENT "WINEPREFIX=${CMAKE_SOURCE_DIR}/.wine_test"
+        )
+    endif()
 endif()
 
 
