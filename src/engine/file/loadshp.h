@@ -13,6 +13,8 @@ typedef struct {
     char name[5];
     int width;
     int height;
+    int xpos;
+    int ypos;
     int format;
     uint32_t *rgba_pixels;
     THRASHTEXTURE *thrash_tex;

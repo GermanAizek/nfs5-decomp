@@ -26,7 +26,9 @@ void     FEIntro_StopMovie(void);
 int      FEIntro_IsPlaying(void);
 int      FEIntro_GetFrameCount(void);
 void     FEIntro_Play(void);
+void     sub_004DC630(void);                                     /* VA: 0x004DC630 */
 void     sub_004DC790(void);                                     /* VA: 0x004DC790 */
+int      showmad(const char *filename, int *pStatus, int arg3, int arg4, int arg5); /* VA: 0x004DB9E0 */
 
 #ifdef __cplusplus
 }

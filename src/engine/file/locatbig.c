@@ -33,13 +33,20 @@ int QFS_IsCompressed(const uint8_t *src, size_t src_size)
 size_t QFS_GetDecompressedSize(const uint8_t *src, size_t src_size)
 {
     if (!QFS_IsCompressed(src, src_size)) return 0;
-    int has_large_sz = src[0] & 0x01;
-    if (has_large_sz) {
-        if (src_size < 5) return 0;
-        return ((size_t)src[2] << 16) | ((size_t)src[3] << 8) | (size_t)src[4];
+    size_t in_pos = 2;
+    if (src[0] & 0x01) {
+        /* 3-byte compressed size present */
+        in_pos += 3;
+    }
+    if (src[0] & 0x80) {
+        /* 4-byte decompressed size */
+        if (src_size < in_pos + 4) return 0;
+        return ((size_t)src[in_pos] << 24) | ((size_t)src[in_pos + 1] << 16) |
+               ((size_t)src[in_pos + 2] << 8) | (size_t)src[in_pos + 3];
     } else {
-        if (src_size < 4) return 0;
-        return ((size_t)src[2] << 8) | (size_t)src[3];
+        /* 3-byte decompressed size */
+        if (src_size < in_pos + 3) return 0;
+        return ((size_t)src[in_pos] << 16) | ((size_t)src[in_pos + 1] << 8) | (size_t)src[in_pos + 2];
     }
 }
 
@@ -48,33 +55,40 @@ int QFS_Decompress(const uint8_t *src, size_t src_size, uint8_t *dst, size_t dst
     if (!src || !dst || src_size < 4) return 0;
     if (src[1] != 0xFB) return 0;
 
-    int has_large_sz = src[0] & 0x01;
-    int has_comp_sz  = src[0] & 0x80;
-
     size_t in_pos = 2;
-    if (has_large_sz) in_pos += 3;
-    else in_pos += 2;
-
-    if (has_comp_sz) in_pos += 3;
+    if (src[0] & 0x01) {
+        in_pos += 3;
+    }
+    if (src[0] & 0x80) {
+        in_pos += 4;
+    } else {
+        in_pos += 3;
+    }
 
     size_t out_pos = 0;
 
     while (in_pos < src_size && out_pos < dst_size) {
         uint8_t byte0 = src[in_pos++];
         if (byte0 >= 0xFC) {
-            /* 1-byte control: 0..3 literals */
+            /* Stop / 0..3 literals */
             int lit_len = byte0 & 0x03;
             while (lit_len-- && in_pos < src_size && out_pos < dst_size) {
                 dst[out_pos++] = src[in_pos++];
             }
             break;
         } else if (byte0 >= 0xE0) {
-            /* 4-byte command: 0..3 literals, copy 4..1028 bytes from offset 0..131071 */
+            /* Literal run: ((byte0 & 0x1F) * 4) + 4 */
+            int lit_len = ((byte0 & 0x1F) * 4) + 4;
+            while (lit_len-- && in_pos < src_size && out_pos < dst_size) {
+                dst[out_pos++] = src[in_pos++];
+            }
+        } else if (byte0 >= 0xC0) {
+            /* 4-byte command */
             if (in_pos + 3 > src_size) break;
             uint8_t byte1 = src[in_pos++];
             uint8_t byte2 = src[in_pos++];
             uint8_t byte3 = src[in_pos++];
-            int lit_len = (byte0 & 0x03);
+            int lit_len = byte0 & 0x03;
             int copy_len = (((byte0 & 0x0C) << 6) | byte3) + 5;
             int offset = (((byte0 & 0x10) << 12) | ((int)byte1 << 8) | byte2) + 1;
 
@@ -85,29 +99,14 @@ int QFS_Decompress(const uint8_t *src, size_t src_size, uint8_t *dst, size_t dst
                 dst[out_pos] = (out_pos >= (size_t)offset) ? dst[out_pos - offset] : 0;
                 out_pos++;
             }
-        } else if (byte0 >= 0xC0) {
-            /* 3-byte command: 0..3 literals, copy 3..66 bytes from offset 0..16383 */
+        } else if (byte0 >= 0x80) {
+            /* 3-byte command */
             if (in_pos + 2 > src_size) break;
             uint8_t byte1 = src[in_pos++];
             uint8_t byte2 = src[in_pos++];
-            int lit_len = (byte0 & 0x03);
-            int copy_len = (byte0 & 0x3C) + 4;
-            int offset = (((byte0 & 0x00) << 8) | ((int)byte1 << 8) | byte2) + 1;
-
-            while (lit_len-- && in_pos < src_size && out_pos < dst_size) {
-                dst[out_pos++] = src[in_pos++];
-            }
-            while (copy_len-- && out_pos < dst_size) {
-                dst[out_pos] = (out_pos >= (size_t)offset) ? dst[out_pos - offset] : 0;
-                out_pos++;
-            }
-        } else if (byte0 >= 0x80) {
-            /* 2-byte command: 0..3 literals, copy 3..10 bytes from offset 0..1023 */
-            if (in_pos + 1 > src_size) break;
-            uint8_t byte1 = src[in_pos++];
             int lit_len = (byte1 >> 6) & 0x03;
-            int copy_len = (byte0 & 0x1F) + 3;
-            int offset = (((byte0 & 0x60) << 3) | (byte1 & 0x3F)) + 1;
+            int copy_len = (byte0 & 0x3F) + 4;
+            int offset = (((byte1 & 0x3F) << 8) | byte2) + 1;
 
             while (lit_len-- && in_pos < src_size && out_pos < dst_size) {
                 dst[out_pos++] = src[in_pos++];
@@ -117,10 +116,10 @@ int QFS_Decompress(const uint8_t *src, size_t src_size, uint8_t *dst, size_t dst
                 out_pos++;
             }
         } else {
-            /* 0..0x7F: short copy */
+            /* 2-byte command (0x00..0x7F) */
             if (in_pos >= src_size) break;
             uint8_t byte1 = src[in_pos++];
-            int lit_len = (byte0 & 0x03);
+            int lit_len = byte0 & 0x03;
             int copy_len = ((byte0 >> 2) & 0x07) + 3;
             int offset = (((byte0 & 0x60) << 3) | byte1) + 1;
 

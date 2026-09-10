@@ -193,11 +193,12 @@ extern void sub_004DC790(void);
 extern void sub_004D0E10(void);
 extern void sub_004D0F10(void);
 extern void* sub_004FAA30(void);
+extern int FELayout_RunMenu(void);
 
 /* -------------------------------------------------------------------------
  * sub_004D27B0 (0x004D27B0, 1353 bytes)
  * Module: track_select.c
- * Authentic Frontend initialization (scans tracks, sets viewport)
+ * Authentic Frontend initialization (scans tracks, sets viewport, runs layouts)
  * ------------------------------------------------------------------------- */
 int sub_004D27B0(const char *cfg, void *stream, int mode)
 {
@@ -211,7 +212,8 @@ int sub_004D27B0(const char *cfg, void *stream, int mode)
     /* Authentic Frontend subsystem initialization / track scanning (Porsche.exe 0x004D2A49) */
     sub_004FAA30();
 
-    return 0;
+    /* Run authentic Frontend layout menu (selectname.lay -> createplayer.lay) */
+    return FELayout_RunMenu();
 }
 
 extern void sub_00471E60(void);

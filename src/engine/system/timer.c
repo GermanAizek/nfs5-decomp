@@ -2,21 +2,27 @@
 #ifdef _WIN32
 #include <windows.h>
 
-static LARGE_INTEGER g_freq;
-static LARGE_INTEGER g_start_time;
+static LARGE_INTEGER g_freq = {0};
+static LARGE_INTEGER g_start_time = {0};
 static double g_last_frame_time = 0.0;
+static int g_initialized = 0;
 
 void Timer_Init(void)
 {
     QueryPerformanceFrequency(&g_freq);
     QueryPerformanceCounter(&g_start_time);
-    g_last_frame_time = Timer_GetSeconds();
+    g_initialized = 1;
+    g_last_frame_time = 0.0;
 }
 
 double Timer_GetSeconds(void)
 {
+    if (!g_initialized || g_freq.QuadPart == 0) {
+        Timer_Init();
+    }
     LARGE_INTEGER now;
     QueryPerformanceCounter(&now);
+    if (g_freq.QuadPart == 0) return 0.0;
     return (double)(now.QuadPart - g_start_time.QuadPart) / (double)g_freq.QuadPart;
 }
 #else
@@ -25,15 +31,20 @@ double Timer_GetSeconds(void)
 
 static struct timespec g_start_time;
 static double g_last_frame_time = 0.0;
+static int g_initialized = 0;
 
 void Timer_Init(void)
 {
     clock_gettime(CLOCK_MONOTONIC, &g_start_time);
-    g_last_frame_time = Timer_GetSeconds();
+    g_initialized = 1;
+    g_last_frame_time = 0.0;
 }
 
 double Timer_GetSeconds(void)
 {
+    if (!g_initialized) {
+        Timer_Init();
+    }
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
     return (double)(ts.tv_sec - g_start_time.tv_sec) +
@@ -43,7 +54,11 @@ double Timer_GetSeconds(void)
 
 uint32_t Timer_GetTicksMs(void)
 {
+#ifdef _WIN32
+    return (uint32_t)GetTickCount();
+#else
     return (uint32_t)(Timer_GetSeconds() * 1000.0);
+#endif
 }
 
 float Timer_UpdateDelta(void)

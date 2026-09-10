@@ -52,6 +52,13 @@ int AI_GetOpponentCount(void)
     return s_numOpponents;
 }
 
+void AI_SetOpponentCount(int count)
+{
+    if (count < 1) count = 1;
+    if (count > 7) count = 7;
+    s_numOpponents = count;
+}
+
 void AI_SetDifficulty(int difficulty)
 {
     s_aiDifficulty = difficulty;

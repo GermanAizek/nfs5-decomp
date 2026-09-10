@@ -1,6 +1,7 @@
 /* \real\cmn\loadshp.c */
 #include "loadshp.h"
 #include "../../engine/file/vfs.h"
+#include "../../engine/file/locatbig.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,13 +15,17 @@ struct SHAPE_Header {
 
 static uint32_t decode_pixel(uint16_t c, int type)
 {
+    if (c == 0x0001) {
+        return 0;
+    }
     uint32_t a, r, g, b;
-    if (type == 0x6D) {
+    int base_type = type & 0x7F;
+    if (base_type == 0x6D) {
         a = ((c >> 12) & 0xF) * 17;
         r = ((c >> 8) & 0xF) * 17;
         g = ((c >> 4) & 0xF) * 17;
         b = (c & 0xF) * 17;
-    } else if (type == 0x7E) {
+    } else if (base_type == 0x7E) {
         a = (c & 0x8000) ? 255 : 0;
         r = ((c >> 10) & 0x1F) * 255 / 31;
         g = ((c >> 5) & 0x1F) * 255 / 31;
@@ -90,15 +95,75 @@ SHAPE_Header* SHAPE_loadfile(const char *filename)
         if (num_pix > 0 && num_pix < 4096 * 4096) {
             shp->entries[i].pixels = (uint32_t*)malloc(num_pix * 4);
             if (shp->entries[i].pixels) {
-                if (rec_type == 0x7D) {
+                const uint8_t *pixel_src = buf + rec_off + 16;
+                uint8_t *decomp_pixels = NULL;
+                if (rec_off + 16 < sz && QFS_IsCompressed(pixel_src, sz - (rec_off + 16))) {
+                    size_t dsz = QFS_GetDecompressedSize(pixel_src, sz - (rec_off + 16));
+                    if (dsz > 0) {
+                        decomp_pixels = (uint8_t*)malloc(dsz);
+                        if (decomp_pixels) {
+                            if (QFS_Decompress(pixel_src, sz - (rec_off + 16), decomp_pixels, dsz)) {
+                                pixel_src = decomp_pixels;
+                            } else {
+                                free(decomp_pixels);
+                                decomp_pixels = NULL;
+                            }
+                        }
+                    }
+                }
+
+                if (rec_type == 0x7D || (rec_type & 0x7F) == 0x7D) {
                     /* 32-bit direct */
-                    memcpy(shp->entries[i].pixels, buf + rec_off + 16, num_pix * 4);
+                    memcpy(shp->entries[i].pixels, pixel_src, num_pix * 4);
+                } else if (rec_type == 0x7B || (rec_type & 0x7F) == 0x7B) {
+                    /* 8-bit paletted */
+                    const uint8_t *src8 = pixel_src;
+                    uint32_t pal32[256];
+                    for (int c = 0; c < 256; c++) pal32[c] = 0xFF000000 | ((uint32_t)c << 16) | ((uint32_t)c << 8) | c;
+                    uint32_t pal_rel = buf[rec_off + 1] | ((uint32_t)buf[rec_off + 2] << 8) | ((uint32_t)buf[rec_off + 3] << 16);
+                    size_t pal_off = (pal_rel > 0 && rec_off + pal_rel < sz) ? (rec_off + pal_rel) : (rec_off + 16 + num_pix);
+                    if (pal_off + 16 <= sz) {
+                        uint8_t pal_type = buf[pal_off];
+                        uint16_t pal_count = *(const uint16_t*)(buf + pal_off + 4);
+                        if (pal_count == 0 || pal_count > 256) pal_count = 256;
+                        if ((pal_type == 0x2A || pal_type == 0x24) && pal_off + 16 + pal_count * 4 <= sz) {
+                            const uint32_t *pal_raw = (const uint32_t*)(buf + pal_off + 16);
+                            for (int c = 0; c < pal_count; c++) pal32[c] = pal_raw[c];
+                        } else if (pal_type == 0x22 && pal_off + 16 + pal_count * 3 <= sz) {
+                            const uint8_t *pal_raw = buf + pal_off + 16;
+                            for (int c = 0; c < pal_count; c++) {
+                                pal32[c] = 0xFF000000 | ((uint32_t)pal_raw[c * 3 + 0] << 16) | ((uint32_t)pal_raw[c * 3 + 1] << 8) | pal_raw[c * 3 + 2];
+                            }
+                        } else if (pal_off + 16 + pal_count * 2 <= sz) {
+                            const uint16_t *pal16 = (const uint16_t*)(buf + pal_off + 16);
+                            int conv_type = (pal_type == 0x2D) ? 0x7E : 0x78;
+                            for (int c = 0; c < pal_count; c++) {
+                                pal32[c] = decode_pixel(pal16[c], conv_type);
+                            }
+                        }
+                    }
+                    for (size_t p = 0; p < num_pix; p++) {
+                        shp->entries[i].pixels[p] = pal32[src8[p]];
+                    }
+                } else if (rec_type == 0x7F || (rec_type & 0x7F) == 0x7F) {
+                    /* 24-bit direct BGR */
+                    const uint8_t *src8 = pixel_src;
+                    for (size_t p = 0; p < num_pix; p++) {
+                        uint8_t b = src8[p * 3 + 0];
+                        uint8_t g = src8[p * 3 + 1];
+                        uint8_t r = src8[p * 3 + 2];
+                        shp->entries[i].pixels[p] = 0xFF000000 | ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
+                    }
                 } else {
                     /* 16-bit packed */
-                    const uint16_t *src16 = (const uint16_t*)(buf + rec_off + 16);
+                    const uint16_t *src16 = (const uint16_t*)pixel_src;
                     for (size_t p = 0; p < num_pix; p++) {
                         shp->entries[i].pixels[p] = decode_pixel(src16[p], rec_type);
                     }
+                }
+
+                if (decomp_pixels) {
+                    free(decomp_pixels);
                 }
             }
         }

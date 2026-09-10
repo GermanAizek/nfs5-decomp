@@ -19,6 +19,12 @@ THRASHTEXTURE* THRASH_talloc(int w, int h, int fmt, int mips, void* pal) {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             
+#ifndef GL_CLAMP_TO_EDGE
+#define GL_CLAMP_TO_EDGE 0x812F
+#endif
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
             return &t->info;
         }
     }
@@ -42,22 +48,47 @@ void THRASH_treset(void) {
 }
 
 void THRASH_tupdate(THRASHTEXTURE* tex, void* data, int pitch) {
-    (void)pitch;
     if (!tex || !data) return;
     OGLTexture* t = (OGLTexture*)tex;
     glBindTexture(GL_TEXTURE_2D, t->gl_id);
 
     int gl_fmt = GL_BGRA;
     int gl_type = GL_UNSIGNED_BYTE;
+    int bpp = 4;
 
     switch(tex->format) {
-        case 1: gl_type = GL_UNSIGNED_SHORT_1_5_5_5_REV; break;
-        case 2: gl_type = GL_UNSIGNED_SHORT_4_4_4_4_REV; break;
-        case 3: gl_fmt = GL_RGB; gl_type = GL_UNSIGNED_SHORT_5_6_5; break;
-        case 4: gl_type = GL_UNSIGNED_BYTE; break;
+        case THRASHPF_ARGB1555:
+            gl_fmt = GL_BGRA;
+            gl_type = GL_UNSIGNED_SHORT_1_5_5_5_REV;
+            bpp = 2;
+            break;
+        case THRASHPF_ARGB4444:
+            gl_fmt = GL_BGRA;
+            gl_type = GL_UNSIGNED_SHORT_4_4_4_4_REV;
+            bpp = 2;
+            break;
+        case THRASHPF_RGB565:
+            gl_fmt = GL_RGB;
+            gl_type = GL_UNSIGNED_SHORT_5_6_5;
+            bpp = 2;
+            break;
+        case THRASHPF_ARGB8888:
+        default:
+            gl_fmt = GL_BGRA;
+            gl_type = GL_UNSIGNED_BYTE;
+            bpp = 4;
+            break;
+    }
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    if (pitch > 0 && bpp > 0 && pitch != tex->width * bpp) {
+        glPixelStorei(GL_UNPACK_ROW_LENGTH, pitch / bpp);
+    } else {
+        glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     }
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex->width, tex->height, 0, gl_fmt, gl_type, data);
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
 }
 
 void THRASH_settexture(THRASHTEXTURE* tex) {

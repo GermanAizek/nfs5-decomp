@@ -175,6 +175,8 @@ if(BUILD_ENGINE)
         src/real/patch3/pc/tcp.c
         src/utility/UMemory.cpp
         src/frontend/fert/src/Window.cpp
+        src/frontend/fert/src/FELayout.cpp
+        src/frontend/fert/src/FEGarage3D.cpp
         src/frontend/common/Src/FEError.cpp
         src/frontend/common/Src/FEIntro.cpp
         src/game/Common/Render/RBillBoard.cpp
@@ -207,6 +209,7 @@ if(BUILD_ENGINE)
     set(ENGINE_SOURCES
         src/engine/file/vfs.c
         src/engine/file/loadshp.c
+        src/engine/file/locatbig.c
         src/engine/input/input.c
         src/engine/system/timer.c
         src/engine/audio/audio.c

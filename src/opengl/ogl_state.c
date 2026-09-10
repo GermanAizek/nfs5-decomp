@@ -4,7 +4,10 @@ void THRASH_setstate(int id, int value) {
     ogl_state_values[id] = value;
     switch(id) {
         case 0: // ALPHA
-            if (value) {
+            if (value == 2) {
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+            } else if (value) {
                 glEnable(GL_BLEND);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             } else {
@@ -49,6 +52,16 @@ void THRASH_setstate(int id, int value) {
             break;
         }
         case 9: // TEXTURECLAMP
+            if (value) {
+#ifndef GL_CLAMP_TO_EDGE
+#define GL_CLAMP_TO_EDGE 0x812F
+#endif
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            } else {
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            }
             break;
         case 10: // ALPHATEST
             if (value) {

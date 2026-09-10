@@ -114,9 +114,16 @@ void sub_00467AA0(void)
     SET3D_shutdown();
 }
 
+#include "thrash.h"
+
 void sub_00468320(int a, int b, int c, int d)
 {
-    (void)a; (void)b; (void)c; (void)d;
+    (void)d;
+    if (a > 0 && b > 0) {
+        ThrashInit_SetVideoMode(a, b, c ? c : 16, 0);
+        THRASH_setvideomode(a, b, c ? c : 16);
+        THRASH_clip(0, 0, a, b);
+    }
 }
 
 void sub_00464390(void)

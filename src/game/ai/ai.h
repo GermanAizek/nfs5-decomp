@@ -37,6 +37,7 @@ void  AI_Init(int screenWidth);
 void  AI_Shutdown(void);
 void  AI_Update(float deltaSec);
 int   AI_GetOpponentCount(void);
+void  AI_SetOpponentCount(int count);
 void  AI_SetDifficulty(int difficulty);
 int   AI_GetDifficulty(void);
 void  AI_LoadCopFile(void);

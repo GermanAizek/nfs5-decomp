@@ -15,10 +15,24 @@ int THRASH_setvideomode(int w, int h, int bpp) {
     ogl_height = h;
     ogl_bpp = bpp;
 
+    const char *full_env = getenv("NFS5_FULLSCREEN");
+    if (!full_env) full_env = getenv("THRASH_FULLSCREEN");
     const char *win_env = getenv("NFS5_WINDOWED");
     if (!win_env) win_env = getenv("THRASH_WINDOWED");
-    int windowed = (win_env && (strcmp(win_env, "1") == 0 || strcmp(win_env, "true") == 0 || strcmp(win_env, "yes") == 0));
-    ogl_fullscreen = !windowed;
+    const char *driver = getenv("SDL_VIDEODRIVER");
+    int offscreen = (driver && strcmp(driver, "offscreen") == 0);
+
+    int is_fullscreen = 0;
+    if (full_env && (strcmp(full_env, "1") == 0 || strcmp(full_env, "true") == 0 || strcmp(full_env, "yes") == 0)) {
+        is_fullscreen = 1;
+    } else if (win_env && (strcmp(win_env, "0") == 0 || strcmp(win_env, "false") == 0 || strcmp(win_env, "no") == 0)) {
+        is_fullscreen = 1;
+    }
+    if (offscreen) {
+        is_fullscreen = 0;
+    }
+    ogl_fullscreen = is_fullscreen;
+    int windowed = !is_fullscreen;
 
 #ifdef _WIN32
     if (!ogl_hwnd) {
@@ -130,10 +144,12 @@ int THRASH_setvideomode(int w, int h, int bpp) {
         }
     }
 
-    ogl_hglrc = wglCreateContext(ogl_hdc);
     if (!ogl_hglrc) {
-        fprintf(stderr, "THRASH_setvideomode: wglCreateContext failed (err=%lu)\n", GetLastError());
-        return 0;
+        ogl_hglrc = wglCreateContext(ogl_hdc);
+        if (!ogl_hglrc) {
+            fprintf(stderr, "THRASH_setvideomode: wglCreateContext failed (err=%lu)\n", GetLastError());
+            return 0;
+        }
     }
     if (!wglMakeCurrent(ogl_hdc, ogl_hglrc)) {
         fprintf(stderr, "THRASH_setvideomode: wglMakeCurrent failed (err=%lu)\n", GetLastError());

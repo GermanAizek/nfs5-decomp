@@ -95,6 +95,10 @@ extern "C" {
 #include "../src/frontend/fert/src/Window.h"
 #include "../src/frontend/common/Src/FEError.h"
 #include "../src/frontend/common/Src/FEIntro.h"
+#include "../src/frontend/fert/src/FELayout.h"
+#include "../src/frontend/fert/src/FEGarage3D.h"
+#include "../src/engine/file/locatbig.h"
+#include "../src/engine/file/vfs.h"
 
 static int g_sync_counter = 0;
 static int test_task(void *ud, int delta) {
@@ -3972,6 +3976,151 @@ int main() {
     assert(FEIntro::InitRender(2) == true);
     assert(FEIntro::InitRender(10) == false); // Expects <= 4
 
+    // Test FELayout MenuManager state transitions and profile management
+    FERT::MenuManager &mm = FERT::MenuManager::Instance();
+    mm.Init();
+    assert(mm.GetState() == FERT::SCREEN_SELECT_NAME);
+    assert(mm.GetProfiles().size() >= 1);
+    assert(mm.GetSelectedProfileIndex() == 0);
+
+    // Transition to create player
+    mm.SetState(FERT::SCREEN_CREATE_PLAYER);
+    assert(mm.GetState() == FERT::SCREEN_CREATE_PLAYER);
+
+    // Add profile and transition back to select name
+    mm.AddProfile("TEST DRIVER", 3);
+    mm.SetState(FERT::SCREEN_SELECT_NAME);
+    assert(mm.GetState() == FERT::SCREEN_SELECT_NAME);
+    assert(mm.GetProfiles().size() >= 2);
+    assert(mm.GetSelectedProfileIndex() == (int)mm.GetProfiles().size() - 1);
+    assert(mm.GetProfiles().back().name == "TEST DRIVER");
+    assert(mm.GetProfiles().back().avatarIndex == 3);
+
+    // Remove profile
+    mm.RemoveCurrentProfile();
+    assert(mm.GetProfiles().size() >= 1);
+
+    // Test transition from SCREEN_SELECT_NAME to SCREEN_MAIN_MENU via CONTINUE button
+    assert(mm.GetState() == FERT::SCREEN_SELECT_NAME);
+    mm.SetRunning(true);
+    // Click CONTINUE button (x: 245..397, y: 392..410)
+    mm.HandleMouseDown(1, 250, 400);
+    assert(mm.GetState() == FERT::SCREEN_MAIN_MENU);
+
+    // In SCREEN_MAIN_MENU: test hover on singleplayer button (152, 47, 162, 18)
+    mm.HandleMouseMove(160, 55);
+    assert(mm.GetHoverMenuButton() == 0);
+
+    // Hover away from buttons
+    mm.HandleMouseMove(10, 10);
+    assert(mm.GetHoverMenuButton() == -1);
+
+    // Hover over multiplayer button (152, 71, 162, 18)
+    mm.HandleMouseMove(160, 75);
+    assert(mm.GetHoverMenuButton() == 1);
+
+    // Click singleplayer button (152, 47, 162, 18) -> Opens SCREEN_SINGLEPLAYER popup menu!
+    mm.HandleMouseDown(1, 160, 55);
+    assert(mm.GetState() == FERT::SCREEN_SINGLEPLAYER);
+
+    // Initial difficulty is 2 (expert)
+    assert(mm.GetDifficulty() == 2);
+    assert(AI_GetDifficulty() == 2);
+
+    // Hover over difficulty button (243, 206, 152, 18)
+    mm.HandleMouseMove(250, 210);
+    assert(mm.GetHoverSingleplayerButton() == 0);
+
+    // Click difficulty button: cycles to beginner (0)
+    mm.HandleMouseDown(1, 250, 210);
+    assert(mm.GetDifficulty() == 0);
+    assert(AI_GetDifficulty() == 0);
+
+    // Click difficulty button again: cycles to advanced (1)
+    mm.HandleMouseDown(1, 250, 210);
+    assert(mm.GetDifficulty() == 1);
+    assert(AI_GetDifficulty() == 1);
+
+    // Click difficulty button again: cycles to expert (2)
+    mm.HandleMouseDown(1, 250, 210);
+    assert(mm.GetDifficulty() == 2);
+    assert(AI_GetDifficulty() == 2);
+
+    // Hover over cancel button (243, 351, 152, 18)
+    mm.HandleMouseMove(250, 360);
+    assert(mm.GetHoverSingleplayerButton() == 2);
+
+    // Click cancel button -> returns to SCREEN_MAIN_MENU
+    mm.HandleMouseDown(1, 250, 360);
+    assert(mm.GetState() == FERT::SCREEN_MAIN_MENU);
+
+    // Re-enter SCREEN_SINGLEPLAYER
+    mm.HandleMouseDown(1, 160, 55);
+    assert(mm.GetState() == FERT::SCREEN_SINGLEPLAYER);
+
+    // Bottom bar BACK button in SCREEN_SINGLEPLAYER returns to SCREEN_MAIN_MENU
+    mm.HandleMouseDown(1, 20, 460);
+    mm.HandleMouseUp(1, 20, 460);
+    assert(mm.GetState() == FERT::SCREEN_MAIN_MENU);
+
+    // Re-enter SCREEN_SINGLEPLAYER
+    mm.HandleMouseDown(1, 160, 55);
+    assert(mm.GetState() == FERT::SCREEN_SINGLEPLAYER);
+
+    // Hover over quick race button (243, 254, 152, 18)
+    mm.HandleMouseMove(250, 260);
+    assert(mm.GetHoverSingleplayerButton() == 1);
+
+    // Click quick race button to open Quick Race garage screen!
+    mm.HandleMouseDown(1, 250, 260);
+    assert(mm.GetState() == FERT::SCREEN_QUICK_RACE);
+
+    // Test cycling car
+    int origCar = mm.GetQuickRaceCarIndex();
+    mm.HandleMouseDown(1, 220, 50);
+    assert(mm.GetQuickRaceCarIndex() == origCar + 1);
+
+    // Test cycling color
+    int origCol = mm.GetQuickRaceColorIndex();
+    mm.HandleMouseDown(1, 180, 75);
+    assert(mm.GetQuickRaceColorIndex() == (origCol + 1) % 6);
+
+    // Test cycling location
+    int origLoc = mm.GetQuickRaceLocationIndex();
+    mm.HandleMouseDown(1, 400, 50);
+    assert(mm.GetQuickRaceLocationIndex() == origLoc + 1);
+
+    // Test cycling opponents count
+    int origOpp = mm.GetQuickRaceOpponentsCount();
+    mm.HandleMouseDown(1, 580, 122);
+    int expectedOpp = (origOpp >= 7) ? 1 : (origOpp + 1);
+    assert(mm.GetQuickRaceOpponentsCount() == expectedOpp);
+
+    // Test hovering over car area switches cursor to racing glove (shape 22)
+    mm.HandleMouseMove(320, 280);
+
+    // Test bottom bar BACK button in SCREEN_QUICK_RACE returns to SCREEN_SINGLEPLAYER
+    mm.HandleMouseDown(1, 20, 460);
+    mm.HandleMouseUp(1, 20, 460);
+    assert(mm.GetState() == FERT::SCREEN_SINGLEPLAYER);
+
+    // Re-enter SCREEN_QUICK_RACE and click RACE at bottom bar to launch game
+    mm.HandleMouseDown(1, 250, 260);
+    assert(mm.GetState() == FERT::SCREEN_QUICK_RACE);
+    mm.HandleMouseDown(1, 320, 470);
+    mm.HandleMouseUp(1, 320, 470);
+    assert(!mm.IsRunning());
+    assert(mm.GetReturnCode() == 0);
+
+    // Return to main menu and test bottom bar BACK returns to SCREEN_SELECT_NAME
+    mm.SetRunning(true);
+    mm.SetState(FERT::SCREEN_MAIN_MENU);
+    mm.HandleMouseDown(1, 20, 460);
+    mm.HandleMouseUp(1, 20, 460);
+    assert(mm.GetState() == FERT::SCREEN_SELECT_NAME);
+
+    mm.Shutdown();
+
     // 13. Game and Frontend modules (replay, sky, skilltest, fe_game_options, fe_credits, fe_options, fe_career, fe_showcase, fe_chronicle, fe_font)
     printf("[13] Testing Game & Frontend modules...\n");
     Replay_Init();
@@ -4359,6 +4508,27 @@ int main() {
     FEINTRO_sub_4dd230();
     assert(FEINTRO_sub_4dd240() == 0);
 
+    int test_mad_status = -1;
+    assert(showmad(NULL, &test_mad_status, 0, 0, 0) == 0);
+    assert(showmad("nonexistent_file.mad", &test_mad_status, 0, 0, 0) == 0);
+
+    FILE *f_mad = fopen("test_sample.mad", "wb");
+    if (f_mad) {
+        uint8_t mad_hdr[24] = {
+            'M', 'A', 'D', 'm', 24, 0, 0, 0,
+            0, 0, 0, 0, 30, 0, 0, 0,
+            32, 0, 32, 0, 0, 0, 0, 0
+        };
+        fwrite(mad_hdr, 1, sizeof(mad_hdr), f_mad);
+        uint8_t mad_kf[8] = {'M', 'A', 'D', 'k', 8, 0, 0, 0};
+        fwrite(mad_kf, 1, sizeof(mad_kf), f_mad);
+        fclose(f_mad);
+        assert(showmad("test_sample.mad", &test_mad_status, 0, 3, 0) == 1);
+        assert(test_mad_status == 0);
+        remove("test_sample.mad");
+    }
+    sub_004DC630();
+
     assert(UMemory_Init(16) == true);
     void *m_ptr = UMemory_Alloc(512, "test", 42);
     assert(m_ptr != NULL);
@@ -4424,6 +4594,25 @@ int main() {
     assert(TRACK_sub_4af930(2, 3) == 8);
     assert(TRACK_sub_4a7750(123) == 123);
     TrackSelect_Shutdown();
+ 
+    printf("[23] Testing 3D Garage Subsystem (FEGarage3D & RefPack garage.crp)...\n");
+    {
+        size_t rawSize = 0;
+        uint8_t *raw = (uint8_t*)VFS_ReadFile("FEDATA/Models/garage.crp", &rawSize);
+        assert(raw != NULL && rawSize > 100000);
+        assert(QFS_IsCompressed(raw, rawSize) == 1);
+        size_t decompSize = QFS_GetDecompressedSize(raw, rawSize);
+        assert(decompSize == 385024);
+        uint8_t *decomp = (uint8_t*)malloc(decompSize);
+        assert(decomp != NULL);
+        assert(QFS_Decompress(raw, rawSize, decomp, decompSize) == (int)decompSize);
+        free(decomp);
+        VFS_FreeFile(raw);
+
+        assert(FEGarage3D_Init() == 1);
+        FEGarage3D_Render(0.016f);
+        FEGarage3D_Shutdown();
+    }
 
     printf("=== ALL RECONSTRUCTED MODULE TESTS PASSED! ===\n");
     return 0;
