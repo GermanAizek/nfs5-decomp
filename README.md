@@ -12,6 +12,16 @@
 
 NFS5-decomp - attempt bit2bit decompile original Demo version from here (https://archive.org/details/NeedForSpeedPorscheUnleashedDemo)
 
+### Current status decompilation binaries Eagle Engine and THRASH API (codename game engine and render api)
+
+
+
+https://github.com/user-attachments/assets/5e435f25-e50e-4740-911b-d3a19521b542
+
+## Authors
+
+- Herman Semenoff <<GermanAizek@yandex.ru>>
+
 <div align="center">
   <p>
     <img src="docs/assets/in_memory.jpg" alt="Saki Kaskas & Rom di Prisco" />
@@ -21,7 +31,3 @@ NFS5-decomp - attempt bit2bit decompile original Demo version from here (https:/
 <h4 align="center">
   Many thanks for legendary OST
 </h4>
-
-## Authors
-
-- Herman Semenoff <<GermanAizek@yandex.ru>>
